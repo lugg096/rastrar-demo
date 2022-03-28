@@ -1,0 +1,117 @@
+<!-- <ion-content [fullscreen]="true" class="contetLogin">
+
+  <ion-slides #slidesPadre pager="false" [options]="slideOptsOnboarding" style="height: 100%;">
+
+    <ion-slide class="ion-no-padding">
+
+      <div style=" padding-bottom: 5px;  height: 100%; width: 100%; color: #2F3435;">
+
+
+
+        <ion-slides #slidesDatos class="slide-identificacion" pager="true" [options]="slideOpts"
+          (ionSlideNextEnd)="verSlide()" (ionSlidePrevEnd)="verSlide()" (ionSlideReachEnd)="endSlide()">
+
+          <ion-slide>
+            <div>
+              <img style="width: 95%; display: block;margin: auto"
+                src="../../../assets/images/Team Work_Two Color.png">
+            </div>
+          </ion-slide>
+
+          <ion-slide>
+            <div style="margin-left: 5%;">
+              <img style="width: 100%; display: block;margin:auto"
+                src="../../../assets/images/Authentication_Two Color.png">
+            </div>
+          </ion-slide>
+
+          <ion-slide>
+            <div style="margin-left: 5%;">
+              <img style="width: 100%; display: block;" src="../../../assets/images/QR code_Two Color.png">
+            </div>
+          </ion-slide>
+
+        </ion-slides>
+
+
+
+        <div class="textSlide" [ngClass]="indexSlide==0 ? 'textSlide' : 'textSlideNone'">
+          <p class="text-title"> Crea certificados </p>
+          <p class="text-info">Crea y administra todos lo certificados generados y pendientes por generar. </p>
+        </div>
+
+        <div class="textSlide" [ngClass]="indexSlide==1 ? 'textSlide' : 'textSlideNone'">
+          <p class="text-title">Seguridad</p>
+          <p class="text-info">Solo podran generar cetificados usuarios con roles y permisos asignados. 
+          </p>
+        </div>
+
+        <div class="textSlide" [ngClass]="indexSlide==2 ? 'textSlide' : 'textSlideNone'">
+          <p class="text-title">Identificacion por DID</p>
+          <p class="text-info">Obtener información necesaria leyendo el código QR de entidad.</p>
+        </div>
+
+
+
+        <div style="text-align: center;margin-top:40%;">
+          <a href="javascript:void(0)" class="btn-2" (click)="nextSlidePadre()">Iniciar sesión</a>
+          <p style="font-size:10px; margin: 40px 25px; color: var(--black-100);">Si no tiene cuenta para iniciar sesión
+            comunicarce con el área administrativa de Coopecan</p>
+        </div>
+
+
+      </div>
+    </ion-slide>
+
+    <ion-slide class="ion-no-padding">
+      <div style="height: 100%;width: 100%;; color: var(--black-400);padding: 23px;">
+        <div style="line-height: 0.2;margin-top: 20%;">
+          <p style="font-size: 22px;font-weight: 600;text-align: left;color: var(--black-400);">Bienvenido a Coopecan</p>
+          <p style="font-size: 13px;font-weight: 600;text-align: left;color: var(--black-100);">Inicia sesión para cotinuar</p>
+        </div>
+        <form [formGroup]="passForm">
+          <ion-item style="margin-top: 20%;">
+            <ion-label position="stacked" style="--color:var(--black-100)">Usuario</ion-label>
+            <ion-input formControlName="passOld" placeholder="Usuario" style="color: var(--black-400);"></ion-input>
+          </ion-item>
+
+          <p style="font-size: 11px;color: #eb445a;text-align: left;margin-top: 5px;"
+            *ngIf="!passForm.controls.passOld.valid && !passForm.controls.passOld.pending && (passForm.controls.passOld.dirty || submitAttempt)">
+          Usuario es requerido
+        </p>
+
+          <ion-item style="margin-top:18px">
+            <ion-label position="stacked" style="--color:var(--black-100)">Contraseña</ion-label>
+            <ion-input placeholder="Contraseña" [type]="tipo" formControlName="pass" style="color: var(--black-400);">
+            </ion-input>
+            <span style="position: absolute;right: 10px; bottom: 5px;z-index: 10;" (click)="mostrar()">
+              <ion-icon name="eye" *ngIf="viewPass" style="font-size: 23px;color: var(--main-color);"></ion-icon>
+              <ion-icon name="eye-off" *ngIf="!viewPass" style="font-size: 23px;color: var(--main-color)"></ion-icon>
+            </span>
+          </ion-item>
+          <p style="font-size: 11px;color: #eb445a;text-align: left;margin-top: 5px;"
+          *ngIf="!passForm.controls.passNew.valid && (passForm.controls.passNew.dirty || submitAttempt)">
+        Contraseña es requerida
+      </p>
+        </form>
+
+        <a href="javascript:void(0)" class="btn btn-2" (click)="login()" style="position: relative;top: 50px;">Iniciar
+          sesión</a>
+        <p> <a href="javascript:void(0)" class="cancel" (click)="backSlidePadre()">Cancelar</a></p>
+
+
+
+
+      </div>
+
+
+    </ion-slide>
+
+   <ion-slide>
+ Hola
+  </ion-slide>
+
+
+
+  </ion-slides>
+</ion-content> -->

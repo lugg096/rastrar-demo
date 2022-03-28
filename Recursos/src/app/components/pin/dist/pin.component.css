@@ -1,0 +1,35 @@
+/* PIN */
+.pin {
+  background: var(--main-color);
+}
+
+.toolbar-pin {
+  --background: var(--main-color);
+  height: 20px;
+}
+
+.titulo-pin {
+  font-size: 25px;
+  color: white;
+}
+
+.titulo-parrafo-pin {
+  margin-top: 12px;
+  margin-bottom: 0;
+  color: white;
+  font-size: 22px;
+}
+
+.text-parrafo-pin {
+  margin-top: 5px;
+  padding: 0 50px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.734);
+}
+
+.button-pin {
+  margin: 0.5px;
+  font-size: 16px;
+  height: 55px;
+  --background: var(--main-color);
+}

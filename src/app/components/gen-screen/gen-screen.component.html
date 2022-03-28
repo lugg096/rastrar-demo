@@ -1,0 +1,191 @@
+<ion-content>
+  <div *ngIf="preview"
+    style="position: fixed;top: 0;width: 100%;z-index: 20; color: #fff;background: linear-gradient(90deg, #1c1c24 10%, rgb(60, 61, 68) 100%); margin-bottom: 0;height: 55px;">
+    <ion-icon slot="start" name="close" class="icon-nav-arrow "
+      style=" position: absolute;z-index: 10; padding: 20px;padding-top: 15px;" (click)="closeModal()">
+    </ion-icon>
+    <ion-item style="--background: transparent;margin-bottom: 0;" lines="none">
+      <ion-title class="title">Vista previa de pantalla</ion-title>
+    </ion-item>
+  </div>
+
+  <div *ngIf="!preview">
+    <ion-icon name="close" class="icon-close" (click)="closeModal()">
+    </ion-icon>
+  </div>
+
+  <!--   <p
+    style="font-weight: 520;font-size: 16px;margin: 20px;margin-bottom: 12px; line-height: 1.2;color:  var(--text-color-3);margin-top: 78px;">
+    Formulario de tarea</p> -->
+
+  <div style="padding: 20px 40px;" [ngClass]="preview?'margin-t':null">
+    <p class="title-form" style="margin-bottom:10px;">{{metadata.title}}</p>
+
+    <form [formGroup]="registroForm" class="row">
+
+      <ng-container *ngFor="let field of fields;index as i">
+
+        <!--TYPE ADDERSS  -->
+
+        <div *ngIf="field.type == 'address'" style="padding: 0;" [class]="field.width.boost">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">{{field.caption}}</ion-label>
+            <ion-input [formControlName]="field.code" [type]="field.type" [placeholder]="field.placeholder"
+              class="input-form"></ion-input>
+            <span class="input-icon animate-pulse2" (click)="scan(field)">
+
+              <ion-icon name="qr-code-outline"></ion-icon>
+            </span>
+          </ion-item>
+          <app-control-messages [control]="registroForm.controls[field.code]"></app-control-messages>
+        </div>
+
+        <!--TYPE INPUT  -->
+        <div *ngIf="field.type == 'input'" style="padding: 0;" [class]="field.width.boost">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">{{field.caption}}</ion-label>
+            <ion-input [formControlName]="field.code" [type]="field.inputtype" class="input-form"
+              [placeholder]="field.placeholder"></ion-input>
+          </ion-item>
+          <app-control-messages [control]="registroForm.controls[field.code]"></app-control-messages>
+        </div>
+
+        <!--TYPE LISTBYAPI  -->
+        <div *ngIf="field.type == 'listByApi'" style="padding: 0;" [class]="field.width.boost">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">{{field.caption}}</ion-label>
+            <ion-label position="stacked" class="label-form" style="margin-bottom: 20px;">8 Certificados seleccionados</ion-label>
+          </ion-item>
+          <app-control-messages [control]="registroForm.controls[field.code]"></app-control-messages>
+        </div>
+
+
+
+        <!--TYPE CHECKBOX  -->
+        <div *ngIf="field.type == 'checkbox'" style="padding: 0;" [class]="field.width.boost">
+          <ion-item style="margin-top: 10px;">
+            <ion-label position="stacked" class="label-form">{{field.caption}}</ion-label>
+            <ion-select multiple="true" [formControlName]="field.code" [value]="field.value" okText="ok"
+              cancelText="Cancelar" class="input-form" [placeholder]="field.placeholder">
+              <ion-select-option [value]="opt.key" *ngFor="let opt of field.options">{{opt.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <app-control-messages [control]="registroForm.controls[field.code]"></app-control-messages>
+        </div>
+
+
+
+        <!--TYPE SELECT  -->
+        <div *ngIf="field.type == 'select'" style="padding: 0;" [class]="field.width.boost">
+          <ion-item style="margin-top: 10px;">
+            <ion-label position="stacked" class="label-form">{{field.caption}}</ion-label>
+            <ion-select [formControlName]="field.code" [value]="field.value" okText="ok" cancelText="Cancelar"
+              class="input-form" [placeholder]="field.placeholder">
+              <ion-select-option [value]="opt.key" *ngFor="let opt of field.options">{{opt.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <app-control-messages [control]="registroForm.controls[field.code]"></app-control-messages>
+        </div>
+
+        <div *ngIf="field.type == 'button'" style="padding: 15px;" [class]="field.width.boost">
+          <p style="margin: 0;font-size: 16px; font-weight: 600;color: rgb(75 123 226);">
+            <ion-icon name="alert-circle-outline" style="font-size: 20px;transform: translateY(4px);"></ion-icon>
+            {{field.caption}}
+          </p>
+          <p style="font-size: 13px;color: rgb(102, 102, 102);">Esta acción se ejecutara una vez terminada la tarea</p>
+          <!--   <ion-button (click)="getAPI_REST(field)" class="button-03">
+            <ion-icon name="flash-outline"></ion-icon> {{field.caption}}
+          </ion-button> -->
+        </div>
+
+        <div *ngIf="field.type =='uploadFile'" style="padding: 15px;" [class]="field.width.boost"
+          [formGroupName]="field.code">
+          <p style="font-size: 13px;
+    color: #838282;
+    margin-bottom: 8px;">{{field.caption}}</p>
+          <ion-button (click)="fileInput.click()" class="button-03">
+            <ion-icon name="document-attach-outline">
+            </ion-icon>
+            {{field.placeholder}}
+          </ion-button>
+
+          <p style="color: var(--black-400); margin: 0;margin-top: 3px; font-size: 12px;font-style: italic">
+            {{registroForm.controls[field.code].value.name}}
+          </p>
+          <input hidden (change)="onFileSelected(field.code)" #fileInput type="file" [id]="field.code">
+          <app-control-messages [control]="registroForm.controls[field.code]" [field]="'name'"></app-control-messages>
+
+        </div>
+
+        <!--TYPE SELECT 0.2  -->
+        <!--     <div *ngIf="field.type == 'searchUser'" [formGroupName]="field.code" [class]="field.width.boost"> -->
+        <div *ngIf="field.type == 'searchUser'" [formGroupName]="field.code" style="padding: 0;"
+          [class]="field.width.boost">
+          <ion-item style="margin-top: 10px;" lines="inset"
+            (click)="listTables(field.options[0].value,field.options[0].key,field.code)">
+            <ion-label position="stacked" class="label-form">{{field.caption}}</ion-label>
+            <ion-input [formControlName]="'name'" [placeholder]="field.placeholder" class="input-form"></ion-input>
+            <span class="input-icon">
+              <ion-icon name="search"></ion-icon>
+            </span>
+          </ion-item>
+          <app-control-messages [control]="registroForm.controls[field.code]" [field]="'name'"></app-control-messages>
+        </div>
+
+        <!-- ************************************************* -->
+
+        <!--TYPE TEXTBOX  -->
+        <div *ngIf="field.type == 'textarea'" [class]="field.width.boost" style="padding: 0;">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">{{field.caption}}</ion-label>
+            <ion-textarea [formControlName]="field.code" [rows]="field.rows" class="input-form"
+              [placeholder]="field.placeholder"></ion-textarea>
+          </ion-item>
+          <app-control-messages [control]="registroForm.controls[field.code]" [field]="'name'"></app-control-messages>
+
+        </div>
+
+
+
+        <!--TYPE SECION IMAGES  -->
+        <div *ngIf="field.type == 'imageselect'" [class]="field.width.boost" style="padding: 0;">
+          <ion-item style="margin-top: 10px;" (click)="imagesCapture(field)" lines="inset">
+            <ion-label position="stacked" class="label-form">{{field.caption}}</ion-label>
+            <ion-input readonly [formControlName]="field.code" [placeholder]="field.placeholder" class="input-form">
+            </ion-input>
+
+            <span class="input-icon">
+              <ion-icon name="camera"></ion-icon>
+            </span>
+          </ion-item>
+          <app-control-messages [control]="registroForm.controls[field.code]" [field]="'name'"></app-control-messages>
+
+        </div>
+
+
+
+
+
+      </ng-container>
+
+
+
+
+
+    </form>
+
+
+    <div style=" display: block;margin-top: 35px;text-align: center;margin-bottom: 35px;"
+      *ngFor="let button of buttons">
+      <!-- <a href="javascript:void(0)" class="btn-2" (click)="dataForm()" -->
+      <a href="javascript:void(0)" class="btn-2" (click)="actionButton(button.type)"
+        [ngStyle]="{'width.px': button.width,'color': button.color,'background.': button.background}"
+        style="display: inline;">{{update_detail?'Actualizar
+        información':button.text}}</a>
+    </div>
+
+  </div>
+
+
+
+</ion-content>

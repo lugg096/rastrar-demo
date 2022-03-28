@@ -1,0 +1,78 @@
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+
+
+  .progress {
+    align-items: center;
+    position: relative;
+    padding: 0;
+    display: flex;
+    width: 100%;
+    background: rgb(255, 255, 255);
+    margin: 0 2px;
+    border-radius: 5px;
+}
+
+.progress-value {
+    box-shadow: var(--shadow-secondary);
+    border-radius: 5px;
+    background:rgb(106, 153, 255);
+    height: 14px;
+    width: 50%;
+    transition: 0.3s;
+}
+
+.progress-value-bg {
+    background: rgb(240, 240, 240);
+    position: absolute;
+    width: 24.5%;
+    z-index: 1;
+    border-radius: 5px;
+    height: 14px;
+    cursor: pointer;
+}
+
+.progress-value-bg-t{
+    background: transparent;
+    position: absolute;
+    width: 24.5%;
+    z-index: 3;
+    border-radius: 5px;
+    height: 14px;
+    cursor: pointer;
+}
+
+
+@keyframes load {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 0%;
+    }
+}
+
+.btn-prog {
+    width: 25%;
+    display: inline-block;
+    text-align: center;
+    a {
+        /*  background: #625deb;  */
+        padding: 8px;
+        color: rgb(155, 155, 155);
+        font-size: 14px;
+        border-radius: 5px;
+    }
+}
+

@@ -1,0 +1,20 @@
+.content-qr {
+  border-radius: 10px;
+  background-image: linear-gradient(#1c1c24, #174253);
+  box-shadow: var(--shadow-black-300);
+  width: 85%;
+  margin: auto;
+  padding: 20px;
+  margin-bottom: 15px;
+  text-align: center;
+  
+}
+
+ion-item{
+  p{
+    font-size: 12px;
+  }
+  ion-label{
+    color: var(--black-400);
+  }
+}

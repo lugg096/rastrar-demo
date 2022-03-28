@@ -1,0 +1,1165 @@
+<ion-content style="--background: #fff;">
+
+  <!-- NAME SCREEN -->
+  <div style="padding: 8px 10px;
+  background: #fcf5f5;
+  position: fixed;
+  top: 0;
+  width: 100%;    z-index: 2000;">
+    <div style="display: inline-block;">
+      <img [src]="_env.url2 + dataSreen.imagenUrl" style="    height: 35px;
+      width: 35px;
+      object-fit: cover;
+      border-radius: 12px;">
+    </div>
+    <p style="
+/* color: #d36970d9; */
+color: #585858d9;
+    font-size: 14px;
+    font-weight: 800;
+    margin-top: 5px;
+    margin-bottom: 0;
+    display: inline-block;
+    margin-left: 8px;">{{dataSreen.name}}
+    </p>
+
+    <div style="    position: absolute;
+    right: 0;
+    z-index: 20;
+    top: 0;" (click)="selectForm()">
+      <ion-icon name="close" style="    font-size: 25px;
+      color: rgb(161 161 161 / 47%);
+      padding: 15px;"></ion-icon>
+    </div>
+  </div>
+
+  <div style="padding: 15px;margin-top: 45px;">
+    <!-- Pagination -->
+    <div style="
+     position: relative;margin-bottom: -5px;">
+
+      <p style="    margin: 0;
+       font-size: 11px;
+       color: #b5babf;">Step {{activeSlide}} de {{numSlides}}</p>
+      <p style="    margin: 0;
+       color: #d36970e8;
+       font-size: 18px;
+       font-weight: 600;
+       font-style: italic;">{{titleSlide}}</p>
+
+      <div style="    position: absolute;
+       top: 12px;
+       font-size: 26px;
+       right: 0px;
+       color: #cda4a4;">
+        <ion-icon name="chevron-back-outline" style="margin: 0 18px;
+         color: #d5d5d5;" (click)="changeSlide('back')"></ion-icon>
+        <ion-icon name="chevron-forward-outline" style="color: #db7078;" (click)="changeSlide('next')">
+        </ion-icon>
+      </div>
+
+      <div class="progress">
+        <div class="progress-value" #bar></div>
+        <div style="    box-shadow: none;
+         border-radius: 50px;
+         background: #f3dedfbf;
+         height: 0.17rem;
+         width: 100%;"></div>
+      </div>
+    </div>
+
+    <div *ngFor="let sec of sections;index as i" class="box-slide" [id]="'sld'+(i+1)"
+      [ngClass]="i==0?'activeSlide':null">
+
+      <div *ngIf="sec.section.code == 'procMP'" style="margin-top: 20px;">
+
+        <p style="    margin: 0;
+        font-size: 12px;
+        color: #95989b;
+        margin-bottom: 12px; font-weight: 700;
+        margin-left: 3px;">Productores </p>
+
+        <a href="javascript:void(0)" class="btn-4" style="
+  position: absolute;
+      top: 10px;
+      right: 0;" (click)="addProducers()">
+          <ion-icon name="add-circle" style="color: #273b69;
+    font-size: 22px;
+    transform: translateY(6px);
+    margin-right: 2px;"></ion-icon> Agregar
+        </a>
+
+        <div *ngIf="listProducers.length == 0" style="
+        padding: 10px 15px;
+      position: relative;
+      padding-bottom: 20px;
+      padding-left: 10px;
+      background: #f3f3f3;
+      border-radius: 5px;margin-bottom: 15px;">
+          <p style="margin: 0;
+          font-size: 12px;
+          font-weight: 700;
+          color: #6a6a6a;">Ningún productor asociado</p>
+
+          <div>
+
+          </div>
+        </div>
+
+        <div *ngFor="let prod of listProducers" style="
+        padding: 10px 15px;
+        position: relative;
+        padding-bottom: 20px;
+       padding-left: 20px;border-bottom: 1px solid #ddd;
+       margin-bottom: 15px;">
+          <div style="position: relative;">
+            <p style="margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #6a6a6a;">{{prod.name}}</p>
+            <p style="margin: 0;
+  font-size: 10px;
+  font-style: italic;" *ngIf="prod.dni!=''">DNI. {{prod.dni}}</p>
+
+            <p style="margin: 0;
+  font-size: 10px;
+  font-style: italic">Adrx. {{ prod.adrx | adrx:(5)}} </p>
+          </div>
+
+          <div style="position: absolute;
+          top: 10px;
+          right: 10px;
+          text-align: center;
+          margin: 5px 15px;">
+            <p style="    margin: 0;
+            font-size: 15px;
+            font-weight: 700;
+            color: #d36970e8;">{{prod.count}} {{prod.q_unid}} </p>
+            <p style="font-size: 12px;
+            font-weight: 600;
+            color: #1c1c1c;margin: 0;">{{prod.certs.length}} Certificados</p>
+          </div>
+
+          <div style="    box-shadow: none;
+          border-radius: 50px;
+          background: #4fa956;
+          height: 0.2rem;
+          width: 40px;
+          transform: rotate(90deg);
+          position: absolute;
+          top: 8px;
+          margin-top: 25px;
+          left: -15px;"></div>
+
+          <div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!--  <div *ngIf="sec.section.code == 'cadeSumin'" style="margin-top: 20px;">
+
+        <img src="../../../assets/images/tracking.jpg" alt="" style="margin-bottom: 20px;">
+
+        <div style="margin-bottom: 20px;position: relative;">
+          <p style="    margin: 0;
+      font-size: 12px;
+      color: #95989b;
+      margin-bottom: 12px; font-weight: 700;
+      margin-left: 3px;">Traking de producto </p>
+
+          <a href="javascript:void(0)" class="btn-4" style="
+  position: absolute;
+      top: -12px;
+      right: 0;">
+            <ion-icon name="add-circle" style="color: #273b69;
+    font-size: 22px;
+    transform: translateY(6px);
+    margin-top: -10px;
+    margin-right: 2px;"></ion-icon> Agregar
+          </a>
+
+
+
+
+          <div style="/* border: 1px solid #dd9797; */
+          /* border-radius: 12px; */
+          padding: 10px 15px;
+          position: relative;
+          padding-bottom: 20px;
+         padding-left: 20px;border-bottom: 1px solid #ddd;">
+            <p style="margin: 0;
+            font-size: 12px;
+            font-weight: 700;
+            color: #6a6a6a;">Desde Piura, Sullana</p>
+            <p style="margin: 0;
+            font-size: 10px;
+            font-style: italic;">-5.183954,-80.6290605</p>
+
+            <p style="margin: 0;
+            font-size: 12px;
+            font-weight: 700;
+            color: #6a6a6a;
+            margin-top: 5px;">A Lambayeque, Chiclayo</p>
+            <p style="margin: 0;
+            font-size: 10px;
+            font-style: italic">-9.983954,-81.5250502</p>
+
+            <div style="    position: absolute;
+            top: 2px;
+            right: 10px;
+            text-align: center;
+            margin: 12px;">
+              <p style="margin: 0;
+            color: #d36970e8;
+            font-weight: 800;    font-size: 12px;
+      letter-spacing: 0.7px;">VIAJE 1</p>
+              <p style="    margin: 0;
+              font-size: 15px;
+              font-weight: 700;
+              color: #4a4a4a;">120.52 Km </p>
+              <p style="font-size: 12px;
+              font-weight: 600;
+              color: #1c1c1c;">5h 30min</p>
+            </div>
+
+            <div style="box-shadow: none;
+            border-radius: 50px;
+            background: #4fa956;
+            height: 0.2rem;
+            width: 50px;
+            /* width: 100%; */
+            transform: rotate(
+        90deg);
+            position: absolute;
+            top: 20px;
+            margin-top: 25px;
+            left: -20px;"></div>
+
+            <div>
+
+            </div>
+          </div>
+
+          <div style="/* border: 1px solid #dd9797; */
+          margin-top: 10px;
+          /* border-radius: 12px; */
+          padding: 10px 15px;
+          position: relative;
+         padding-left: 20px;">
+            <p style="margin: 0;
+            font-size: 12px;
+            font-weight: 700;
+            color: #6a6a6a;">Desde Lambayeque, Chiclayo</p>
+            <p style="margin: 0;
+            font-size: 10px;
+            font-style: italic;">-5.183954,-80.6290605</p>
+
+            <p style="margin: 0;
+            font-size: 12px;
+            font-weight: 700;
+            color: #6a6a6a;
+            margin-top: 5px;">A Lima, Barranco</p>
+            <p style="margin: 0;
+            font-size: 10px;
+            font-style: italic">-9.983954,-81.5250502</p>
+
+            <div style="    position: absolute;
+            top: 2px;
+            right: 10px;
+            text-align: center;
+            margin: 12px;">
+              <p style="margin: 0;
+            color: #d36970e8;
+            font-weight: 800;    font-size: 12px;
+      letter-spacing: 0.7px;">VIAJE 2</p>
+              <p style="    margin: 0;
+              font-size: 15px;
+              font-weight: 700;
+              color: #4a4a4a;">320.01 Km </p>
+              <p style="font-size: 12px;
+              font-weight: 600;
+              color: #1c1c1c;">8h 20min</p>
+            </div>
+
+            <div style="box-shadow: none;
+            border-radius: 50px;
+            background: #4fa956;
+            height: 0.2rem;
+            width: 50px;
+            /* width: 100%; */
+            transform: rotate(
+        90deg);
+            position: absolute;
+            top: 20px;
+            margin-top: 25px;
+            left: -20px;"></div>
+
+            <div>
+
+            </div>
+          </div>
+
+        </div>
+
+
+      </div> -->
+
+      <div *ngIf="sec.section.code == 'fotVid'" style="margin-top: 20px;">
+
+        <p style="    margin: 0;
+        font-size: 15px;
+        color: #95989b;
+        margin-bottom: 0px; font-weight: 600;
+        margin-left: 3px;">Portada</p>
+
+        <div *ngIf="imgPortada==''" style="text-align: center;">
+          <p style="margin: 0;
+          font-size: 13px;
+          color: #838383;">Use una predeterminada</p>
+          <p style="margin: 0;
+          font-size: 14px;
+          color: #838383;
+          font-weight: 700;
+          line-height: 1;">o eliga una desde su dispositivo</p>
+        </div>
+
+
+        <div *ngIf="imgPortada==''" style="    text-align: center;
+        border: 2px dashed #d3d3d3;
+        margin: 20px 0;
+        padding: 20px;margin-bottom: 5px;">
+
+          <ion-icon name="cloud-upload-outline" style="    font-size: 60px;
+          color: #d7d7d7;"></ion-icon>
+          <p style="font-size: 11px;
+          font-weight: 600;
+          color: #adadad;">JPG, PNG, o JPEG, menor a 10MB</p>
+
+          <div style="font-size: 14px;
+          color: #7c7c7c;
+          text-decoration: underline;
+          font-weight: 600;">
+            Elija archivo
+          </div>
+        </div>
+
+        <div *ngIf="imgPortada!=''" style="text-align: center;">
+          <p style="margin: 0;
+          font-size: 13px;
+          color: #d36970e8;">¡Listo!</p>
+          <p style="margin: 0;
+          font-size: 14px;
+          color: #838383;
+          font-weight: 500;
+          line-height: 1;;">Imagen selecionada</p>
+        </div>
+
+        <div *ngIf="imgPortada!=''" style="margin-top: 10px;position: relative;">
+          <img [src]="'../../../assets/images/portadas/'+imgPortada" alt="" style="width: 100%;">
+          <p style="    position: absolute;
+          margin: 0;
+          bottom: 0;
+          width: 100%;
+          color: white;
+          font-weight: 600;
+          font-size: 12px;
+          padding: 1px 10px;
+          font-style: italic;
+          background-image: linear-gradient(to top, #eb656e, #e9626b, #e65f67, #e45b64, #e15861, #dd545d, #da515a, #d64d56, #d04851, #ca434c, #c53e47d1);
+          opacity: 0.95;">
+            {{imgPortada=='p1.jpg'?'Limon':(imgPortada=='p2.jpg'?'Café':(imgPortada=='p3.jpg'?'Quinoa':null)) }}</p>
+        </div>
+
+
+        <div style="margin-bottom: 30px;
+        text-align: right;
+        padding-right: 4px;
+        top: 10px;
+        margin-top: 5px;">
+          <a href="javascript:void(0)" (click)="imagesPred()" style="font-size: 12px;
+          color: #e65f67d1;
+          font-weight: 700;
+          width: auto;">
+            <ion-icon name="image-outline" style="position: relative;
+            right: 1px;
+            font-size: 20px;
+            margin-top: -12px;
+            transform: translateY(5px);"></ion-icon> Usar predeterminada
+          </a>
+        </div>
+
+        <p style="    margin: 0;
+        font-size: 15px;
+        color: #95989b;
+        margin-bottom: 12px; font-weight: 600;
+        margin-left: 3px;">Certificados</p>
+
+        <!--         <div style="text-align: center;margin-bottom: 40px;">
+          <img src="../../../assets/images/cert-prueba.jpeg" alt=""
+            style="box-shadow: 0 0px 15px rgb(187 187 187 / 58%);width: 97%;">
+        </div>
+
+ -->
+
+        <ion-slides #slidesDatos class="slide-identificacion"
+          style="position: relative;text-align: center;margin-bottom: 40px;" pager="false" [options]="slideOpts"
+          (ionSlideNextEnd)="verSlide()" (ionSlidePrevEnd)="verSlide()" (ionSlideReachEnd)="endSlide()">
+
+          <ion-slide *ngFor="let item of listCerts">
+            <div style="margin-left: 5%;">
+              <img style="width: 100%; display: block;margin:auto;    max-height: 200px;
+         box-shadow: 0 0px 15px rgb(187 187 187 / 58%)" [src]="item.imgfile">
+            </div>
+          </ion-slide>
+
+          <div *ngIf="listCerts.length == 0" style="
+          padding: 10px 15px;
+        position: relative;
+        padding-bottom: 20px;
+        padding-left: 10px;
+        background: #f3f3f3;
+        border-radius: 5px;margin-bottom: 15px;">
+            <p style="margin: 0;
+            font-size: 12px;
+            font-weight: 700;
+            color: #6a6a6a;    width: 100%;
+    text-align: left;">Ningún certificado asociado</p>
+
+            <div>
+
+            </div>
+          </div>
+
+
+          <!--     <ion-slide *ngFor="let item of listCerts" (click)="filedoc.click()">
+            <div style="margin-left: 5%;">
+              <img style="width: 100%; display: block;margin:auto;    max-height: 180px;
+          width: auto;box-shadow: 0px 0px 30px #d2d2d2;" [src]="endPoint+item.data.document.imgfile.url">
+            </div>
+            <a [href]="endPoint+item.data.document.datafile.url"
+              (click)="prueba(endPoint+item.data.document.imgfile.name)" target="_blank" hidden #filedoc></a>
+          </ion-slide> -->
+
+        </ion-slides>
+
+
+
+
+      </div>
+
+      <div *ngIf="sec.form">
+        <!--    <div>FORMULARIO</div> -->
+        <form [formGroup]="sec.form">
+          <div *ngFor="let field of sec.fields">
+
+            <!--TYPE ADDERSS  -->
+            <ion-item *ngIf="field.type == 'address'" class="item" [ngStyle]="{'width.%': field.width }">
+              <ion-label position="stacked" class="text-label">{{field.caption}}</ion-label>
+              <ion-input [formControlName]="field.code" [type]="field.type" [placeholder]="field.placeholder"
+                class="input-style"></ion-input>
+              <span class="input-icon animate-pulse2" (click)="scan(field)">
+                <ion-icon name="qr-code-outline"></ion-icon>
+              </span>
+            </ion-item>
+
+            <!--TYPE LISTBYAPI  -->
+            <!--  <div *ngIf="field.type == 'listByApi'" style="padding: 0;" [class]="field.width.boost">
+              <ion-item style="margin-top: 10px;" lines="inset">
+                <ion-label position="stacked" class="label-form">{{field.caption}}</ion-label>
+       
+                <ion-label position="stacked" class="label-form" style="margin-bottom: 20px;">
+                  {{registroForm.controls[field.code].value.length}} Certificados seleccionados
+                </ion-label>
+                <div class="input-icon" style="bottom: 15px;">
+                  <a href="javascript:void(0)" class="btn-2" style="padding: 8px 15px; font-size: 11px;box-shadow: none;"
+                    (click)="selectList(field)">
+                    Agregar</a>
+                </div>
+              </ion-item>
+    
+    
+              <app-control-messages [control]="registroForm.controls[field.code]"></app-control-messages>
+            </div> -->
+
+
+            <!--TYPE INPUT  -->
+            <div style="margin-top: 20px;" *ngIf="field.type == 'input'" class="item"
+              [ngStyle]="{'width.%': field.width }">
+              <p style="    margin: 0;
+          font-size: 12px;
+          color: #95989b;
+          margin-bottom: 7px;
+          font-weight: 700;
+          margin-left: 3px;">{{field.caption}} <span style="color: #d36970e8;" *ngIf="field.required">(*)</span> </p>
+              <ion-item class="item-input" lines="none">
+                <ion-input [formControlName]="field.code" [type]="field.inputtype" class="input-style"
+                  [placeholder]="field.placeholder">
+                </ion-input>
+              </ion-item>
+            </div>
+
+            <!--TYPE SELECT  -->
+            <ion-item *ngIf="field.type == 'select'" class="item" [ngStyle]="{'width.%': field.width }"
+              [formGroupName]="field.code">
+              <ion-label position="stacked" class="text-label">{{field.caption}}</ion-label>
+              <ion-select formControlName="key" [value]="field.value" okText="ok" cancelText="Cancelar"
+                class="input-style" [placeholder]="field.placeholder"
+                (ionChange)="selectChang($event,field.options,field.code)">
+                <ion-select-option [value]="opt.key" *ngFor="let opt of field.options">{{opt.name}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <!--TYPE CHECKBOX  -->
+            <ion-item *ngIf="field.type == 'checkbox'" class="item" [ngStyle]="{'width.%': field.width }"
+              [formGroupName]="field.code">
+              <ion-label position="stacked" class="label-form">{{field.caption}}</ion-label>
+              <ion-select formControlName="key" [value]="field.value" okText="ok" cancelText="Cancelar"
+                class="input-style" multiple="true" [placeholder]="field.placeholder"
+                (ionChange)="selectMulti($event,field.options,field.code)">
+                <ion-select-option [value]="opt.key" *ngFor="let opt of field.options">{{opt.name}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <!--TYPE TEXTBOX  -->
+            <ion-item *ngIf="field.type == 'textarea'" class="item" [ngStyle]="{'width.%': field.width }">
+              <ion-label position="stacked" class="text-label">{{field.caption}}</ion-label>
+              <ion-textarea [formControlName]="field.code" [rows]="field.rows" class="input-style"
+                [placeholder]="field.placeholder"></ion-textarea>
+            </ion-item>
+
+            <!--TYPE SECION IMAGES  -->
+            <ion-item *ngIf="field.type == 'imageselect'" class="item" (click)="imagesCapture(field)"
+              [ngStyle]="{'width.%': field.width }">
+              <ion-label position="stacked" class="text-label">{{field.caption}}</ion-label>
+              <ion-input readonly [formControlName]="field.code" [placeholder]="field.placeholder" class="input-style">
+              </ion-input>
+
+              <span class="input-icon">
+                <ion-icon name="camera"></ion-icon>
+              </span>
+            </ion-item>
+
+            <ng-container *ngIf="field.type != 'checkbox' && field.type != 'select'">
+              <app-control-messages [control]="sec.form.controls[field.code]"></app-control-messages>
+            </ng-container>
+
+            <ng-container *ngIf="field.type == 'checkbox' || field.type == 'select'">
+              <app-control-messages [control]="sec.form.controls[field.code]" [field]="'key'"></app-control-messages>
+            </ng-container>
+
+          </div>
+        </form>
+      </div>
+
+
+      <div style="text-align: right;" *ngIf="i==0">
+
+        <a href="javascript:void(0)" class="btn-3" style="padding: 15px 20px;
+    text-align: center;
+    width: 33%;" (click)="changeSlide('next')">
+          Siguiente
+        </a>
+      </div>
+
+      <div style="text-align: center;" *ngIf="i!=0">
+        <a href="javascript:void(0)" (click)="changeSlide('back')" class="btn-2" style="padding: 15px 40px;
+margin-right: 10px;">Anterior</a>
+
+        <a href="javascript:void(0)" class="btn-3" style="padding: 15px 40px;" (click)="changeSlide('next')">
+          Siguiente
+        </a>
+      </div>
+
+
+    </div>
+
+    <div class="box-slide" [id]="'sld'+(numSlides)">
+
+      <div style="    text-align: center;margin-top: 10px;">
+        <p style="
+        margin: 0;
+        font-size: 16px;
+        color: #838383;
+        font-weight: 700;
+        ">Visualizar</p>
+        <p style="padding: 0 50px;
+        text-align: center;
+         font-size: 13px; 
+        color: #838383;">Presentación preliminar de como se verá en la web</p>
+      </div>
+
+      <div style="    margin-bottom: 75px;
+      text-align: center;
+      margin-top: 15px;">
+        <a href="javascript:void(0)" class="btn-3" style="padding: 11px 20px;
+        color: #e65f67d1;
+        background: #fff;
+        border: 1px solid #e65f67b3;
+        font-weight: 700;
+        box-shadow: 0 0px 10px rgb(167 167 167 / 44%);
+        width: auto;
+        font-size: 11px;" (click)="verDemo()">
+          <ion-icon name="camera-outline" style="    position: relative;
+       right: 4px;
+       font-size: 20px;
+       margin-top: -8px;
+       transform: translateY(5px);"></ion-icon> Vista previa
+        </a>
+      </div>
+
+      <p style="margin: 0;
+      font-size: 16px;
+      color: #838383;
+      font-weight: 700;
+      line-height: 1;text-align: center;"> Asociar QR</p>
+      <p style="padding: 0 50px;
+      text-align: center;
+      font-size: 13px;
+      color: #838383;">Elija una de las opciones para asociar esta informacion a uno QR ya generado o para generar un
+        nuevo</p>
+
+
+
+
+      <div style="text-align: center; " slot="fixed">
+        <a href="javascript:void(0)" class="btn-3" style="padding: 15px 0px;display: block;
+        margin: auto;margin-bottom:15px ;">
+          Asociar a QR
+        </a>
+
+        <a href="javascript:void(0)" (click)="asociarQR()" class="btn-2" style="padding: 15px 0px;
+      margin-right: 10px;display: block;
+    margin: auto;">Crear nuevo QR</a>
+
+
+      </div>
+    </div>
+
+
+    <!-- <div class="box-slide" id="sld1">
+
+      <div style="margin-bottom: 20px;">
+        <p style="    margin: 0;
+    font-size: 12px;
+    color: #95989b;
+    margin-bottom: 7px;
+    font-weight: 700;
+    margin-left: 3px;">Asunto (Lote, SKU, etc...)</p>
+        <ion-item class="item-input" lines="none">
+          <ion-input lines="none" placeholder="Ingrese un texto">
+          </ion-input>
+        </ion-item>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <p style="    margin: 0;
+    font-size: 12px;
+    color: #95989b;
+    margin-bottom: 7px;
+    font-weight: 700;
+    margin-left: 3px;">Comprador</p>
+        <ion-item class="item-input" lines="none">
+          <ion-input lines="none" placeholder="Ingrese un texto">
+          </ion-input>
+        </ion-item>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <p style="    margin: 0;
+    font-size: 12px;
+    color: #95989b;
+    margin-bottom: 7px;
+    font-weight: 700;
+    margin-left: 3px;">Cantidad (Jabas)</p>
+        <ion-item class="item-input" lines="none">
+          <ion-input lines="none" placeholder="Ingrese un cantidad">
+          </ion-input>
+        </ion-item>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <p style="    margin: 0;
+    font-size: 12px;
+    color: #95989b;
+    margin-bottom: 7px;
+    font-weight: 700;
+    margin-left: 3px;">Origen</p>
+        <ion-item class="item-input" lines="none">
+          <ion-input lines="none" placeholder="Ingrese un texto">
+          </ion-input>
+        </ion-item>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <p style="    margin: 0;
+    font-size: 12px;
+    color: #95989b;
+    margin-bottom: 7px;
+    font-weight: 700;
+    margin-left: 3px;">Destino</p>
+        <ion-item class="item-input" lines="none">
+          <ion-input lines="none" placeholder="Ingrese un texto">
+          </ion-input>
+        </ion-item>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <p style="    margin: 0;
+    font-size: 12px;
+    color: #95989b;
+    margin-bottom: 7px;
+    font-weight: 700;
+    margin-left: 3px;">Fecha de emisión</p>
+        <ion-item class="item-input" lines="none">
+          <ion-input lines="none" placeholder="Seleccione">
+          </ion-input>
+        </ion-item>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <p style="    margin: 0;
+    font-size: 12px;
+    color: #95989b;
+    margin-bottom: 7px;
+    font-weight: 700;
+    margin-left: 3px;">Fecha de vencimiento</p>
+        <ion-item class="item-input" lines="none">
+          <ion-input lines="none" placeholder="Seleccione">
+          </ion-input>
+        </ion-item>
+      </div>
+
+      <div style="text-align: right;">
+
+        <a href="javascript:void(0)" class="btn-3" style="padding: 15px 20px;
+       /*  padding-left: 20px; */
+        text-align: center;
+        width: 33%;" (click)="changeSlide('next')">
+          Siguiente
+        </a>
+      </div>
+    </div> -->
+
+    <!--     <div class="box-slide" id="sld2">
+
+
+      <div style="margin-bottom: 20px;">
+        <p style="    margin: 0;
+    font-size: 12px;
+    color: #95989b;
+    margin-bottom: 7px;
+    font-weight: 700;
+    margin-left: 3px;">Tipo de calibre</p>
+        <ion-item class="item-input" lines="none">
+          <ion-input lines="none" placeholder="Seleccione">
+          </ion-input>
+        </ion-item>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <p style="    margin: 0;
+    font-size: 12px;
+    color: #95989b;
+    margin-bottom: 7px;
+    font-weight: 700;
+    margin-left: 3px;">Tipo de calibre</p>
+        <ion-item class="item-input" lines="none">
+          <ion-input lines="none" placeholder="Seleccione">
+          </ion-input>
+        </ion-item>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <p style="    margin: 0;
+    font-size: 12px;
+    color: #95989b;
+    margin-bottom: 7px;
+    font-weight: 700;
+    margin-left: 3px;">Tipo de calibre</p>
+        <ion-item class="item-input" lines="none">
+          <ion-input lines="none" placeholder="Seleccione">
+          </ion-input>
+        </ion-item>
+      </div>
+
+
+
+      <div style="text-align: center;">
+        <a href="javascript:void(0)" (click)="changeSlide('back')" class="btn-2" style="padding: 15px 40px;
+margin-right: 10px;">Anterior</a>
+
+        <a href="javascript:void(0)" class="btn-3" style="padding: 15px 40px;" (click)="changeSlide('next')">
+          Siguiente
+        </a>
+      </div>
+    </div> -->
+
+    <!--  <div class="box-slide" id="sld3">
+
+      <p style="    margin: 0;
+      font-size: 12px;
+      color: #95989b;
+      margin-bottom: 12px; font-weight: 700;
+      margin-left: 3px;">Productores </p>
+
+      <a href="javascript:void(0)" class="btn-4" style="
+position: absolute;
+    top: -8px;
+    right: 0;" (click)="addProducers()">
+        <ion-icon name="add-circle" style="color: #273b69;
+  font-size: 22px;
+  transform: translateY(6px);
+  margin-top: -10px;
+  margin-right: 2px;"></ion-icon> Agregar
+      </a>
+
+      <div *ngIf="listProducers.length == 0" style="
+      padding: 10px 15px;
+    position: relative;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    background: #f3f3f3;
+    border-radius: 5px;">
+        <p style="margin: 0;
+        font-size: 12px;
+        font-weight: 700;
+        color: #6a6a6a;">Ningún productor asociado</p>
+
+        <div>
+
+        </div>
+      </div>
+
+      <div *ngFor="let prod of listProducers" style="
+      padding: 10px 15px;
+      position: relative;
+      padding-bottom: 20px;
+     padding-left: 20px;border-bottom: 1px solid #ddd;">
+        <p style="margin: 0;
+        font-size: 12px;
+        font-weight: 700;
+        color: #6a6a6a;">{{prod.name}}</p>
+        <p style="margin: 0;
+        font-size: 10px;
+        font-style: italic;">DNI. 72630487</p>
+
+        <p style="margin: 0;
+        font-size: 12px;
+        font-weight: 700;
+        color: #6a6a6a;
+        margin-top: 5px;">Desde Piura, Sullana </p>
+        <p style="margin: 0;
+        font-size: 10px;
+        font-style: italic">-5.183954,-80.6290605</p>
+
+        <div style="    position: absolute;
+        top: 10px;
+        right: 10px;
+        text-align: center;
+        margin: 12px;">
+          <p style="    margin: 0;
+          font-size: 15px;
+          font-weight: 700;
+          color: #d36970e8;">{{prod.count}} Jabas </p>
+          <p style="font-size: 12px;
+          font-weight: 600;
+          color: #1c1c1c;">12 Certificados</p>
+        </div>
+
+        <div style="box-shadow: none;
+        border-radius: 50px;
+        background: #4fa956;
+        height: 0.2rem;
+        width: 50px;
+        /* width: 100%; */
+        transform: rotate(
+    90deg);
+        position: absolute;
+        top: 20px;
+        margin-top: 25px;
+        left: -20px;"></div>
+
+        <div>
+
+        </div>
+      </div>
+
+      <div style="text-align: center;margin-top: 30px;">
+        <a href="javascript:void(0)" (click)="changeSlide('back')" class="btn-2" style="padding: 15px 40px;
+margin-right: 10px;">Anterior</a>
+
+        <a href="javascript:void(0)" class="btn-3" style="padding: 15px 40px;" (click)="changeSlide('next')">
+          Siguiente
+        </a>
+      </div>
+    </div> -->
+
+    <!--    <div class="box-slide" id="sld4">
+
+      <img src="../../../assets/images/tracking.jpg" alt="" style="margin-bottom: 20px;">
+
+      <div style="margin-bottom: 20px;position: relative;">
+        <p style="    margin: 0;
+    font-size: 12px;
+    color: #95989b;
+    margin-bottom: 12px; font-weight: 700;
+    margin-left: 3px;">Traking de producto </p>
+
+        <a href="javascript:void(0)" class="btn-4" style="
+position: absolute;
+    top: -12px;
+    right: 0;">
+          <ion-icon name="add-circle" style="color: #273b69;
+  font-size: 22px;
+  transform: translateY(6px);
+  margin-top: -10px;
+  margin-right: 2px;"></ion-icon> Agregar
+        </a>
+
+  
+
+        <div style="/* border: 1px solid #dd9797; */
+        /* border-radius: 12px; */
+        padding: 10px 15px;
+        position: relative;
+        padding-bottom: 20px;
+       padding-left: 20px;border-bottom: 1px solid #ddd;">
+          <p style="margin: 0;
+          font-size: 12px;
+          font-weight: 700;
+          color: #6a6a6a;">Desde Piura, Sullana</p>
+          <p style="margin: 0;
+          font-size: 10px;
+          font-style: italic;">-5.183954,-80.6290605</p>
+
+          <p style="margin: 0;
+          font-size: 12px;
+          font-weight: 700;
+          color: #6a6a6a;
+          margin-top: 5px;">A Lambayeque, Chiclayo</p>
+          <p style="margin: 0;
+          font-size: 10px;
+          font-style: italic">-9.983954,-81.5250502</p>
+
+          <div style="    position: absolute;
+          top: 2px;
+          right: 10px;
+          text-align: center;
+          margin: 12px;">
+            <p style="margin: 0;
+          color: #d36970e8;
+          font-weight: 800;    font-size: 12px;
+    letter-spacing: 0.7px;">VIAJE 1</p>
+            <p style="    margin: 0;
+            font-size: 15px;
+            font-weight: 700;
+            color: #4a4a4a;">120.52 Km </p>
+            <p style="font-size: 12px;
+            font-weight: 600;
+            color: #1c1c1c;">5h 30min</p>
+          </div>
+
+          <div style="box-shadow: none;
+          border-radius: 50px;
+          background: #4fa956;
+          height: 0.2rem;
+          width: 50px;
+          /* width: 100%; */
+          transform: rotate(
+      90deg);
+          position: absolute;
+          top: 20px;
+          margin-top: 25px;
+          left: -20px;"></div>
+
+          <div>
+
+          </div>
+        </div>
+
+        <div style="/* border: 1px solid #dd9797; */
+        margin-top: 10px;
+        /* border-radius: 12px; */
+        padding: 10px 15px;
+        position: relative;
+       padding-left: 20px;">
+          <p style="margin: 0;
+          font-size: 12px;
+          font-weight: 700;
+          color: #6a6a6a;">Desde Lambayeque, Chiclayo</p>
+          <p style="margin: 0;
+          font-size: 10px;
+          font-style: italic;">-5.183954,-80.6290605</p>
+
+          <p style="margin: 0;
+          font-size: 12px;
+          font-weight: 700;
+          color: #6a6a6a;
+          margin-top: 5px;">A Lima, Barranco</p>
+          <p style="margin: 0;
+          font-size: 10px;
+          font-style: italic">-9.983954,-81.5250502</p>
+
+          <div style="    position: absolute;
+          top: 2px;
+          right: 10px;
+          text-align: center;
+          margin: 12px;">
+            <p style="margin: 0;
+          color: #d36970e8;
+          font-weight: 800;    font-size: 12px;
+    letter-spacing: 0.7px;">VIAJE 2</p>
+            <p style="    margin: 0;
+            font-size: 15px;
+            font-weight: 700;
+            color: #4a4a4a;">320.01 Km </p>
+            <p style="font-size: 12px;
+            font-weight: 600;
+            color: #1c1c1c;">8h 20min</p>
+          </div>
+
+          <div style="box-shadow: none;
+          border-radius: 50px;
+          background: #4fa956;
+          height: 0.2rem;
+          width: 50px;
+          /* width: 100%; */
+          transform: rotate(
+      90deg);
+          position: absolute;
+          top: 20px;
+          margin-top: 25px;
+          left: -20px;"></div>
+
+          <div>
+
+          </div>
+        </div>
+
+      </div>
+
+
+      <div style="text-align: center;">
+        <a href="javascript:void(0)" (click)="changeSlide('back')" class="btn-2" style="padding: 15px 40px;
+      margin-right: 10px;">Anterior</a>
+
+        <a href="javascript:void(0)" class="btn-3" style="padding: 15px 40px;" (click)="changeSlide('next')">
+          Siguiente
+        </a>
+      </div>
+    </div> -->
+
+    <!--     <div class="box-slide" id="sld5">
+
+      <p style="    margin: 0;
+      font-size: 15px;
+      color: #95989b;
+      margin-bottom: 0px; font-weight: 600;
+      margin-left: 3px;">Portada</p>
+
+      <div *ngIf="imgPortada==''" style="text-align: center;">
+        <p style="margin: 0;
+        font-size: 13px;
+        color: #838383;">Use una predeterminada</p>
+        <p style="margin: 0;
+        font-size: 14px;
+        color: #838383;
+        font-weight: 700;
+        line-height: 1;">o eliga una desde su dispositivo</p>
+      </div>
+
+
+      <div *ngIf="imgPortada==''" style="    text-align: center;
+      border: 2px dashed #d3d3d3;
+      margin: 20px 0;
+      padding: 20px;margin-bottom: 5px;">
+
+        <ion-icon name="cloud-upload-outline" style="    font-size: 60px;
+        color: #d7d7d7;"></ion-icon>
+        <p style="font-size: 11px;
+        font-weight: 600;
+        color: #adadad;">JPG, PNG, o JPEG, menor a 10MB</p>
+
+        <div style="font-size: 14px;
+        color: #7c7c7c;
+        text-decoration: underline;
+        font-weight: 600;">
+          Elija archivo
+        </div>
+      </div>
+
+      <div *ngIf="imgPortada!=''" style="text-align: center;">
+        <p style="margin: 0;
+        font-size: 13px;
+        color: #d36970e8;">¡Listo!</p>
+        <p style="margin: 0;
+        font-size: 14px;
+        color: #838383;
+        font-weight: 500;
+        line-height: 1;;">Imagen selecionada</p>
+      </div>
+
+      <div *ngIf="imgPortada!=''" style="margin-top: 10px;position: relative;">
+        <img [src]="'../../../assets/images/'+imgPortada" alt="">
+        <p style="    position: absolute;
+        margin: 0;
+        bottom: 0;
+        width: 100%;
+        color: white;
+        font-weight: 600;
+        font-size: 12px;
+        padding: 1px 10px;
+        font-style: italic;
+        background-image: linear-gradient(to top, #eb656e, #e9626b, #e65f67, #e45b64, #e15861, #dd545d, #da515a, #d64d56, #d04851, #ca434c, #c53e47d1);
+        opacity: 0.95;">Limon</p>
+      </div>
+
+
+      <div style="margin-bottom: 30px;
+      text-align: right;
+      padding-right: 4px;
+      top: 10px;
+      margin-top: 5px;">
+        <a href="javascript:void(0)" (click)="imagesPred()" style="font-size: 12px;
+        color: #e65f67d1;
+        font-weight: 700;
+        width: auto;">
+          <ion-icon name="image-outline" style="position: relative;
+          right: 1px;
+          font-size: 20px;
+          margin-top: -12px;
+          transform: translateY(5px);"></ion-icon> Usar predeterminada
+        </a>
+      </div>
+
+      <p style="    margin: 0;
+      font-size: 15px;
+      color: #95989b;
+      margin-bottom: 12px; font-weight: 600;
+      margin-left: 3px;">Certificados</p>
+
+      <div style="text-align: center;margin-bottom: 40px;">
+        <img src="../../../assets/images/cert-prueba.jpeg" alt=""
+          style="box-shadow: 0 0px 15px rgb(187 187 187 / 58%);width: 97%;">
+      </div>
+
+
+      <div style="text-align: center; " slot="fixed">
+        <a href="javascript:void(0)" (click)="changeSlide('back')" class="btn-2" style="padding: 15px 40px;
+      margin-right: 10px;">Anterior</a>
+
+        <a href="javascript:void(0)" class="btn-3" style="padding: 15px 40px;" (click)="changeSlide('next')">
+          Terminar
+        </a>
+      </div>
+    </div> -->
+
+  </div>
+
+
+
+
+
+</ion-content>

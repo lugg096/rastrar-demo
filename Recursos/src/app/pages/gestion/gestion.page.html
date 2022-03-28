@@ -1,0 +1,262 @@
+<ion-content style="--background:var(--color-background);">
+  <!-- HEADER -->
+  <div
+    style="color: #fff;background: linear-gradient(90deg, #1c1c24 10%, rgb(60, 61, 68) 100%); margin-bottom: 0;height: 55px;">
+    <ion-icon slot="start" name="search" class="icon-nav-arrow " (click)="buscar=true"
+      style=" position: absolute;z-index: 10; padding: 20px;padding-top: 15px;right: 0;">
+    </ion-icon>
+    <ion-menu-button name="main-menu" style="font-size: 28px;position: absolute;z-index: 10;left:5px;top:3px">
+    </ion-menu-button>
+    <ion-item style="--background: transparent;margin-bottom: 0;" lines="none">
+      <ion-title class="title">QR generados</ion-title>
+    </ion-item>
+  </div>
+
+  <div class="row" [ngClass]="buscar?'nonePosition':'upContainer'"
+    style="background:var(--color-background); color: #fff;background: linear-gradient(90deg, #1c1c24 10%, rgb(60, 61, 68) 100%); margin-bottom: 0;height: 55px;">
+
+    <div class="col-9">
+      <div class="search">
+        <input type="text" [ngModel]="nameFilter" (ngModelChange)="buscarCert($event)"
+          placeholder="Buscar certificados">
+      </div>
+    </div>
+
+    <div class="col-3" style=" padding: 0;
+    font-size: 12px;
+    margin-top: 17px;" (click)="cancelBuscar()">
+      Cancelar
+    </div>
+  </div>
+
+  <!-- TABS -->
+
+  <!-- TABS 2 -->
+  <div
+    style=" position: fixed;bottom: 0;z-index: 1000;  background: #fff; width: 100%;text-align: center;box-shadow: var(--shadow-black-300); ">
+
+    <div class="button-filter select" (click)="filter(env.STATUS_REG.SAVED)" #pendientes>
+      <ion-icon name="timer-outline" style="transform: translateY(2px);"></ion-icon>
+      <p style="font-size: 9px;margin-top: 0;line-height: 0.4;letter-spacing: 0.5px;margin-bottom: 0;"
+        class="text-button">
+        Vigentes</p>
+    </div>
+
+    <div class="button-filter" (click)="filter(env.STATUS_REG.UPLOADED)" #completados>
+      <ion-icon name="heart-dislike-outline" style="transform: translateY(2px);"></ion-icon>
+      <p style="font-size: 9px;margin-top: 0;line-height: 0.4;letter-spacing: 0.5px;margin-bottom: 0;"
+        class="text-button"> Vencidos
+      </p>
+    </div>
+  </div>
+
+
+  <!-- BUTTON FAB -->
+  <!--   <ion-fab slot="fixed" horizontal="center" vertical="bottom">
+    <ion-fab-button class="fab-button-scan" style="margin-bottom: 25px;" (click)="selectForm()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+ -->
+
+  <!-- BUTTON FAB 2-->
+  <div style="position: fixed;bottom: 30px;width: 100%;text-align: center;z-index: 1001;">
+    <a href="javascript:void(0)" class="btn-3" (click)="selectForm()" style="text-decoration: none;
+      background: linear-gradient(
+  90deg
+  , #eb656e 10%, #bf3942 100%);
+      padding: 17px 15px;
+      border-radius: 30px;
+      color: #fff;
+      box-shadow: var(--shadow-black-100);
+      font-weight: 500;">
+      <ion-icon name="add" style="font-size: 20px;transform: translateY(6px);"></ion-icon>
+    </a>
+  </div>
+
+
+  <ion-refresher slot="fixed" (ionRefresh)="refreshList($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- PRUEBA -->
+  <!--   <div style="margin: 0 12px;margin-bottom:150px;">
+    <div class="row" style="padding: 8px;padding-top: 5px;">
+
+      <div class="col-6 m-0 p-0" style="position: relative;" *ngFor="let item of arrayPrueba">
+        <div style="padding: 15px;background: #fff;margin: 5px;border-radius: 10px;position: relative;">
+  
+          <div (click)="verQRCert(item)">
+            <p
+              style="color: #cd7c7c;font-size: 13px;font-weight: 600;margin-top: 0;margin-bottom: 0;padding-right: 20px;">
+              {{item.objective_cert}}<br>
+            </p>
+
+            <ion-icon name="ellipsis-vertical" style="
+            position: absolute;
+            top: 13px;
+            right: 10px;
+            font-size: 18px;
+            color: #ce8585de;" (click)="delete(item)"></ion-icon>
+            
+
+          
+            <p style="font-size: 12px;
+            color: #818181;
+            margin: 0;
+            font-weight: 600;">{{item.desc || ''}}</p>
+              <p style="font-size: 10px;color: #8d8d8d;margin-bottom: 8px;">
+                Expira el {{ ((item.f_vencimineto)*1000) | date:'dd/MM/yy' }}</p>
+          </div>
+  
+          <div style="    position: absolute;
+          bottom: 8px;
+          right: 8px;">
+            <img [src]="_env.url2 + item.imgTypeSreen" style="height: 24px;
+            width: 24px;
+            object-fit: cover;
+            border-radius: 50px;
+            opacity: 0.9;">
+          </div>
+       
+        </div>
+      </div>
+  
+  
+    </div>
+  </div>
+ -->
+
+
+  <!-- ************************** -->
+
+
+  <div style="margin: 0 12px;margin-bottom:150px;">
+
+    <div class="row" style="padding: 8px;padding-top: 5px;">
+
+      <div class="col-6 m-0 p-0" style="position: relative;" *ngFor="let item of list">
+        <div style="padding: 15px;background: #fff;margin: 5px;border-radius: 10px;position: relative;">
+  
+          <div (click)="verQRCert(item)">
+            <p
+              style="color: #cd7c7c;font-size: 13px;font-weight: 600;margin-top: 0;margin-bottom: 0;padding-right: 20px;">
+              {{item.objective_cert}}<br>
+            </p>
+
+            <ion-icon name="ellipsis-vertical" style="
+            position: absolute;
+            top: 13px;
+            right: 10px;
+            font-size: 18px;
+            color: #ce8585de;" (click)="delete(item)"></ion-icon>
+            
+
+          
+            <p style="font-size: 12px;
+            color: #818181;
+            margin: 0;
+            font-weight: 600;">{{item.desc || ''}}</p>
+              <p style="font-size: 10px;color: #8d8d8d;margin-bottom: 8px;">
+                Expira el {{ ((item.f_vencimineto)*1000) | date:'dd/MM/yy' }}</p>
+          </div>
+  
+          <div style="    position: absolute;
+          bottom: 8px;
+          right: 8px;">
+            <img [src]="_env.url2 + item.imgTypeSreen" style="height: 24px;
+            width: 24px;
+            object-fit: cover;
+            border-radius: 50px;
+            opacity: 0.9;">
+          </div>
+       
+        </div>
+      </div>
+    <!--   <div class="col-6 m-0 p-0" *ngFor="let item of list">
+        <div style="padding: 15px;background: #fff;margin: 5px;border-radius: 10px;position: relative;">
+
+          <div (click)="verCert(item)">
+            <p
+              style="color: #cd7c7c;font-size: 11px;font-weight: 600;margin-top: 0;margin-bottom: 0;padding-right: 20px;">
+              {{item.title}}<br> <span style="text-transform: uppercase;
+            font-style: italic;
+            font-size: 9px;
+            color: #545454;">{{item.objective_cert || ''}}</span><br>
+            </p>
+            <p style="color: rgb(53, 53, 53);font-size: 12px;font-weight: 500;margin-top: 0;margin-bottom: 0;">
+              {{item.titular_name}}</p>
+            <p style="font-size: 8px;color: #8d8d8d;">
+
+              Creado el {{ ((item.f_emision)*1000) | date:'dd/MM/yy, h:mm a' }}</p>
+          </div>
+          <a href="javascript:void(0)" class="btn btn-2" (click)="completeCert(item)"
+            *ngIf="item.status==env.STATUS_REG.SIGNED">
+            <ion-icon name="cloud-upload-outline" style="font-size: 18px;
+              margin-top: -6px;
+              transform: translateY(5px);
+              margin-right: 3px;"></ion-icon> Enviar
+          </a>
+
+          <a href="javascript:void(0)" class="btn btn-2" (click)="completeCert(item)"
+            *ngIf="item.status==env.STATUS_REG.SAVED">
+            <i class="fas fa-signature" style="font-size: 13px;margin-right: 3px;"></i> Firmar Info.</a>
+
+
+          <a href="javascript:void(0)" class="btn btn-2" *ngIf="item.status==env.STATUS_REG.UPLOADED">
+            <i class="fas fa-signature" style="font-size: 13px;margin-right: 3px;"></i> Ver credent.</a>
+
+          <ion-icon name="ellipsis-vertical-outline" style="
+              position: absolute;
+              bottom: 22px;
+              right: 10px;
+              font-size: 20px;
+              color: #ce8585de;" *ngIf="item.status==env.STATUS_REG.SAVED" (click)="delete(item)"></ion-icon>
+
+        </div>
+      </div> -->
+
+
+    </div>
+
+
+    <!-- LIST EMPTY -->
+    <div *ngIf="list.length == 0" style="text-align: center;">
+
+      <img src="../../../assets/images/Notes_Two Color.png" style="width: 280px;
+      max-width: 95%;" alt="">
+
+      <p style="    margin: 0;
+      margin-top: -40px;
+      font-size: 14px;
+      color: #8f8f8f;
+      padding: 0 50px;">No se econtraron registros vigentes</p>
+
+    </div>
+
+
+
+
+
+    <!--   <ion-card button="true" *ngIf="list.length == 0" style="--background: white;
+    border-radius: 20px;
+    padding: 8px 0px 8px 20px;
+    box-shadow: var(--shadow-black-100);
+    margin: 0; margin-top: 10px; ">
+      <ion-item-sliding>
+        <ion-item lines="none" class="ion-no-padding ion-no-margin">
+          <ion-label style="line-height: 17px;margin: 0;">
+            <p style="line-height: 1;color: var(--black-400);font-size: 14px;">
+              No se encontró registros
+            </p>
+          </ion-label>
+        </ion-item>
+
+      </ion-item-sliding>
+
+    </ion-card> -->
+  </div>
+
+
+
+</ion-content>

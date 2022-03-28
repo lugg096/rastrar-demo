@@ -1,0 +1,257 @@
+<ion-content [fullscreen]="true" class="contetLogin">
+
+  <ion-slides #slidesPadre pager="false" [options]="slideOptsOnboarding" style="height: 100%;">
+
+    
+    <ion-slide class="ion-no-padding">
+
+      <div style=" padding-bottom: 5px;  height: 100%; width: 100%; color: #2F3435;">
+
+        <div style="position: absolute;
+        top: 50px;
+        width: 100%;
+        color: white;
+        padding: 0 60px">
+
+
+          <div style="    margin-bottom: 50px;">
+            <img src="../../assets/images/logo-white.svg" style=" height: 50px;" alt="">
+          </div>
+
+          <h1 style="    visibility: visible;
+          animation-delay: 0.15s;
+          animation-name: fadeInUp;
+          font-size: 20px;
+          font-weight: 700;
+          line-height: 1.2;">Plataforma Blockchain para asegurar la trazabilidad digital.</h1>
+          <p style="    margin-bottom: 1.5rem!important;
+  margin-top: 1.5rem!important;
+  font-size: 13px;">Rastreamos el recorrido de un producto para
+            consumo humano a través de toda la cadena de suministro: producción,
+            procesamiento, distribución y comercialización.</p>
+        </div>
+
+        <div style="    z-index: -5;background: linear-gradient(
+          -47deg, #eb656e 0%, #bf3942 100%);height: 100%;width: 100%;opacity: 0.94;position: absolute;">
+        </div>
+
+        <div style="position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;">
+          <svg viewBox="0 0 1920 310" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" class="svg replaced-svg">
+            <defs></defs>
+            <g id="shapeHome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g id="shapeHome" transform="translate(0.000000, -554.000000)" fill="#FFFFFF">
+                <path
+                  d="M-3,551 C186.257589,757.321118 319.044414,856.322454 395.360475,848.004007 C509.834566,835.526337 561.525143,796.329212 637.731734,765.961549 C713.938325,735.593886 816.980646,681.910577 1035.72208,733.065469 C1254.46351,784.220361 1511.54925,678.92359 1539.40808,662.398665 C1567.2669,645.87374 1660.9143,591.478574 1773.19378,597.641868 C1848.04677,601.75073 1901.75645,588.357675 1934.32284,557.462704 L1934.32284,863.183395 L-3,863.183395"
+                  id="shapeHome"></path>
+              </g>
+            </g>
+          </svg>
+          <div style="width: 100%;background: white;height: 183px;margin-top: -2px;">
+
+          </div>
+        </div>
+      
+
+
+
+        <div style="text-align: center;position: absolute;bottom: 50px;width: 100%;">
+          <div>
+            <a href="javascript:void(0)" class="btn-3" (click)="slideLogin=true;nextSlidePadre()">Iniciar sesión</a>
+          </div>
+
+          <div style=" margin-top: 10px;">
+            <a href="javascript:void(0)" class="btn-2"
+              (click)="slideLogin=false;slideNewAccount=true;nextSlidePadre()">Crear cuenta </a>
+          </div>
+        </div>
+
+
+      </div>
+    </ion-slide>
+
+    <!-- Iniciar sesion-->
+    <ion-slide *ngIf="slideLogin" class="ion-no-padding" style="display: block;
+  height: 100%;background: rgba(255, 255, 255, 0.54);">
+
+      <!-- Header -->
+      <div style="position: relative;">
+        <ion-icon name="arrow-back-outline" (click)="backSlidePadre();"
+          style="font-size: 20px;padding: 15px;position: absolute;top: 0;left: 0; color: var(--tertiary);">
+        </ion-icon>
+        <p style="font-size: 13px;font-weight: 600;padding: 15px 0;color: var(--main-color);">
+          <!-- Crear cuenta -->
+        </p>
+      </div>
+
+      <div style="
+      color: #2F3435;
+      padding: 0 30px;
+      padding-bottom: 50px;
+      padding-top: 30px;
+      width: 100%;position: relative;">
+
+        <p class="title-gradient">¡Bienvenido/a! </p>
+        <p style=" text-align: left;
+      font-size: 13px;
+      color: #9f9e9e;">Complete los siguientes datos para iniciar tu cuenta.<br>Se estará vinculando una nueva
+          <b>llave pública</b> adicional a su cuenta.
+        </p>
+
+        <form [formGroup]="loginForm" style="margin-top: 20px;">
+
+          <ion-item class="item-input" lines="none">
+            <ion-label position="fixed">
+              <ion-icon name="mail"></ion-icon>
+            </ion-label>
+            <ion-input lines="none" formControlName="email" type="email" placeholder="Correo electrónico">
+            </ion-input>
+          </ion-item>
+          <app-control-messages [control]="loginForm.controls['email']"></app-control-messages>
+
+          <ion-item class="item-input" lines="none">
+            <ion-label position="fixed">
+              <ion-icon name="lock-closed"></ion-icon>
+            </ion-label>
+            <ion-input lines="none" formControlName="pass" placeholder="Ingrese clave">
+            </ion-input>
+          </ion-item>
+          <app-control-messages [control]="loginForm.controls['pass']"></app-control-messages>
+
+
+
+        </form>
+
+        <div style="text-align: center;margin-top: 25px;">
+          <a href="javascript:void(0)"
+            (click)="(loginForm.controls['pass'].value!='' && loginForm.controls['email'].value!='')?validateFormLogin():null"
+            class="btn-3"
+            [ngClass]="(loginForm.controls['pass'].value!='' && loginForm.controls['email'].value!='')?'btn-3':'btn-disable'">
+            Continuar</a>
+        </div>
+
+        <div style="
+      font-size: 14px;
+      margin-top: 20px;
+      bottom: 0;
+      text-align: center;
+      font-weight: 600;
+      color: #888484;">
+          ¿Eres nuevo en Rastrar? <span class="font-grd" (click)="slideNewAccount=true;nextSlidePadre()"> Crear
+            cuenta</span>
+        </div>
+
+      </div>
+    </ion-slide>
+
+    <!-- Crear cuenta -->
+    <ion-slide *ngIf="slideNewAccount" class="ion-no-padding" style="display: block; 
+  height: 100%;background: #ffffff8a;">
+
+      <!-- Header -->
+      <div style="position: relative;">
+        <ion-icon name="arrow-back-outline" (click)="backSlidePadre();"
+          style="font-size: 20px;padding: 15px;position: absolute;top: 0;left: 0; color: var(--tertiary);">
+        </ion-icon>
+        <p style="font-size: 13px;font-weight: 600;padding: 15px 0;color: var(--main-color);">
+
+        </p>
+      </div>
+
+
+      <div style="
+      color: #2F3435;
+      padding: 0 30px;
+      padding-bottom: 50px;
+      padding-top: 30px;
+      width: 100%;position: relative;">
+
+        <p class="title-gradient">Nueva cuenta </p>
+        <p style="  text-align: left;
+      font-size: 13px;
+      color: #9f9e9e;">Complete los siguientes datos para continuar con la creación de su cuenta
+        </p>
+
+        <form [formGroup]="accountForm" style="margin-top: 20px;">
+
+          <ion-item class="item-input" lines="none">
+            <ion-label position="fixed">
+              <ion-icon name="person"></ion-icon>
+            </ion-label>
+            <ion-input lines="none" formControlName="name" placeholder="Ingrese su nombre">
+            </ion-input>
+          </ion-item>
+          <app-control-messages [control]="accountForm.controls['name']"></app-control-messages>
+
+          <ion-item class="item-input" lines="none">
+            <ion-label position="fixed">
+              <ion-icon name="shield-checkmark"></ion-icon>
+            </ion-label>
+            <ion-input lines="none" formControlName="dni" type="text" placeholder="Ingrese DNI">
+            </ion-input>
+          </ion-item>
+          <app-control-messages [control]="accountForm.controls['dni']"></app-control-messages>
+
+          <ion-item class="item-input" lines="none">
+            <ion-label position="fixed">
+              <ion-icon name="mail"></ion-icon>
+            </ion-label>
+            <ion-input lines="none" formControlName="email" type="email" placeholder="Ingrese correo electrónico">
+            </ion-input>
+          </ion-item>
+          <app-control-messages [control]="accountForm.controls['email']"></app-control-messages>
+
+
+          <ion-item class="item-input" lines="none">
+            <ion-label position="fixed">
+              <ion-icon name="lock-closed"></ion-icon>
+            </ion-label>
+            <ion-input lines="none" formControlName="pass" type="text" placeholder="Ingrese una clave">
+            </ion-input>
+          </ion-item>
+          <app-control-messages [control]="accountForm.controls['pass']"></app-control-messages>
+
+
+        </form>
+
+
+
+
+
+        <ion-item lines="none" class="check-terms">
+          <ion-label>Acepto <a href="javascript:void(0)">términos y condiciones</a> </ion-label>
+          <ion-checkbox slot="start" value="acepto" (ionChange)="checkboxClick($event)">
+          </ion-checkbox>
+        </ion-item>
+
+
+
+        <div style="text-align: center;margin-top: 18px;">
+          <a href="javascript:void(0)" (click)="ter?validateForm():null" class="btn-3"
+            [ngClass]="ter?'btn-3':'btn-disable'">
+            Continuar</a>
+        </div>
+
+      </div>
+    </ion-slide>
+
+    <!-- Crear PIN -->
+    <ion-slide>
+      <div class=" text-left" style="background: var(--bfirma-primary);width: 100%;height: 100%;">
+        <app-pin [data]="dataSlideCreate" (backPage)="backSlidePadre()" (getClave)="getClave($event)"></app-pin>
+      </div>
+    </ion-slide>
+
+    <!-- Validar PIN -->
+    <ion-slide>
+      <div class=" text-left" style="background: var(--bfirma-primary);width: 100%;height: 100%;">
+        <app-pin [data]="dataSlideValidacion" (backPage)="backSlidePadre()" (getClave)="getClaveValid($event)">
+        </app-pin>
+      </div>
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>

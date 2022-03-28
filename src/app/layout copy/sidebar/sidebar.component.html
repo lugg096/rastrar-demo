@@ -1,0 +1,127 @@
+<div class="sidebar">
+    <div class="logo-details">
+        <i class="fab fa-stripe-s"></i>
+        <span class="logo_name">Stamping</span>
+    </div>
+
+    <ul class="nav-links">
+        <li>
+
+            <a href="#" class="nav_title">
+                <i class="fas fa-home"></i>
+                <span class="link_name">Dashboard</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Category</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <div class="icon-link">
+                <a href="#" class="nav_title">
+                    <i class="fas fa-columns"></i>
+                    <span class="link_name">Category</span>
+                </a>
+                <i class="fas fa-chevron-down arrow" (click)="showMenu($event)"></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="#">Category</a></li>
+                <li><a href="#">Web Desing</a></li>
+                <li><a href="#">Card Desing</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <div class="icon-link">
+                <a href="#" class="nav_title">
+                    <i class="fas fa-archive"></i>
+                    <span class="link_name">Post</span>
+                </a>
+                <i class="fas fa-chevron-down arrow" (click)="showMenu($event)"></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="#">Post</a></li>
+                <li><a href="#">Web Desing</a></li>
+                <li><a href="#">Card Desing</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#" class="nav_title">
+                <i class="far fa-map"></i>
+                <span class="link_name">Analytics</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Analytics</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#" class="nav_title">
+                <i class="fas fa-chart-line"></i>
+                <span class="link_name">Char</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Char</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <div class="icon-link">
+                <a href="#" class="nav_title">
+                    <i class="fas fa-plug"></i>
+                    <span class="link_name">Plugins</span>
+                </a>
+                <i class="fas fa-chevron-down arrow"></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="#">Plugins</a></li>
+                <li><a href="#">Web Desing</a></li>
+                <li><a href="#">Card Desing</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </li>
+
+
+        <li class="profile" style="position: absolute;bottom: 0;">
+            <div class="profile-details">
+                <div class="profile-content">
+                    <img src="../../../assets/img/user.jpg" alt="">
+                </div>
+
+                <div class="name-job">
+                    <div class="profile_name">Luiggi</div>
+                    <div class="job">Admin Web</div>
+                </div>
+                <i class="fas fa-sign-out-alt"></i>
+            </div>
+        </li>
+    </ul>
+
+    <div class="btn-menu" style=" position: absolute;
+    top: 0px;
+    right: -40px;padding: 10px 20px;" (click)="btnMenu($event)">
+        <div style="
+        background: #fcfbfd;
+    border-radius: 100%;
+    height: 32px;
+    width: 32px;
+    box-shadow: 0 3px 15px rgb(0 0 0 / 10%);
+    display: flex;
+    align-items: center;
+    justify-content: center;">
+            <i class="fas fa-chevron-left icon-menu" style="
+                    transform: translateY(1.5px) translateX(-1px);font-size: 14px;"></i>
+        </div>
+    </div>
+
+</div>
+
+<!-- <section class="home-section">
+    <div class="home-content">
+        <i class="fas fa-bars icon-menu" (click)="btnMenu()"></i>
+        <span class="text">Drop Down</span>
+    </div>
+</section> -->

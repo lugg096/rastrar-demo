@@ -1,0 +1,131 @@
+<!-- <ion-header class="ion-no-border">
+  <ion-toolbar  style="--background: linear-gradient(90deg, #1c1c24 10%, rgb(60, 61, 68) 100%);">
+    <ion-buttons slot="end" style="position: absolute;left: 0;z-index: 20;" (click)="goGestion()">
+      <ion-icon name="arrow-back" style="font-size: 25px; color: white;padding: 15px;"></ion-icon>
+    </ion-buttons>
+    <p style="text-align: center;color: white;font-size: 16px;margin: 0;">
+      Perfil</p>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content scrollEvents="true" [fullscreen]="true">
+  <div
+    style="color: #fff;background: linear-gradient(90deg, #1c1c24 10%, rgb(60, 61, 68) 100%); margin-bottom: 0;height: 55px;">
+
+    <ion-menu-button name="main-menu" style="font-size: 28px;position: absolute;z-index: 10;left:5px;top:3px">
+    </ion-menu-button>
+    <ion-item style="--background: transparent;margin-bottom: 0;" lines="none">
+      <ion-title class="title">Perfil</ion-title>
+    </ion-item>
+  </div>
+
+
+
+  <div
+    style="text-align: -webkit-center;padding: 10% 0 3% 0; background: linear-gradient(90deg, #1c1c24 10%, rgb(60, 61, 68) 100%);">
+    <!--  <img src="../../../assets/images/FBLV.jpg"
+      style="width: 100px;max-height: 100px;border-radius: 100%;object-fit: cover;"> -->
+
+    <div style="width: 80px;
+      height: 80px;
+      border-radius: 100%;
+      background: white;
+      color: var(--main-color);
+      font-size: 28px;
+      font-weight: 500;
+      text-align: center;
+      padding-top: 20px;">
+      {{(user.name | slice:0:2)}}
+    </div>
+
+    <p style="font-size: 17px;color: white;font-weight: 600; margin-bottom: 5px;margin-top: 15px;line-height: 1;">
+      {{user.name}}</p>
+    <p style="font-size: 11px;color: white;font-weight: 600;margin-top: 0px;">{{user.email}}
+    </p>
+  </div>
+
+  <ion-list style="padding-bottom:40px ;">
+    <p style="margin: 10px 15px;font-size: 18px;color: #686868;font-weight: 600;">Datos personales</p>
+
+    <ion-item button="true" lines="none">
+      <ion-label>
+        <p>Nombre</p>
+        {{user.name}}
+      </ion-label>
+    </ion-item>
+
+
+    <ion-item button="true" lines="none">
+      <ion-label>
+        <p>Cargo</p>
+        {{user.role.value}}
+      </ion-label>
+    </ion-item>
+
+    <ion-item button="true" lines="none">
+      <ion-label>
+        <p>{{user.idens[0].type_name}}</p>
+        {{user.idens[0].number}}
+      </ion-label>
+    </ion-item>
+
+    <ion-item button="true" lines="none" (click)="generarQR({value: user.publicKey,text: 'Dirección'})">
+      <ion-label>
+        <p>Dirección</p>
+        {{user.publicKey}}
+      </ion-label>
+      <ion-icon slot="end" size="small" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item button="true" lines="none" (click)="generarQR({value: ('did:ethr:lacchain:'+user.publicKey),text: 'DID'})">
+      <ion-label>
+        <p>DID</p>
+        {{'did:ethr:lacchain:'+user.publicKey}}
+      </ion-label>
+      <ion-icon slot="end" size="small" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+
+    <ion-item button="true" lines="none" (click)="getPrivateKey()">
+      <ion-label>
+        <p>Llave privada</p>
+        *************************
+      </ion-label>
+      <ion-icon slot="end" size="small" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+
+
+    <ion-item button="true" lines="none">
+      <ion-label>
+        <p>Email</p>
+        {{user.email}}
+      </ion-label>
+    </ion-item>
+
+
+    <ion-item button="true" lines="none" (click)="changePin()">
+      <ion-label>
+        <p>Cambiar PIN de seguridad</p>
+        ********
+      </ion-label>
+      <ion-icon slot="end" size="small" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+
+
+    <!--   <ion-item button="true" lines="none">
+      <ion-label>
+        <p>Contraseña</p>
+        ********
+      </ion-label>
+      <ion-button (click)="generarQR({value: '2035798799879797897',text: 'DID'})" class="button-01" style="height: 40px;width: 100px;">
+        Cambiar <ion-icon name="key" style="font-size: 18px;margin-left: 3px;color: #fff;">
+        </ion-icon>
+      </ion-button>
+    </ion-item> -->
+
+
+
+
+  </ion-list>
+
+
+</ion-content>

@@ -1,0 +1,59 @@
+<ion-content>
+
+  <div style="padding: 22px;position: relative;">
+    <!--    <p style="font-size: 15px;">{{title}}</p> -->
+    <ion-icon name="chevron-back-outline" (click)="closeModal()" style="font-size: 20px;
+    color: #db7078;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 20px;">
+    </ion-icon>
+    <p style="margin: 0;
+    color: #d36970e8;
+    font-size: 18px;
+    font-weight: 600;
+    font-style: italic;
+    transform: translateY(-5px) translateX(20px);">{{title}}</p>
+    <a *ngIf="listSelect.length!=0" href="javascript:void(0)" class="btn btn-2"
+      (click)=" listSelect.length==0?null:confirm()" style="position: absolute;
+      top: 18px;
+      right: 20px;">
+      Agregar</a>
+
+
+    <div class="row" style="margin-top: 15px;">
+      <div class="col-12">
+        <input class="form-control" [ngModel]="nameFilter" (ngModelChange)="changeInput($event,0,'input')"
+          placeholder="Buscar por nombre">
+      </div>
+    </div>
+
+    <div style="padding: 10px 0;overflow-y: scroll;display: block;">
+      <div>
+        <p style="    margin: 0;
+        font-size: 12px;
+        margin-top: 10px;
+        font-weight: 600;color: #818181;">¿Necesita un formulario personalizado? Solicitalo <a href="" style="color: #d34f58e8;
+    font-style: italic;
+    text-decoration: underline;">Aquí</a> </p>
+
+      </div>
+
+      <ng-container *ngFor="let itm of list;index as i">
+        <div class="inputGroup">
+          <input [id]="itm.key" name="radio" type="checkbox" [checked]="selectValid(itm)"
+            (change)="confirmCheck(itm,$event)" />
+          <label [attr.for]="itm.key" style="line-height: 1;">
+            {{itm.name}}
+            <br>
+            <span style="font-style: italic;font-size: 12px;"> {{itm.data[label]}}
+            </span>
+          </label>
+        </div>
+
+      </ng-container>
+
+    </div>
+  </div>
+</ion-content>

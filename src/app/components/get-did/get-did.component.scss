@@ -1,0 +1,32 @@
+.content-qr {
+  border-radius: 10px;
+  background: var(--main-color);
+  box-shadow: var(--shadow-black-300);
+  width: 83%;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+ion-label {
+  font-size: 14px !important;
+  p {
+    font-size: 11px;
+  }
+}
+
+.ident {
+  width: 700px;
+  height: 446px;
+ // background-image: linear-gradient(#1c1c24, #174253);
+ background-image: linear-gradient(#101015, #101015);
+  border-radius: 20px;
+  color: rgba(255, 255, 255, 0.829);
+  padding: 15px 20px;
+}
+
+
+.row {
+  margin-right: 0px;
+  margin-left: 0px;
+}

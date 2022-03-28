@@ -1,0 +1,92 @@
+<ion-content>
+
+  <!-- HEADER -->
+  <div>
+    <ion-icon name="close" class="icon-close" (click)="closeModal()">
+    </ion-icon>
+    <ion-item style="--background: transparent;margin-bottom: 0;" lines="none">
+      <ion-title class="title-modal">Documento</ion-title>
+    </ion-item>
+  </div>
+
+  <div class="content-qr">
+    <P class="font-white-1">{{data.name}}
+      <ion-badge class="status" [ngClass]="data.status?'enabled':'disabled'" style="transform: translateY(6px);">
+        {{data.status?'Activo':'Desactivo'}}
+      </ion-badge>
+    </P>
+
+    <div style="text-align: center;text-align: -webkit-center;">
+      <img [src]="urlImg" alt="">
+    </div>
+  </div>
+
+  <div style="margin-right: 40px;text-align: right;">
+    <ion-button [href]="urlDoc" target="_blank" class="button-03">
+      <ion-icon name="document-outline" style="font-size: 20px;"></ion-icon>Ver documento
+    </ion-button>
+  </div>
+
+  <div style="padding: 30px 40px;padding-top: 10px">
+    <p class="font-black-2">Datos de documento
+    </p>
+<!--     <p class="font-black-3">Tu información se
+      encuentra segura alojada en la </p> -->
+
+
+    <div class="row">
+      <ion-item lines="none" class="col-6">
+        <ion-label>
+          <p>Nombre</p>
+          {{data.name}}
+        </ion-label>
+      </ion-item>
+
+      <ion-item lines="none" class="col-6">
+        <ion-label>
+          <p>Titular</p>
+          {{data.data.document.subject.name}}<br>
+          <p style="color: rgb(105, 105, 105); font-size: 12px;line-height: 0.8;font-style: italic;">
+           {{(data.data.document.subject.data.dids.address | slice:0:6)+' ...
+            '+(data.data.document.subject.data.dids.address | slice:38:42)}}
+          </p>
+        </ion-label>
+      </ion-item>
+    </div>
+
+    <div class="row">
+      <ion-item lines="none" class="col-6">
+        <ion-label>
+          <p>Tipo</p>
+          {{data.data.document.documentType.value}}
+        </ion-label>
+      </ion-item>
+
+      <ion-item lines="none" class="col-6">
+        <ion-label>
+          <p>Emisor</p>
+          {{data.data.document.issuer2}}
+        </ion-label>
+      </ion-item>
+    </div>
+
+    <div class="row">
+      <ion-item lines="none" class="col-6">
+        <ion-label>
+          <p>Fecha de emisión</p>
+          {{(data.data.document.iat)*1000 | date:'dd/MM/yyyy'}}
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none" class="col-6">
+        <ion-label>
+          <p>Fecha de caducidad</p>
+          {{(data.data.document.exp)*1000 | date:'dd/MM/yyyy'}}
+        </ion-label>
+      </ion-item>
+
+    </div>
+
+  </div>
+
+
+</ion-content>

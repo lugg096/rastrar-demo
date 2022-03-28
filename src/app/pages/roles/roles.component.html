@@ -1,0 +1,127 @@
+<app-header [title]="'Roles'"></app-header>
+
+<ion-content class="content-table">
+
+  <!-- Cabecera y botones de acción -->
+  <div class="row content-header">
+    <div class="col-6">
+      <p class="title-header">Listado de roles</p>
+    </div>
+    <!-- Content buttons -->
+    <div class="col-6 content-buttons">
+
+      <a href="javascript:void(0)" class="btn-3" (click)="form()" >
+        <ion-icon name="add-circle"></ion-icon> Crear rol </a>
+
+    <!--   <ion-button class="button-03">
+        <ion-icon name="add"></ion-icon> 
+      </ion-button> -->
+    </div>
+  </div>
+
+
+  <!-- Card del listado -->
+  <ion-card class="card-table">
+
+
+    <p class="text-filter">Filtro de registros</p>
+    <div class="row">
+
+      <div class="col-4">
+        <input class="form-control" [ngModel]="nameFilter" (ngModelChange)="changeInput($event,0,'input')"
+          placeholder="Buscar">
+      </div>
+
+      <div class="col-4 checkbox-filer">
+        <ion-checkbox slot="start" (ionChange)="changeInput($event,1,'checkbox')" color="tertiary">
+        </ion-checkbox>
+        <label>Ver desactivados</label>
+      </div>
+    </div>
+
+    <div class="table-responsive table-style">
+      <table class="table">
+        <thead>
+          <tr>
+            <th (click)="orderByTable(item.key)" *ngFor="let item of thead"
+              [ngClass]="orderBy.key==item.key?'select-col-order' :''">{{item.name}} <ion-icon
+                [name]="orderBy.key==item.key?(orderBy.order? 'arrow-down':'arrow-up' ) :'swap-vertical'"
+                class="icon-filter"></ion-icon>
+            </th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="list.length <= 0 && load">
+            <td colspan="6">
+              <div class="alert alert-secondary" role="alert">
+                <span><i class="fa fa-spinner fa-pulse"></i>
+                  Cargando registros...
+                </span>
+              </div>
+
+            </td>
+          </tr>
+
+          <tr *ngFor="let a of pageOfItems">
+
+            <td>{{a.key}}</td>
+            <td>{{a.name}}</td>
+            <td>{{a.data.acc_web?'Con acceso':'Sin acceso'}}</td>
+            <td>{{a.data.acc_app?'Con acceso':'Sin acceso'}}</td>
+
+            <td>
+              <ion-badge class="status" [ngClass]="a.status?'enabled' :'disabled'"> {{a.status?'Activo':'Desactivo'}}
+              </ion-badge>
+            </td>
+
+            <td>
+              <div class="dropdown">
+                <div class="dropbtn">
+                  <ion-button class="button-01">
+                    <ion-icon name="settings-outline" class="icon-01">
+                    </ion-icon> <br>
+                  </ion-button>
+                </div>
+
+                <div class="dropdown-content">
+
+                  <a href="javascript:void(0)" (click)="form(a)">
+                    <ion-icon name="create-outline" class="icon-01"> </ion-icon>Editar
+                  </a>
+
+                  <a href="javascript:void(0)" *ngIf="a.status" (click)="changeStatus(a.key,false)">
+                    <ion-icon name="close-circle-outline" class="icon-01"></ion-icon> Deshabilitar
+                  </a>
+
+                  <a href="javascript:void(0)" *ngIf="!a.status" (click)="changeStatus(a.key,true)">
+                    <ion-icon name="checkmark-circle-outline" class="icon-01"></ion-icon> Habilitar
+                  </a>
+
+                  <a href="javascript:void(0)" (click)="delete(a)" class="option-division">
+                    <ion-icon name="trash-outline" class="icon-01">
+                    </ion-icon> Eliminar
+                  </a>
+
+                </div>
+              </div>
+            </td>
+
+          </tr>
+          <tr *ngIf="list.length <= 0 && !load">
+            <td colspan="5">No se encontraron registros.</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+      <jw-pagination [items]="list" [pageSize]="20" (changePage)="onChangePage($event)">
+      </jw-pagination>
+    </div>
+
+
+  </ion-card>
+
+
+
+</ion-content>

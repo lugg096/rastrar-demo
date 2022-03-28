@@ -1,0 +1,90 @@
+<ion-header class="ion-no-border">
+
+  <ion-toolbar [style.--background]="'#1c1c24'">
+    <ion-buttons slot="end" style="position: absolute;right: 0;z-index: 20;" (click)="goGestion()">
+      <ion-icon name="close-outline" style="font-size: 30px; color: white;padding: 15px;"></ion-icon>
+    </ion-buttons>
+    <p style="text-align: center;color: rgba(255, 255, 255, 0.842);font-size: 16px;margin: 0;">
+      Sincronizar</p>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content scrollEvents="true" [fullscreen]="true"  [style.--custombg]="'#1c1c24'">
+  <!-- Image of the album -->
+
+  <p style="font-size: 22px; margin: 20px 20px 10px 20px; color: white;position: fixed;line-height: 1;">
+    Sincronizar información del aplicativo
+    <br> <small style="font-size: 12px;color: rgba(255, 255, 255, 0.842);">Seleccione la información que desee actualizar</small>
+  </p>
+
+  <!-- Rest of the page content -->
+  <div class="main">
+
+    <!-- General information -->
+    <ion-row>
+    </ion-row>
+
+    <!-- List of tracks -->
+    <ion-list>
+      <div style="min-height: 400px;padding-top: 10px;">
+
+        <div class="row"  *ngFor="let item of listTable" (click)="sync(item.code)" style="background: #f9f9f9c4; 
+      padding: 15px 0;
+      margin: 0 15px;
+      border-radius: 10px;position: relative; margin-bottom: 10px;">
+          <div class="col-3" style="text-align: -webkit-center;">
+
+            <div style="
+            background: var(--secondary-color);
+    height: 35px;
+    width: 35px;
+    text-align: center;
+    border-radius: 7px;
+    margin-top: 5px;">
+              <ion-icon [name]="item.icon" style="
+                  font-size: 22px;
+    color: white;
+    margin-top: 6px"></ion-icon>
+            </div>
+          </div>
+          <div class="col-8 p-0">
+            <p style="
+              font-weight: 600;
+        font-size: 14px;
+        margin: 7px auto;
+        margin-bottom: 0;">
+              {{item.name}}</p>
+
+            <p style="    font-size: 11px;
+          /* color: #a1a1a1; */
+          /* font-weight: 600; */
+          margin: 0;
+          /* font-size: 12px; */
+          margin: 0;
+          color: #7c828d;">
+                {{item.info}}</p>
+          </div>
+
+          <div style="    
+              font-size: 20px;
+        margin: 0;
+        position: absolute;
+        top: 25px;
+        right: 15px;
+        color: #7c828d;
+        width: auto;">
+            <ion-icon name="sync"></ion-icon>
+          </div>
+
+
+
+
+        </div>
+
+
+      </div>
+    </ion-list>
+  </div>
+
+</ion-content>

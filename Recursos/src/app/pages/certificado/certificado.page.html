@@ -1,0 +1,136 @@
+<ion-header class="ion-no-border">
+
+  <ion-toolbar [style.--background]="'#1c1c24'">
+    <ion-buttons slot="end" style="position: absolute;right: 0;z-index: 20;" (click)="goGestion()">
+      <ion-icon name="close-outline" style="font-size: 30px; color: white;padding: 15px;"></ion-icon>
+    </ion-buttons>
+    <p style="text-align: center;color: rgba(255, 255, 255, 0.842);font-size: 16px;margin: 0;">
+      Certificado</p>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content [style.--custombg]="'#1c1c24'">
+
+  <div class="ion-text-center image-box" style="z-index: 20;">
+    <div style="position: relative;margin-bottom: 20px;" #container id="container">
+      <img [src]="certData.img_cert" (click)="verCertificado()" style="filter: drop-shadow(0 1px 2px rgb(90, 90, 90));">
+    </div>
+  </div>
+
+  <!-- Rest of the page content -->
+  <div class="main">
+
+    <!-- General information -->
+    <ion-row>
+    </ion-row>
+
+    <!-- List of tracks -->
+    <ion-list style="max-width: 600px;
+    margin: auto;">
+      <div>
+
+        <div style="text-align: center;
+        margin-bottom: 20px;">
+
+          <a href="javascript:void(0)" (click)="presentar()" class="btn btn-2"
+            style="position: relative;margin-right: 3px;padding-top: 4px;">
+            <ion-icon name="arrow-redo-outline" style="font-size: 20px;transform: translateY(5px);margin-right: 3px;">
+            </ion-icon>
+            Transferir
+          </a>
+
+          <a href="javascript:void(0)" (click)="compartir()" class="btn btn-3"
+            style="position: relative;padding-top: 4px;margin-left: 3px;">
+            <ion-icon name="share-social" style="font-size: 20px;transform: translateY(5px);margin-right: 3px;">
+            </ion-icon>
+            Compartir
+          </a>
+
+        </div>
+
+      </div>
+
+      <p style="margin: 10px 15px;font-size: 18px;color: #686868;font-weight: 600;">Atributos de la credencial</p>
+      <p style="margin: 5px 15px;font-size: 12px;color: #acacac;">{{certData.data.objective_cert}}</p>
+
+      <ion-item lines="none" *ngIf="certData.certificateType=='C4'">
+        <ion-label class="ion-text-wrap"> 
+          <p>Codigo de recepción</p>
+          <p style="font-size: 14px !important;
+          color: var(--black-400) !important;line-height: 1;">
+            {{certData.code_almc}}
+          </p>
+
+        </ion-label>
+        
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label class="ion-text-wrap"> 
+          <p>Emisor</p>
+          <p style="font-size: 14px !important;
+          color: var(--black-400) !important;line-height: 1;">
+            {{certData.emisor_name}} <br>
+            <span style="font-size: 10px;"> {{certData.emisor_did}}</span>
+          </p>
+
+        </ion-label>
+        
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label class="ion-text-wrap"> 
+          <p>Rol de emisor</p>
+          {{certData.emisor_role}}
+        </ion-label>
+        
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label class="ion-text-wrap"> 
+          <p>Titular</p>
+
+          <p style="font-size: 14px !important;
+          color: var(--black-400) !important;line-height: 1;">
+            {{certData.titular_name}} <br>
+            <span style="font-size: 10px;"> {{certData.data.adrx_titular}}</span>
+          </p>
+
+
+        </ion-label>
+
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label class="ion-text-wrap"> 
+          <p>Fecha de emisión</p>
+          {{(certData.data.f_emision)*1000 | date:'dd/MM/yy, h:mm a'}}
+        </ion-label>
+    
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label class="ion-text-wrap"> 
+          <p>Fecha de vencimiento</p>
+          {{(certData.data.f_vencimiento)*1000 | date:'dd/MM/yy, h:mm a'}}
+        </ion-label>
+        
+      </ion-item>
+
+      <p style="margin: 10px 15px;font-size: 18px;color: #686868;font-weight: 600;">Datos de ingresados</p>
+
+      <ion-item lines="none" *ngFor="let item of infoCert" (click)="item.key=='img_reg'?imagesCapture():null">
+        <ion-label class="ion-text-wrap"> 
+          <p>{{item.caption}}</p>
+          {{item.value}}
+        </ion-label>
+        <ion-icon *ngIf="item.key=='img_reg'" slot="end" name="images-outline"></ion-icon>
+        
+      </ion-item>
+
+    </ion-list>
+  </div>
+
+</ion-content>

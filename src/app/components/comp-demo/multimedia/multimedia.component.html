@@ -1,0 +1,153 @@
+<div style="padding-bottom: 250px;">
+  <p style="margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #313131e8;
+  padding: 10px 10px;">Multimedia</p>
+
+
+  <div *ngFor="let item of multimedia;index as i" style="margin-bottom: 30px;">
+    <div (click)="view(item)" *ngIf="item.trxid">
+      <div style="margin-bottom: 5px;position: relative;">
+
+        <img src="../../../../assets/images/producer-icon.png" style="object-fit: cover;
+      border-radius: 100%;
+      height: 30px;
+      width: 30px;
+      padding: 2px;
+      background-color: rgb(250, 250, 250);
+      margin: 0 7px;
+      border: 0.5px solid #e3e3e3c9;">
+
+        <p style="line-height: 1;
+      margin: 0;
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      color: #686868;
+      transform: translateY(7px);">{{item.titular}} <br> <span style="font-size: 11px;
+    font-weight: 600;">Productor</span>
+        </p>
+
+        <ion-icon name="ellipsis-horizontal-outline" style="color: #abababb5;
+      position: absolute;
+      top: 2px;
+      right: 8px;
+      font-size: 21px;position: absolute;top: 8px;right: 12px;"></ion-icon>
+      </div>
+
+      <div style="margin-bottom: 10px;">
+        <p style="margin: 0 10px;
+      line-height: 1.2;
+      font-size: 13px;
+      color: #646464;"><span style="color: rgb(60 135 215);">#Credecial</span> {{item.name}}</p>
+      </div>
+
+      <img [src]="item.imgfile" style="max-height: 300px;
+    opacity: 0.95;
+    width: 100%;
+    object-fit: cover;
+    border-top: 1px solid #efefef94;
+    border-bottom: 1px solid #efefef94;">
+
+
+    </div>
+
+    <div (click)="view(item)" *ngIf="!item.trxid && item.type!='urlYouTube'">
+      <div style="margin-bottom: 5px;position: relative;">
+
+        <img [src]="dataContact.logoUrl.value" style="object-fit: cover;
+      border-radius: 100%;
+      height: 30px;
+      width: 30px;
+      padding: 1px;
+      background-color: rgb(250, 250, 250);
+      margin: 0 7px;">
+
+        <p style="line-height: 1;
+      margin: 0;
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      color: #686868;
+      transform: translateY(7px);">{{dataContact.businessName.value}} <br> <span style="font-size: 11px;
+    font-weight: 600;">Cooperativa</span>
+        </p>
+
+        <ion-icon name="ellipsis-horizontal-outline" style="color: #abababb5;
+      position: absolute;
+      top: 2px;
+      right: 8px;
+      font-size: 21px;position: absolute;top: 8px;right: 12px;"></ion-icon>
+
+      </div>
+
+      <div style="margin-bottom: 10px;">
+        <p style="margin: 0 10px;
+      line-height: 1.2;
+      font-size: 13px;
+      color: #646464;"><span style="color: rgb(60 135 215);">#Evidencias</span>{{item.name}}, {{item.value.value}}</p>
+      </div>
+
+      <img [src]="item.value.files[0].url" style="max-height: 300px;
+    opacity: 0.95;
+    width: 100%;
+    object-fit: cover;
+    border-top: 1px solid #efefef94;
+    border-bottom: 1px solid #efefef94;">
+
+
+    </div>
+
+    <div *ngIf="!item.trxid && item.type=='urlYouTube'">
+      <div style="margin-bottom: 5px;position: relative;">
+
+        <img [src]="dataContact.logoUrl.value" style="object-fit: cover;
+      border-radius: 100%;
+      height: 30px;
+      width: 30px;
+      padding: 1px;
+      background-color: rgb(250, 250, 250);
+      margin: 0 7px;">
+
+        <p style="line-height: 1;
+      margin: 0;
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      color: #686868;
+      transform: translateY(7px);">{{dataContact.businessName.value}} <br> <span style="font-size: 11px;
+    font-weight: 600;">Cooperativa</span>
+        </p>
+
+        <ion-icon name="ellipsis-horizontal-outline" style="color: #abababb5;
+      position: absolute;
+      top: 2px;
+      right: 8px;
+      font-size: 21px;position: absolute;top: 8px;right: 12px;"></ion-icon>
+
+      </div>
+
+      <div style="margin-bottom: 10px;">
+        <p style="margin: 0 10px;
+      line-height: 1.2;
+      font-size: 13px;
+      color: #646464;"><span style="color: rgb(60 135 215);">#Evidencias</span> {{item.name}}</p>
+      </div>
+
+      <!-- <img [src]="item.value.files[0].url" style="max-height: 300px;
+    opacity: 0.95;
+    width: 100%;
+    object-fit: cover;
+    border-top: 1px solid #efefef94;
+    border-bottom: 1px solid #efefef94;"> -->
+
+      <iframe style="width: 100%;height: 280px;" [src]="getVideoIframe(item.value)" frameborder="0" controls="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+    </div>
+
+  </div>
+
+</div>

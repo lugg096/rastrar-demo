@@ -1,0 +1,103 @@
+.title {
+    text-align: center;
+    color: #F7F8FB;
+    font-size: 15px;
+  }
+
+  .icon-nav-arrow {
+    color: #F7F8FB;
+    font-size: 25px;
+    padding: 15px 20px;
+  }
+  
+
+  ion-item{
+    p{
+      font-size: 11px !important;
+    }
+    ion-label{
+      font-size: 14px !important;
+      color: var(--black-400);
+    }
+  }
+
+
+
+  
+.status {
+  font-size: 10px;
+  padding: 6px 8px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.pending {
+  background: #b1b1b1;
+ /*  background: #1a75b1; */
+  color: #ffffff;
+}
+
+.enabled {
+  background: #29c79f;
+  color: #ffffff;
+}
+
+.inProcess{
+  background: #29c79f;
+  color: #ffffff;
+  padding-right: 20px;
+  cursor: pointer;
+}
+
+.disabled {
+  background: #d66855;
+  color: #ffffff;
+}
+
+.info{
+  background: #1a75b1;
+  color: #ffffff;
+}
+
+
+.true {
+  background: #1ab14c;
+  color: #ffffff;
+}
+
+.false {
+  background: #b1381a;
+  color: #ffffff;
+}
+
+.font-black-2 {
+  margin: 10px 5px;
+  font-size: 15px;
+  color: var(--black-400);
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -25px;
+  margin-left: -25px;
+}
+
+.button-03 {
+  text-transform: initial;
+  --background: #0059b5d6;
+  color: #fff;
+  --border-radius: 20px;
+  font-size: 10px;
+  display: inline-block;
+  padding: 0 2px !important;
+  font-weight: 600;
+  margin: 0;
+
+  ion-icon {
+    font-size: 16px;
+    margin-right: 4px;
+  }
+}

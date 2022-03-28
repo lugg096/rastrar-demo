@@ -1,0 +1,114 @@
+<app-header [title]="'Listado de botones'"></app-header>
+
+<ion-content class="content-table">
+
+  <!-- Cabecera y botones de acción -->
+  <div class="row content-header">
+    <div class="col-6">
+      <p class="title-header">Botones de {{key_table}}</p>
+
+      <!-- Routing -->
+      <p class="routing">
+        <a href="javascript:void(0)" (click)="back()">Acciones</a>
+        <ion-icon name="chevron-forward-outline">
+        </ion-icon>
+        <a href="javascript:void(0)"> Listado de botones</a>
+      </p>
+
+    </div>
+    <!-- Content buttons -->
+    <div class="col-6 content-buttons">
+      <ion-button (click)="form()" class="button-03">
+        <ion-icon name="add"></ion-icon> Crear botón
+      </ion-button>
+    </div>
+  </div>
+
+
+  <!-- Card del listado -->
+  <ion-card class="card-table">
+
+    <p class="text-filter">Filtro de registros</p>
+    <div class="row">
+
+      <div class="col-4">
+        <input class="form-control" [ngModel]="nameFilter" (ngModelChange)="changeInput($event,0,'input')"
+          placeholder="Buscar por código">
+      </div>
+
+      <div class="col-4 checkbox-filer">
+        <ion-checkbox slot="start" (ionChange)="changeInput($event,1,'checkbox')" color="tertiary">
+        </ion-checkbox>
+        <label>Ver desactivos</label>
+      </div>
+    </div>
+
+    <div class="table-responsive table-style">
+      <table class="table">
+        <thead>
+          <tr>
+            <th (click)="orderByTable(item.key)" *ngFor="let item of thead"
+              [ngClass]="orderBy.key==item.key?'select-col-order' :''">{{item.name}} <ion-icon
+                [name]="orderBy.key==item.key?(orderBy.order? 'arrow-down':'arrow-up' ) :'swap-vertical'"
+                class="icon-filter"></ion-icon>
+            </th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="list.length <= 0 && load">
+            <td colspan="4">
+              <div class="alert alert-secondary" role="alert">
+                <span><i class="fa fa-spinner fa-pulse"></i>
+                  Cargando registros...
+                </span>
+              </div>
+
+            </td>
+          </tr>
+
+          <tr *ngFor="let a of pageOfItems;index as i">
+
+            <td>{{a.name}}</td>
+            <td>{{a.note}}</td>
+            <td>{{a.type}}</td>
+
+            <td>
+              <div class="dropdown">
+                <div class="dropbtn">
+                  <ion-button class="button-01">
+                    <ion-icon name="settings-outline" class="icon-01">
+                    </ion-icon> <br>
+                  </ion-button>
+                </div>
+
+                <div class="dropdown-content">
+
+                  <a href="javascript:void(0)" (click)="form(a,i)">
+                    <ion-icon name="create-outline" class="icon-01"> </ion-icon>Editar
+                  </a>
+
+                  <a href="javascript:void(0)" (click)="delete(i)" class="option-division">
+                    <ion-icon name="trash-outline" class="icon-01">
+                    </ion-icon> Eliminar
+                  </a>
+
+                </div>
+              </div>
+            </td>
+
+          </tr>
+          <tr *ngIf="list.length <= 0 && !load">
+            <td colspan="5">No se encontraron registros.</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+      <jw-pagination [items]="list" [pageSize]="5" (changePage)="onChangePage($event)">
+      </jw-pagination>
+    </div>
+
+  </ion-card>
+
+</ion-content>

@@ -1,0 +1,43 @@
+<ion-content>
+  <div>
+    <ion-icon name="close" class="icon-close" (click)="closeModal()">
+    </ion-icon>
+  </div>
+
+  <div style="padding: 25px;margin-top:30px;">
+    <p style="font-size: 20px;">Lista de {{type_text}}</p>
+    <div>
+      <input class="form-control" [ngModel]="nameFilter" (ngModelChange)="changeInput($event,0,'input')"
+        placeholder="Buscar por nombre">
+        <!-- <input class="form-control" [ngModel]="nameFilter" (ngModelChange)="filter($event)"
+        placeholder="Buscar por nombre"> -->
+    </div>
+
+    <div style="padding: 20px 0;overflow-y: scroll;display: block;">
+      <ng-container *ngFor="let itm of list;index as i">
+        <div class="inputGroup">
+          <input [id]="itm.key" name="radio" type="radio" [checked]="itm.key==item.key" (change)="confirm(itm)" />
+          <label [attr.for]="itm.key">
+            {{itm.name}} <br>
+            <span style="font-style: italic;font-size: 12px;">{{itm.key}}
+            </span>
+            <span style="font-style: italic;font-size: 12px;" *ngIf="isUser">{{itm.data.idens[0].number}}
+            </span>
+          </label>
+        </div>
+
+      </ng-container>
+
+      <div *ngIf="list.length <= 0 && load" class="alert alert-secondary" role="alert">
+        <span><i class="fa fa-spinner fa-pulse"></i>
+          Cargando registros...
+        </span>
+      </div>
+      
+      <div *ngIf="list.length <= 0 && !load" style="font-style: italic;font-size: 13px; color: rgb(100, 100, 100);padding: 5px;">
+        <p>No se encontraron registros.</p>
+      </div>
+
+    </div>
+  </div>
+</ion-content>

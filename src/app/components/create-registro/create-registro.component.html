@@ -1,0 +1,46 @@
+<ion-content>
+
+  <div>
+    <ion-icon name="close" class="icon-close" (click)="closeModal()">
+    </ion-icon>
+  </div>
+
+  <div style="padding: 20px 40px;">
+
+    <p class="title-form">{{isEdit?'Actualizar':'Crear'}} registro</p>
+    <form [formGroup]="registroForm">
+
+      <ion-item style="margin-top: 20px;" class="col-6 p-0" lines="inset">
+        <ion-label position="stacked" class="label-form">Código</ion-label>
+        <ion-input [readonly]="isEdit?true:false" formControlName="key" placeholder="Ingrese el código"
+          class="input-form"></ion-input>
+      </ion-item>
+      <app-control-messages [control]="registroForm.controls['key']"></app-control-messages>
+
+      <ion-item style="margin-top: 20px;" class="col-12 p-0" lines="inset">
+        <ion-label position="stacked" class="label-form">Valor</ion-label>
+        <ion-input formControlName="name" placeholder="Ingrese el valor" class="input-style"></ion-input>
+      </ion-item>
+      <app-control-messages [control]="registroForm.controls['name']"></app-control-messages>
+
+      <ion-item style="margin-top: 20px;" class="col-12 p-0" lines="inset">
+        <ion-label position="stacked" class="label-form">Propiedades avanzadas</ion-label>
+        <ion-textarea formControlName="properties" rows="6" class="input-style"
+          placeholder='{"key":"value", "key":"value", ...}'></ion-textarea>
+      </ion-item>
+    </form>
+
+
+<!--     <div style="text-align: center;margin-top: 30px;">
+      <ion-button (click)="validateForm()" class="button-02" style="width: 50%;">
+        {{isEdit?'Actualizar':'Crear'}}
+      </ion-button>
+    </div> -->
+
+    <div style="display: block;margin-top: 35px;text-align: center;margin-bottom: 35px;">
+      <a href="javascript:void(0)" class="button-a" (click)="validateForm()">  {{isEdit?'Actualizar':'Crear'}}</a>
+    </div>
+
+  </div>
+
+</ion-content>

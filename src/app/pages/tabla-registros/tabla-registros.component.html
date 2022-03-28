@@ -1,0 +1,121 @@
+<app-header [title]="'Listado de registros'"></app-header>
+
+<ion-content class="content-table">
+
+  <!-- Cabecera y botones de acción -->
+  <div class="row content-header">
+    <div class="col-6">
+      <p class="title-header">Registros de {{key_table}}</p>
+
+      <!-- Routing -->
+      <p class="routing">
+        <a href="javascript:void(0)" (click)="back()">Tablas</a>
+        <ion-icon name="chevron-forward-outline">
+        </ion-icon>
+        <a href="javascript:void(0)"> Listado de registros</a>
+      </p>
+
+    </div>
+    <!-- Content buttons -->
+    <div class="col-6 content-buttons">
+      <a href="javascript:void(0)" class="btn-3" (click)="form()">
+        <ion-icon name="add-circle"></ion-icon> Crear registro
+      </a>
+
+    </div>
+  </div>
+
+
+  <!-- Card del listado -->
+  <ion-card class="card-table">
+
+    <p class="text-filter">Filtro de registros</p>
+    <div class="table-responsive table-style">
+      <table class="table">
+        <thead>
+          <tr>
+            <th (click)="orderByTable(item.key)" *ngFor="let item of thead"
+              [ngClass]="orderBy.key==item.key?'select-col-order' :''">{{item.name}} <ion-icon
+                [name]="orderBy.key==item.key?(orderBy.order? 'arrow-down':'arrow-up' ) :'swap-vertical'"
+                class="icon-filter"></ion-icon>
+            </th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="list.length <= 0 && load">
+            <td colspan="4">
+              <div class="alert alert-secondary" role="alert">
+                <span><i class="fa fa-spinner fa-pulse"></i>
+                  Cargando registros...
+                </span>
+              </div>
+
+            </td>
+          </tr>
+
+          <tr *ngFor="let a of pageOfItems">
+
+            <td>{{a.key}} <ion-badge *ngIf="a.data.properties.paramSystem" class="status" [ngClass]="'info'"
+                style=" margin-bottom: -8px;">
+                <ion-icon name="lock-closed-outline" style="font-size: 12px;
+              margin-top: -2px;
+              transform: translateY(0px);">
+                </ion-icon> Conf. System
+              </ion-badge>
+            </td>
+            <td>{{a.name}}</td>
+
+            <td>
+              <ion-badge class="status" [ngClass]="a.status?'enabled' :'disabled'"> {{a.status?'Activo':'Desactivo'}}
+              </ion-badge>
+            </td>
+
+            <td>
+              <div class="dropdown">
+                <div class="dropbtn">
+                  <ion-button class="button-01">
+                    <ion-icon name="settings-outline" class="icon-01">
+                    </ion-icon> <br>
+                  </ion-button>
+                </div>
+                <ng-container *ngIf="true">
+                  <div class="dropdown-content">
+
+                    <a href="javascript:void(0)" (click)="form(a)">
+                      <ion-icon name="create-outline" class="icon-01"> </ion-icon>Editar
+                    </a>
+
+                    <a href="javascript:void(0)" *ngIf="a.status" (click)="changeStatus(a.key,false)">
+                      <ion-icon name="close-circle-outline" class="icon-01"></ion-icon> Deshabilitar
+                    </a>
+
+                    <a href="javascript:void(0)" *ngIf="!a.status" (click)="changeStatus(a.key,true)">
+                      <ion-icon name="checkmark-circle-outline" class="icon-01"></ion-icon> Habilitar
+                    </a>
+
+                    <a href="javascript:void(0)" (click)="delete(a.key)" class="option-division">
+                      <ion-icon name="trash-outline" class="icon-01">
+                      </ion-icon> Eliminar
+                    </a>
+
+                  </div>
+                </ng-container>
+              </div>
+            </td>
+
+          </tr>
+          <tr *ngIf="list.length <= 0 && !load">
+            <td colspan="5">No se encontraron registros.</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+      <jw-pagination [items]="list" [pageSize]="20" (changePage)="onChangePage($event)">
+      </jw-pagination>
+    </div>
+
+  </ion-card>
+
+</ion-content>

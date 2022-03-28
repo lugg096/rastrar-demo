@@ -1,0 +1,397 @@
+<app-header [title]="'Pantalla'"></app-header>
+
+<ion-content class="content-table">
+
+  <!-- Cabecera y botones de acción -->
+  <div class="row content-header">
+    <div class="col-6">
+      <p class="title-header">{{isEdit?'Editar':'Crear'}} pantalla
+        <!-- {{key_table}} -->
+      </p>
+
+      <!-- Routing -->
+      <p class="routing">
+        <a href="javascript:void(0)" (click)="goScreen()">Pantallas</a>
+        <ion-icon name="chevron-forward-outline">
+        </ion-icon>
+        <a href="javascript:void(0)"> {{isEdit?'Edición':'Creación'}} de pantalla</a>
+      </p>
+
+    </div>
+    <!-- Content buttons -->
+    <div class="col-6 content-buttons">
+
+      <!--    <ion-button (click)="screenTask()" class="button-04">
+        <ion-icon name="eye"></ion-icon> Vista previa
+      </ion-button> -->
+
+      <a href="javascript:void(0)" class="btn-3" (click)="screenTask()">
+        <ion-icon name="eye-outline"></ion-icon> Vista previa
+      </a>
+
+      <a href="javascript:void(0)" class="btn-3" (click)="validateForm()">
+        <ion-icon name="save" style="    font-size: 22px;
+        transform: translateY(6px);"></ion-icon> Guardar
+      </a>
+
+      <!--  <ion-button (click)="validateForm()" class="button-03">
+        <ion-icon name="save-outline"></ion-icon> Guardar
+      </ion-button> -->
+    </div>
+  </div>
+
+  <!-- Card del listado -->
+  <ion-card class="card-table">
+
+    <p class="text-filter">Información general</p>
+
+    <form [formGroup]="sreenForm">
+
+      <div class="row" style="margin-top: 10px;">
+        <div class="col-12 col-md-4  p-0">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">Nombre de pantalla</ion-label>
+            <ion-input formControlName="name" placeholder="Ingrese el nombre" class="input-form"></ion-input>
+          </ion-item>
+          <app-control-messages [control]="sreenForm.controls['name']"></app-control-messages>
+        </div>
+
+        <div class="col-12 col-md-4  p-0">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">Descripción</ion-label>
+            <ion-input formControlName="description" placeholder="Ingrese el descripción" class="input-form">
+            </ion-input>
+          </ion-item>
+          <app-control-messages [control]="sreenForm.controls['description']"></app-control-messages>
+        </div>
+
+        <div class="col-12 col-md-4 p-0" formGroupName="action">
+
+          <ion-item style="margin-top: 10px;" lines="inset" (click)="listFields()">
+            <ion-label position="stacked" class="label-form">Acción</ion-label>
+            <ion-input formControlName="name" placeholder="Selecionar acción" class="input-form"></ion-input>
+            <span class="input-icon">
+              <ion-icon name="search"></ion-icon>
+            </span>
+          </ion-item>
+          <app-control-messages [control]="sreenForm.controls['action']" [field]="'name'"></app-control-messages>
+
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-6 col-md-4 p-0" formGroupName="certificateType">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">Tipo de pantalla</ion-label>
+            <ion-select formControlName="key" okText="ok" cancelText="Cancelar"
+              (ionChange)="selectChang($event,listCertType,'certificateType',_env.TABLE_SIS.type_certificate)"
+              [value]="sreenForm.controls['certificateType'].value.key" placeholder="Seleccionar tipo"
+              class="input-form">
+              <ion-select-option [value]="opt.key" *ngFor="let opt of listCertType">{{opt.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <app-control-messages [control]="sreenForm.controls['certificateType']" [field]="'key'">
+          </app-control-messages>
+        </div>
+
+        <div class="col-6 col-md-4 p-0">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">Visibilidad</ion-label>
+            <ion-select  [disabled]="isSystem"  okText="ok" cancelText="Cancelar"
+            formControlName="visibility_type" placeholder="Visibilidad"
+              class="input-form">
+              <ion-select-option [value]="opt.key" *ngFor="let opt of listVisType">{{opt.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <app-control-messages [control]="sreenForm.controls['visibility_type']">
+          </app-control-messages>
+        </div>
+
+        <div class="col-6 col-md-4 pt-3" *ngIf="sreenForm.controls['imagenUrl'].value==''">
+          <p style="font-size: 14px;
+          color: #484848;
+          margin-bottom: 8px;">Imagen referencial
+          </p>
+          <ion-button (click)="fileInputImg.click()" class="button-03">
+            <ion-icon name="image-outline"></ion-icon>
+            Seleccionar imagen
+          </ion-button>
+
+          <p style="color: var(--black-400); margin: 0;margin-top: 3px; font-size: 12px;font-style: italic">
+            {{imgeFile.name}}
+          </p>
+          <input hidden (change)="onFileSelected('imgfile')" #fileInputImg type="file" accept="image/*" id="imgfile">
+        </div>
+
+        <div class="col-6 col-md-4  pt-3" *ngIf="sreenForm.controls['imagenUrl'].value!=''">
+          <p style="font-size: 14px;
+    color: #484848;
+    margin-bottom: 8px;">Imagen referencial
+            <ion-icon name="create-outline" style="padding: 5px;
+            font-size: 18px;
+            margin-top: -20px;
+            transform: translateY(7px);cursor: pointer;" (click)="changeImagen()"></ion-icon>
+          </p>
+
+          <ion-button [href]="urlImg" target="_blank" class="button-03">
+            <ion-icon name="image-outline"></ion-icon>
+            Ver imagen
+          </ion-button>
+
+
+        </div>
+      </div>
+
+    </form>
+
+    <br>
+    <div class="row">
+      <div class="col-6">
+        <p class="text-filter">Configuración de campos</p>
+      </div>
+      <div class="col-6">
+        <div class="content-buttons">
+
+          <p class="routing">
+            <a href="javascript:void(0)" *ngIf="typeCert=='C2'" class="btn-3" (click)="addSection()">
+              <ion-icon name="list-outline"></ion-icon> Agregar sección
+            </a>
+
+            <a href="javascript:void(0)" class="btn-3" (click)="form()">
+              <ion-icon name="add-circle"></ion-icon> Agregar campo
+            </a>
+          </p>
+
+
+
+          <!--   <ion-button (click)="form()" class="button-03">
+            <ion-icon name="add"></ion-icon> Agregar campo
+          </ion-button> -->
+        </div>
+      </div>
+    </div>
+
+
+    <div class="table-responsive table-style">
+      <!--     <table class="table">
+        <thead>
+          <tr>
+            <th (click)="orderByTable(item.key)" *ngFor="let item of thead"
+              [ngClass]="orderBy.key==item.key?'select-col-order' :''">{{item.name}} <ion-icon
+                [name]="orderBy.key==item.key?(orderBy.order? 'arrow-down':'arrow-up' ) :'swap-vertical'"
+                class="icon-filter"></ion-icon>
+            </th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="list.length <= 0 && load">
+            <td colspan="5">
+              <div class="alert alert-secondary" role="alert">
+                <span><i class="fa fa-spinner fa-pulse"></i>
+                  Cargando registros...
+                </span>
+              </div>
+
+            </td>
+          </tr>
+
+          <tr *ngFor="let a of pageOfItems;index as i">
+
+            <td>{{a.field.key}}</td>
+            <td>{{a.field.name}}
+
+            </td>
+            <td>{{a.required?'Si':'No'}}</td>
+            <td>{{a.field.data.iscertificade?'Si':'Ninguno'}}</td>
+
+            <td>
+              <div class="dropdown">
+                <div class="dropbtn">
+                  <ion-button class="button-01" [disabled]="a.field.data.properties.SYSTEM">
+                    <ion-icon name="settings-outline" class="icon-01">
+                    </ion-icon> <br>
+                  </ion-button>
+                </div>
+
+                <div class="dropdown-content" *ngIf="!a.field.data.properties.SYSTEM">
+
+                  <a href="javascript:void(0)" (click)="form(a,i)">
+                    <ion-icon name="create-outline" class="icon-01"> </ion-icon>Editar
+                  </a>
+
+
+                  <a href="javascript:void(0)" (click)="delete(i)" class="option-division">
+                    <ion-icon name="trash-outline" class="icon-01">
+                    </ion-icon> Eliminar
+                  </a>
+
+                </div>
+              </div>
+            </td>
+
+          </tr>
+          <tr *ngIf="list.length <= 0 && !load">
+            <td colspan="5">No se encontraron registros.</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+      <jw-pagination [items]="list" [pageSize]="20" (changePage)="onChangePage($event)">
+      </jw-pagination> -->
+
+
+
+
+      <div>
+        <!-- ***PRUEBA*** -->
+        <div style="border-top: 1px solid #e9ecef;">
+          <div class="row" style="
+          width: 100%;color:var(--ion-card-color, var(--ion-item-color, var(--ion-color-step-550, #737373)));font-size: 14px;
+          margin-left: 25px;font-weight: 600;padding: 18px;">
+            <!--    <div class="col-2">
+              Código
+            </div> -->
+            <div class="col-4">
+              Nombre
+            </div>
+
+            <div class="col-2">
+              Tipo
+            </div>
+
+            <div class="col-2">
+              Requerido
+            </div>
+
+            <div class="col-2">
+              Valor
+            </div>
+
+            <div class="col-2">
+              Acciones
+
+            </div>
+
+
+          </div>
+        </div>
+
+
+        <div style="border-top: 1px solid #e9ecef;" *ngIf="list.length == 0">
+          <div class="row"
+            style="padding: 13px;width: 100%;color:var(--ion-card-color, var(--ion-item-color, var(--ion-color-step-550, #737373)));font-size: 14px;margin-left: 25px;">
+            <div class="col-12">
+              No se encontraron registros.
+            </div>
+          </div>
+        </div>
+
+
+        <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
+
+
+
+
+          <div *ngFor="let a of list;index as i"
+            style="border-top: 1px solid #e9ecef;padding: 13px;overflow: initial;position: relative;">
+            <div *ngIf="!a.section && !a.block" class="row"
+              style="width: 100%;color:var(--ion-card-color, var(--ion-item-color, var(--ion-color-step-550, #737373)));font-size: 14px;margin-left: 25px;">
+              <!--     <div class="col-2" style="width: 10%;">
+                {{a.field.key}}
+              </div> -->
+              <div class="col-4">
+                {{a.field.name}}
+                <!--               <ion-badge
+                  *ngIf="a.field.data.properties.field_req_c1 || a.field.data.properties.field_req_c2 || a.field.data.properties.field_req_c3 || a.field.data.properties.field_req_c4"
+                  class="status info" style="font-size: 9px;margin-bottom:-5px;">
+                  System
+                </ion-badge> -->
+              </div>
+              <div class="col-2">
+                {{a.field.data.inputtype.value}}
+              </div>
+
+              <div class="col-2">
+                {{a.required?'Si':'No'}}
+              </div>
+
+              <div class="col-2">
+                {{a.field.data.value==''?'Ninguno':a.field.data.value}}
+              </div>
+
+
+              <div class="col-2 dropdown">
+                <div class="dropbtn">
+                  <ion-button class="button-01" style="height: 37px;">
+                    <ion-icon name="settings-outline" class="icon-01">
+                    </ion-icon> <br>
+                  </ion-button>
+                </div>
+
+                <div class="dropdown-content">
+
+                  <a href="javascript:void(0)" (click)="form(a,i)">
+                    <ion-icon name="create-outline" class="icon-01"> </ion-icon>Editar
+                  </a>
+
+
+                  <a href="javascript:void(0)" *ngIf="!a.system" (click)="delete(i)" class="option-division">
+                    <ion-icon name="trash-outline" class="icon-01">
+                    </ion-icon> Eliminar
+                  </a>
+
+                </div>
+              </div>
+
+            </div>
+
+            <div *ngIf="a.section || a.block" class="row" style="width: 100%;
+              margin-left: 25px;
+              color: #d36970e8;
+              font-size: 16px;
+              font-weight: 600;
+              font-style: italic;">
+              <div class="col-10" style="width: 10%;">
+                {{a.name}} {{a.section?'(Sección)':'(Bloque)'}}
+              </div>
+
+              <div class="col-2 dropdown">
+                <div class="dropbtn">
+                  <ion-button class="button-01" style="height: 37px;">
+                    <ion-icon name="settings-outline" class="icon-01">
+                    </ion-icon> <br>
+                  </ion-button>
+                </div>
+
+                <div class="dropdown-content">
+
+                  <a href="javascript:void(0)" (click)="form(a,i)">
+                    <ion-icon name="create-outline" class="icon-01"> </ion-icon>Editar
+                  </a>
+
+
+                  <a href="javascript:void(0)" *ngIf="!a.system" (click)="delete(i)" class="option-division">
+                    <ion-icon name="trash-outline" class="icon-01">
+                    </ion-icon> Eliminar
+                  </a>
+
+                </div>
+              </div>
+
+            </div>
+
+            <ion-reorder slot="end" style="position: absolute;top: 10px;"></ion-reorder>
+          </div>
+
+        </ion-reorder-group>
+        <!-- ***************** -->
+      </div>
+    </div>
+
+
+  </ion-card>
+
+</ion-content>

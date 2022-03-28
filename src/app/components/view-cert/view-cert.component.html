@@ -1,0 +1,205 @@
+<div style="padding: 0px 20px;padding-bottom: 50px; overflow-y: scroll;display: block;position: relative;">
+  <ion-icon name="chevron-back-outline" (click)="closeModal()" style="font-size: 20px;
+  color: #db7078;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 20px;">
+  </ion-icon>
+
+  <p style="color: #d36970e8;
+  text-align: center;
+  font-weight: 700;
+  font-size: 17px;
+  margin-top: 18px;">Certificado digital</p>
+
+
+
+  <div *ngFor="let data of listCred;index as i" style="
+    position: relative;">
+
+
+    <div>
+
+
+      <div style="text-align: center;text-align: -webkit-center;">
+        <img style="
+          object-fit: cover;
+      border-radius: 5px;
+      box-shadow: 0 0px 5px rgb(213 213 213 / 53%);" [src]="data.urlImg" alt="">
+      </div>
+
+      <div style="position: relative;">
+  <!--       <p style="color: #5e5e5e;
+  font-weight: 800;
+  margin: 0;
+  margin-top: 20px;
+  font-size: 20px; padding-right: 60px;">{{data.name}}
+        </p> -->
+        <p style="color: #5e5e5e;
+        font-weight: 600;
+        margin: 0;
+        margin-top: 20px;
+        font-size: 20px;
+        padding-right: 20px;
+        line-height: 1;">{{data.name}}
+              </p>
+
+<!--         <div style="    right: 5px;
+  position: absolute;
+  top: -10px;
+  text-align: center;">
+          <ion-icon name="heart" style="transform: translateY(1.5px);
+    background: #d36970e8;
+    color: white;
+    padding: 8px;
+    font-size: 24px;
+    border-radius: 50px;"></ion-icon>
+          <p style="margin: 0;
+    line-height: 0.8;
+    font-size: 12px;
+    font-weight: 800;">120</p>
+        </div> -->
+
+        <p style="font-size: 14px;
+        color: #858585;margin-top: 10px;">Certificado digital otorgado a {{data.data.document.subject.name}} por el supervisor {{data.data.document.issuer2}} el {{(data.data.document.iat)*1000 | date:'dd/MM/yyyy'}}</p>
+
+      </div>
+
+
+
+      <div style="text-align: left;position: relative;
+        margin-top: 10px;">
+     <!--    <ion-button [href]="data.urlDoc" target="_blank" class="button-03">
+          <ion-icon name="document-outline" style="font-size: 20px;"></ion-icon>Ver documento
+        </ion-button> -->
+
+        <div (click)="arrayBand[i]=!arrayBand[i];" style="position: absolute;
+        right: 0px;
+        top: 10px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #797979;">
+          {{arrayBand[i]?'Mostrar menos':'Ver más'}} <ion-icon [name]="arrayBand[i]?'chevron-up':'chevron-down'" style="    transform: translateY(5px);
+          font-size: 18px;"></ion-icon>
+        </div>
+      </div>
+
+      <div *ngIf="arrayBand[i]" style="padding-top: 10px">
+        <p class="font-black-2">Datos de credencial
+        </p>
+
+        <div class="row">
+          <ion-item lines="none" class="col-12">
+            <ion-label>
+              <p>Nombre</p>
+              {{data.name}}
+            </ion-label>
+          </ion-item>
+
+          <ion-item lines="none" class="col-12">
+            <ion-label>
+              <p>Titular</p>
+
+
+              {{(data.data.document.subject.name | slice:0:3) +'***'+ (data.data.document.subject.name |
+              slice:(data.data.document.subject.name.length-3):(data.data.document.subject.name.length))
+              }}<br>
+              <p style="color: rgb(105, 105, 105); font-size: 12px;font-style: italic;">
+                {{(data.data.document.subject.data.dids.address | slice:0:6)+' ...
+                '+(data.data.document.subject.data.dids.address | slice:38:42)}}
+              </p>
+            </ion-label>
+          </ion-item>
+        </div>
+
+        <div class="row">
+          <ion-item lines="none" class="col-12">
+            <ion-label>
+              <p>Tipo</p>
+              {{data.data.document.documentType.value}}
+            </ion-label>
+          </ion-item>
+
+          <ion-item lines="none" class="col-12">
+            <ion-label>
+              <p>Emisor</p>
+              {{(data.data.document.issuer2 | slice:0:3) +'***'+ (data.data.document.issuer2 |
+              slice:(data.data.document.issuer2.length-3):(data.data.document.issuer2.length))
+              }}<br>
+              <p style="color: rgb(105, 105, 105); font-size: 12px;font-style: italic;">
+                {{(data.data.data_cert.emisor_did | slice:0:6)+' ...
+                '+(data.data.data_cert.emisor_did | slice:38:42)}}
+              </p>
+            </ion-label>
+          </ion-item>
+        </div>
+
+        <div class="row">
+          <ion-item lines="none" class="col-12">
+            <ion-label>
+              <p>Fecha de emisión</p>
+              {{(data.data.document.iat)*1000 | date:'dd/MM/yyyy'}}
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none" class="col-12">
+            <ion-label>
+              <p>Fecha de caducidad</p>
+              {{(data.data.document.exp)*1000 | date:'dd/MM/yyyy'}}
+            </ion-label>
+          </ion-item>
+
+        </div>
+
+
+        <p class="font-black-2">Datos de ingresados</p>
+
+        <ion-item lines="none" *ngFor="let item of data.data.infoCert" style="    margin-left: -10px;">
+          <ion-label class="ion-text-wrap">
+            <p>{{item.caption}}</p>
+            {{item.value}}
+          </ion-label>
+
+
+        </ion-item>
+        
+        <ng-container *ngIf="data.data.imagesUrl">
+          <p *ngIf="data.data.imagesUrl.length>0" class="font-black-2">Evidencias
+          </p>
+  
+          <div  *ngIf="data.data.imagesUrl.length>0">
+            <ion-grid style="padding-bottom: 15%;">
+              <ion-row style="margin: 3px;">
+                <ion-col size="6" class="content-img" *ngFor="let p of data.data.imagesUrl; let i=index"
+                  (click)="verFoto(endPoint + p)">
+                  <div class="img" [attr.id]="'object-img-'+i">
+                    <img [src]="endPoint + p">
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </ng-container>
+
+     
+     
+
+
+
+      </div>
+
+
+
+
+    </div>
+
+
+  </div>
+
+  <!-- 
+    <p style="color: #0261c3;
+    font-size: 18px;
+    margin-left: 15px;
+    margin-top: 20px;
+    padding-right: 30px;">{{dataProv.values[0].value}}</p> -->
+</div>

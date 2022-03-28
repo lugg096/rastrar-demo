@@ -1,0 +1,119 @@
+<ion-content>
+
+  <div>
+    <ion-icon name="close" class="icon-close" (click)="closeModal()">
+    </ion-icon>
+
+  </div>
+
+  <div style="padding: 20px 40px;">
+
+    <p class="title-form">{{isEdit?'Editar':'Crear'}} botón</p>
+    <form [formGroup]="botonForm">
+
+
+      <ion-item class="row" style="margin-top: 10px;" lines="inset">
+        <ion-label position="stacked" class="label-form">Nombre de botón</ion-label>
+        <ion-input formControlName="name" placeholder="Nombre de botón" class="input-form"></ion-input>
+      </ion-item>
+      <app-control-messages [control]="botonForm.controls['name']"></app-control-messages>
+
+      <ion-item style="margin-top: 10px;" class="row" lines="inset">
+        <ion-label position="stacked" class="label-form">Descripción de botón</ion-label>
+        <ion-input formControlName="note" placeholder="Descripción de botón" class="input-form"></ion-input>
+      </ion-item>
+      <app-control-messages [control]="botonForm.controls['note']"></app-control-messages>
+
+
+
+      <div class="row" style="margin-top: 10px;">
+
+        <div class="col-6 p-0">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">Tipo de botón</ion-label>
+            <ion-select formControlName="type" okText="ok" cancelText="Cancelar"
+              [value]="botonForm.controls['type'].value" placeholder="Tipo de botón" class="input-form">
+              <ion-select-option [value]="opt.key" *ngFor="let opt of listTypeBut">{{opt.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <app-control-messages [control]="botonForm.controls['type']"></app-control-messages>
+        </div>
+
+        <div class="col-6 p-0">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">Tipo de acción</ion-label>
+            <ion-select formControlName="mode" okText="ok" cancelText="Cancelar"
+              [value]="botonForm.controls['mode'].value" placeholder="Tipo de acción" class="input-form">
+              <ion-select-option [value]="opt.key" *ngFor="let opt of listCallAct">{{opt.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <app-control-messages [control]="botonForm.controls['mode']"></app-control-messages>
+        </div>
+      </div>
+
+
+      <div class="row " style="margin-top: 10px;">
+        <div class="col-6 p-0">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">Icono (Ionicons name)</ion-label>
+            <ion-input formControlName="icon" placeholder="Icono (Ionicons name)" class="input-form"></ion-input>
+          </ion-item>
+          <app-control-messages [control]="botonForm.controls['icon']"></app-control-messages>
+        </div>
+
+        <div class="col-6 p-0">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">Texto de botón</ion-label>
+            <ion-input formControlName="text" placeholder="Texto de botón" class="input-form"></ion-input>
+          </ion-item>
+          <app-control-messages [control]="botonForm.controls['text']"></app-control-messages>
+        </div>
+      </div>
+
+      <div class="row " style="margin-top: 10px;">
+        <div class="col-6 p-0">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">Color de texto (HEX)</ion-label>
+            <ion-input formControlName="color" placeholder="#FFFFFF" class="input-form"></ion-input>
+          </ion-item>
+          <app-control-messages [control]="botonForm.controls['color']"></app-control-messages>
+        </div>
+
+        <div class="col-6 p-0">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">Color de fondo (HEX)</ion-label>
+            <ion-input formControlName="background" placeholder="#000000" class="input-form"></ion-input>
+          </ion-item>
+          <app-control-messages [control]="botonForm.controls['background']"></app-control-messages>
+        </div>
+      </div>
+
+      <div class="row " style="margin-top: 10px;">
+        <div class="col-6 p-0">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">Ancho (%)</ion-label>
+            <ion-input formControlName="width" placeholder="50%" class="input-form"></ion-input>
+          </ion-item>
+          <app-control-messages [control]="botonForm.controls['width']"></app-control-messages>
+        </div>
+      </div>
+
+
+      <ion-item class="row" style="margin-top: 10px;" lines="inset">
+        <ion-label position="stacked" class="label-form">Propiedades avanzadas</ion-label>
+        <ion-textarea formControlName="properties" rows="3" class="input-style"
+          placeholder='{"key":"value", "key":"value", ...}'></ion-textarea>
+      </ion-item>
+
+    </form>
+
+
+    <div style="text-align: center;margin-top: 30px;">
+      <ion-button (click)="validateForm()" class="button-02" style="width: 70%;">
+        {{isEdit?'Editar':'Crear'}} 
+      </ion-button>
+    </div>
+
+  </div>
+
+</ion-content>

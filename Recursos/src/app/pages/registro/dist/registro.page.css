@@ -1,0 +1,54 @@
+.animate-pulse2 {
+  animation: pulse_02 2s ease infinite;
+}
+
+.icon-nav-arrow {
+  color: #F7F8FB;
+  font-size: 25px;
+  padding: 15px 20px;
+}
+
+.title {
+  text-align: center;
+  color: #F7F8FB;
+  font-size: 15px;
+}
+
+.button-01 {
+  text-transform: capitalize;
+  --background: var(--main-color);
+  --border-radius: 12px;
+  font-size: 11px;
+  display: inline-block;
+  margin: 5px 0;
+  padding: 5px 20px !important;
+}
+
+.text-label {
+  --color: #999999;
+  font-size: 16px;
+}
+
+.item {
+  margin-top: 5px;
+  border-bottom: 0.5px solid #dddddd;
+}
+
+.input-style {
+  color: var(--black-400);
+  font-size: 15px;
+}
+
+.input-icon {
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  z-index: 10;
+  background: #fff;
+  border-radius: 100%;
+}
+.input-icon ion-icon {
+  font-size: 25px;
+  color: var(--main-color);
+  transform: translateY(2px);
+}

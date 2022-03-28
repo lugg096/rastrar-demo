@@ -1,0 +1,42 @@
+/* .home-section {
+    position: relative;
+    background: #e4e9f7;
+    height: 100vh;
+    left: 260px;
+    width: calc(100% - 260px);
+    transition: all 0.5s ease;
+}
+
+.sidebar.close ~ .home-section {
+    left: 78px;
+    width: calc(100% - 78px);
+}
+ */
+
+.section {
+  position: relative;
+  /*   background: #e4e9f7; */
+  background: linear-gradient(
+    to right,
+    #ba3d47,#bd404a,#c0434c,#c2464f,
+    #c54952,#c64a53,#c84c55,#c94d56,
+    #c94d56,#c94d56,#c94d56,#c94d56
+  );
+  /*   height: 100vh; */
+  left: 260px;
+  transition: all 0.5s ease;
+}
+
+.menuClose {
+  position: relative;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+}
+
+.menuOpen {
+  position: relative;
+  left: 260px;
+  width: calc(100% - 260px);
+  transition: all 0.5s ease;
+}

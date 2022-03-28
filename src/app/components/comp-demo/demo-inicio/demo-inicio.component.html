@@ -1,0 +1,158 @@
+<div style="overflow-y: scroll;display: block;--background: var(--color-background-2);">
+  <div style="padding: 8px 10px;
+  background: #d36970e8;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2000;
+  height: 7%;">
+    <div style="display: inline-block;">
+      <ion-icon name="eye" style="font-size: 20px;
+      color: #fff8f8;
+      transform: translateY(3px);"></ion-icon>
+
+    </div>
+    <p style="
+color: #fff8f8;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0;
+    display: inline-block;
+    margin-left: 8px; transform: translateY(-3px);">Vista previa
+    </p>
+
+    <div style="    position: absolute;
+    right: 0;
+    z-index: 20;
+    top: 0;cursor: pointer;" (click)="closeModal()">
+      <ion-icon name="close" style="    font-size: 25px;
+      color: rgb(255 246 246);
+      padding: 10px;"></ion-icon>
+    </div>
+  </div>
+
+
+  <div class="context" style="    margin-top: 41px;height: 93%;">
+    <!--   <div class="context" style="height: 100%;"> -->
+    <div class="viewport">
+      <div class="canvas" style="position: relative;">
+
+        <div [ngClass]="page!='info'?'quitar' :null">
+          <app-infolot [data]="data" [user]="user" [viewDemo_pre]="viewDemo_pre"></app-infolot>
+        </div>
+        <!-- 
+        <div  [ngClass]="page!='almacen'?'quitar' :null">
+          <app-alamcen [producersLot]="producersLot"></app-alamcen>
+        </div>
+ -->
+
+        <div  [ngClass]="page!='contact'?'quitar' :null">
+          <app-conctact [data]="data" [user]="user" [viewDemo_pre]="viewDemo_pre"></app-conctact>
+        </div>
+
+        <div [ngClass]="page!='process'?'quitar' :null">
+          <app-multimedia [data]="data" [user]="user" [viewDemo_pre]="viewDemo_pre"> </app-multimedia>
+        </div>
+
+        <div class="centered" style="width: 100%;  background: #484848;">
+          <div class="row">
+
+            <div class="col-4 m-0 p-0 nav-bottom " (click)="page='info'">
+              <!--  <div class="nav-cont" [ngClass]="page=='info'?'select-nav' :null"> -->
+              <div class="nav-cont" [ngClass]="page=='info'?'select-nav':null">
+                <ion-icon name="cart-outline" style="font-size: 22px;"></ion-icon> <br>
+                <span style="font-size: 10px;letter-spacing: 0.6px;">Información del producto</span>
+              </div>
+            </div>
+
+        <!--     <div class="col-4 m-0 p-0 nav-bottom" (click)="permisoLogin('almacen')">
+              <div class="nav-cont" [ngClass]="null">
+                <ion-icon name="map-outline" style="font-size: 22px;"></ion-icon>
+               <br>
+                <span style="font-size: 10px;letter-spacing: 0.6px;">Cadena de suministro</span>
+              </div>
+            </div> -->
+
+            <div class="col-4 m-0 p-0 nav-bottom" (click)="permisoLogin('contact')">
+              <div class="nav-cont"  [ngClass]="page=='contact'?'select-nav':null">
+                <ion-icon name="rocket-outline" style="font-size: 22px;"></ion-icon>
+               <br>
+                <span style="font-size: 10px;letter-spacing: 0.6px;">Contacto de empresa</span>
+              </div>
+            </div>
+
+
+
+        
+            <div class="col-4 m-0 p-0 nav-bottom" (click)="permisoLogin('process')">
+              <div class="nav-cont" [ngClass]="page=='process'?'select-nav':null">
+                <ion-icon name="layers-outline" style="font-size: 22px;"></ion-icon> <br>
+                <span style="font-size: 10px;letter-spacing: 0.6px;"> Evidencias y certificados</span>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div style="background: rgb(72 72 72);    padding: 40px 50px 30px;text-align: center;">
+
+    <div class="row">
+      <div class="col-6 p-0 m-0 pr-2" style="align-self: center;border-right: 1px solid #ffffff66;">
+        <img src="../../../assets/images/logo-white.svg" style="height: 40px;" alt="">
+      </div>
+      <div class="col-6 p-0 m-0 pl-2" style="align-self: center;">
+        <img src="../../assets/images/logo-lacchain-footer.png" alt="">
+      </div>
+    </div>
+
+    <p style="margin: 35px 10px 25px;
+    text-align: center;
+    color: #ffffff;
+    font-weight: 300;
+    font-size: 13px;;">Rastrar® utiliza tecnologías de vanguardia para construir un puente entre los productores, los
+      consumidores y todos los demás. Nuestra misión es aportar transparencia a la procedencia de los productos,
+      ayudando a crear confianza en la cadena de suministro.</p>
+
+    <div class="btn-1">
+      Más información
+    </div>
+
+    <div class="footer">
+
+
+      <ul>
+        <li>
+          <a href="https://www.facebook.com/" target="_blank">
+            <ion-icon name="logo-facebook"></ion-icon>
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.facebook.com/" target="_blank">
+            <ion-icon name="logo-twitter"></ion-icon>
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.facebook.com/" target="_blank">
+            <ion-icon name="logo-instagram"></ion-icon>
+          </a>
+        </li>
+
+
+
+      </ul>
+
+      <p style="    font-size: 12px;
+      color: white;
+      margin: 0;
+      margin-top: 20px;">© 2021 Rastrar®</p>
+
+    </div>
+  </div>
+</div>

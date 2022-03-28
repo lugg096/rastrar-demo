@@ -1,0 +1,11 @@
+ion-item {
+    --border-color: #e9ecef;
+}
+
+.item-native {
+    z-index: 10000 !important;
+}
+
+/* ion-item::part(native) {
+    padding-inline-start: 5px;
+  } */

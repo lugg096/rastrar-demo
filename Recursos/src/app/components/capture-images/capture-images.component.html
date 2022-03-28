@@ -1,0 +1,45 @@
+<ion-content>
+  <!-- SECTION IMAGES -->
+  <div style="  color: #2F3435;overflow-y: scroll;display: block;">
+    <div>
+      <ion-icon slot="start" name="arrow-back" class="icon-nav-arrow" (click)="closeModal()"
+        style="color: var(--main-color);position: absolute;z-index: 10;left:0px;">
+      </ion-icon>
+    </div>
+
+<!--     <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin: 90px 20px;">
+      <ion-fab-button style="--background:  #fff;--color:var(--main-color);" (click)="gallery()">
+        <ion-icon name="images" style="font-size: 22px;"></ion-icon>
+      </ion-fab-button>
+    </ion-fab> -->
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin: 20px 20px;" *ngIf="!onlyView">
+      <ion-fab-button style="--background:  #fff;--color:var(--main-color);" (click)="takePicture()">
+        <ion-icon name="camera" style="font-size: 22px;"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+
+    <div style=" color: #2F3435; padding: 0 20px;">
+      <p style="text-align: center; font-size: 22px;font-weight: 600; margin-bottom: 10px;margin-top: 10%;">Imagenes
+      </p>
+      <p style="text-align: center;font-size: 11px;"> {{onlyView?'Fotos capturadas en tiempo real':'Capture evidencias de registro desde su cámara.'}} 
+      </p>
+
+      <div style="text-align: center" *ngIf="photoPreview.length==0">
+        <img src="../../../assets/images/Camera _Two Color.png" style="width: 100%;">
+      </div>
+    </div>
+
+    <ion-grid style="padding-bottom: 15%;">
+      <ion-row style="margin: 4px;">
+        <ion-col size="4" class="content-img" *ngFor="let p of photoPreview; let i=index" (click)="verFoto(p.webPath,i)">
+          <div class="img" [attr.id]="'object-img-'+i">
+            <img [src]="p.webPath">
+          </div>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

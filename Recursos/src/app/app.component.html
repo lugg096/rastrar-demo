@@ -1,0 +1,85 @@
+<ion-app style="background: var(--color-background);">
+  <ion-menu type="push" menuId="main-menu" contentId="main" #menu style="--max-width:60%;" (ionWillOpen)="willOpen()">
+
+    <ion-content style="background: transparent;">
+
+      <div style="margin-top: 35%;margin-left: 15%;">
+  <!--       <img src="../assets/images/FBLV.jpg"
+          style="width: 50px;max-height: 50px;border-radius: 18px;object-fit: cover;">
+ -->
+          <div style="width: 45px;
+          height: 45px;
+          border-radius: 13px;
+          background: var(--main-color);
+          color: white;
+          font-size: 20px;
+          font-weight: 500;
+          text-align: center;
+          padding-top: 8px;">
+{{(user.name | slice:0:2)}}
+          </div>
+
+        <p
+          style="font-size: 17px;color: var(--text-color-3);font-weight: 600; margin-bottom: 0;margin-top: 10px;line-height: 1;">
+          {{user.name}}</p>
+        <p style="font-size: 11px;color: var(--text-color-1);font-weight: 600;margin-top: 0px;"> {{user.email}}
+        </p>
+      </div>
+
+      <ion-list style="--background: transparent;">
+        <ion-menu-toggle auto-hide="false" menu="first">
+          <ion-item routerLink="gestion" routerDirection="root" routerLinkActive="active-item" lines="none"
+            (click)="closeMenu()">
+            <ion-label
+              style="font-weight: 500;color: var(--text-color-2);margin-left: 10%;font-size: 13px;transform: translateY(-4px);">
+              Lista de QRs
+            </ion-label>
+          </ion-item>
+
+          <ion-item routerLink="/profile" routerDirection="root" routerLinkActive="active-item" lines="none"
+            (click)="closeMenu()">
+            <ion-label
+              style="font-weight: 500;color: var(--text-color-2);margin-left: 10%;font-size: 13px;transform: translateY(-4px);">
+              Perfil
+            </ion-label>
+          </ion-item> 
+
+
+          <ion-item lines="none" routerLink="/sync-data" routerDirection="root" routerLinkActive="active-item" (click)="closeMenu()">
+            <ion-label
+              style="font-weight: 500;color: var(--text-color-2);margin-left: 10%;font-size: 13px;transform: translateY(-4px);">
+              <ion-icon name="cloud-upload-outline"
+                style="color: var(--main-color);font-size: 18px;transform: translateY(4px);"></ion-icon> Sincronizar
+            </ion-label>
+          </ion-item>
+
+          <ion-item lines="none" [href]="'https://www.coopecan.pe/privacidad.html'" target="_blank" >
+            <ion-label
+              style="font-weight: 500;color: var(--text-color-2);margin-left: 10%;font-size: 13px;transform: translateY(-4px);">
+              Políticas de privacidad
+            </ion-label>
+          </ion-item>
+
+          <ion-item lines="none" [href]="'https://www.coopecan.pe/terminos.html'" target="_blank"  >
+            <ion-label
+              style="font-weight: 500;color: var(--text-color-2);margin-left: 10%;font-size: 13px;transform: translateY(-4px);">
+              Términos y condiciones
+            </ion-label>
+          </ion-item>
+
+          <ion-item lines="none" (click)="closeSesion()">
+            <ion-label
+              style="font-weight: 500;color: var(--text-color-2);margin-left: 10%;font-size: 13px;transform: translateY(-4px);">
+              Cerrar sesión
+            </ion-label>
+          </ion-item>
+
+        </ion-menu-toggle>
+
+      </ion-list>
+
+
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app>

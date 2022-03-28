@@ -1,0 +1,41 @@
+.icon-nav-arrow {
+  color: #F7F8FB;
+  font-size: 25px;
+  padding: 15px 20px;
+  right: 0;
+  cursor: pointer;
+}
+
+.title {
+  text-align: center;
+  color: #F7F8FB;
+  font-size: 15px;
+}
+
+.btn-main {
+  cursor: pointer;
+  background-color: #ffffff;
+  border-radius: 100%;
+  padding: 20px;
+  margin: 0 15px;
+  font-size: 23px;
+  height: 55px;
+  width: 55px;
+  padding: 0;
+  display: inline-block;
+  border: none;
+  box-shadow: var(--shadow-black-600);
+}
+
+.content-qr {
+  border-radius: 10px;
+  background: var(--main-color);
+  box-shadow: var(--shadow-black-300);
+  width: 83%;
+  margin: auto;
+  padding: 20px;
+  /*   margin-top: 18px; */
+  text-align: center;
+  /*    padding-top: 5px; */
+  /*  padding-bottom: 15px; */
+}

@@ -1,0 +1,144 @@
+<ion-content style="--background:var(--color-background);">
+  <div
+    style="position: fixed;top: 0;width: 100%;z-index: 20; color: #fff;background: linear-gradient(90deg, #1c1c24 10%, rgb(60, 61, 68) 100%); margin-bottom: 0;height: 55px;">
+    <ion-icon slot="start" name="arrow-back" class="icon-nav-arrow "
+      style=" position: absolute;z-index: 10; padding: 20px;padding-top: 15px;" (click)="goGestion()">
+    </ion-icon>
+    <ion-item style="--background: transparent;margin-bottom: 0;" lines="none">
+      <ion-title class="title">Crear certificado</ion-title>
+    </ion-item>
+  </div>
+
+  <p
+    style="font-weight: 520;font-size: 16px;    margin: auto;margin-bottom: 12px; line-height: 1.2;color:  var(--text-color-3);margin-top: 78px;width: 90%;">
+    {{metadata.title}} </p>
+
+  <div
+    style="padding: 5px 10px;padding-bottom: 30px; background: white;width: 90%;margin: auto;border-radius: 10px;margin-top: 10px;margin-bottom: 100px;box-shadow: var(--shadow-black-100)">
+
+    <!--  <div > -->
+    <div *ngIf="metadata.certificateType.key=='C4' && isEdit" style="margin: 12px;
+    margin-bottom: 5px;">
+      <p class="text-label" style="    margin: 0;
+      color: var(--black-400);
+      font-size: 11px;">Codigo de recepción</p>
+      <p class="input-style" style="    margin: 0;
+      font-size: 20px;
+      margin-top: 2px;
+      font-weight: 600;">{{this.metadata.code_almc}}</p>
+      <!--  <p class="input-style" style="margin: 0;"></p> -->
+    </div>
+
+    <form [formGroup]="registroForm">
+      <div *ngFor="let field of fields;index as i">
+
+        <!--TYPE ADDERSS  -->
+        <ion-item *ngIf="field.type == 'address'" class="item" [ngStyle]="{'width.%': field.width }">
+          <ion-label position="stacked" class="text-label">{{field.caption}}</ion-label>
+          <ion-input [formControlName]="field.code" [type]="field.type" [placeholder]="field.placeholder"
+            class="input-style"></ion-input>
+          <span class="input-icon animate-pulse2" (click)="scan(field)">
+            <ion-icon name="qr-code-outline"></ion-icon>
+          </span>
+        </ion-item>
+
+        <!--TYPE LISTBYAPI  -->
+        <div *ngIf="field.type == 'listByApi'" style="padding: 0;" [class]="field.width.boost">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">{{field.caption}}</ion-label>
+            <!--     <ion-input [formControlName]="field.code"></ion-input>
+            -->
+            <ion-label position="stacked" class="label-form" style="margin-bottom: 20px;">
+              {{registroForm.controls[field.code].value.length}} Certificados seleccionados
+            </ion-label>
+            <div class="input-icon" style="bottom: 15px;">
+              <a href="javascript:void(0)" class="btn-2" style="padding: 8px 15px; font-size: 11px;box-shadow: none;"
+                (click)="selectList(field)">
+                Agregar</a>
+            </div>
+          </ion-item>
+
+
+          <app-control-messages [control]="registroForm.controls[field.code]"></app-control-messages>
+        </div>
+
+
+        <!--TYPE INPUT  -->
+        <ion-item *ngIf="field.type == 'input'" class="item" [ngStyle]="{'width.%': field.width }">
+          <ion-label position="stacked" class="text-label">{{field.caption}}</ion-label>
+          <ion-input [formControlName]="field.code" [type]="field.inputtype" class="input-style"
+            [placeholder]="field.placeholder"></ion-input>
+        </ion-item>
+
+        <!--TYPE SELECT  -->
+        <ion-item *ngIf="field.type == 'select'" class="item" [ngStyle]="{'width.%': field.width }"
+          [formGroupName]="field.code">
+          <ion-label position="stacked" class="text-label">{{field.caption}}</ion-label>
+          <ion-select formControlName="key" [value]="field.value" okText="ok" cancelText="Cancelar" class="input-style"
+            [placeholder]="field.placeholder" (ionChange)="selectChang($event,field.options,field.code)">
+            <ion-select-option [value]="opt.key" *ngFor="let opt of field.options">{{opt.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!--TYPE CHECKBOX  -->
+        <ion-item *ngIf="field.type == 'checkbox'" class="item" [ngStyle]="{'width.%': field.width }"
+          [formGroupName]="field.code">
+          <ion-label position="stacked" class="label-form">{{field.caption}}</ion-label>
+          <ion-select formControlName="key" [value]="field.value" okText="ok" cancelText="Cancelar" class="input-style"
+            multiple="true" [placeholder]="field.placeholder"
+            (ionChange)="selectMulti($event,field.options,field.code)">
+            <ion-select-option [value]="opt.key" *ngFor="let opt of field.options">{{opt.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+
+
+        <!--TYPE TEXTBOX  -->
+        <ion-item *ngIf="field.type == 'textarea'" class="item" [ngStyle]="{'width.%': field.width }">
+          <ion-label position="stacked" class="text-label">{{field.caption}}</ion-label>
+          <ion-textarea [formControlName]="field.code" [rows]="field.rows" class="input-style"
+            [placeholder]="field.placeholder"></ion-textarea>
+        </ion-item>
+
+        <!--TYPE SECION IMAGES  -->
+        <ion-item *ngIf="field.type == 'imageselect'" class="item" (click)="imagesCapture(field)"
+          [ngStyle]="{'width.%': field.width }">
+          <ion-label position="stacked" class="text-label">{{field.caption}}</ion-label>
+          <ion-input readonly [formControlName]="field.code" [placeholder]="field.placeholder" class="input-style">
+          </ion-input>
+
+          <span class="input-icon">
+            <ion-icon name="camera"></ion-icon>
+          </span>
+        </ion-item>
+
+        <ng-container *ngIf="field.type != 'checkbox' && field.type != 'select'">
+          <app-control-messages [control]="registroForm.controls[field.code]"></app-control-messages>
+        </ng-container>
+
+        <ng-container *ngIf="field.type == 'checkbox' || field.type == 'select'">
+          <app-control-messages [control]="registroForm.controls[field.code]" [field]="'key'"></app-control-messages>
+        </ng-container>
+
+
+
+
+
+      </div>
+
+    </form>
+  </div>
+
+
+  <div
+    style=" height: 80px;text-align: center;position: fixed;bottom: 0;z-index: 20; background: #fff ;box-shadow: var(--shadow-black-600);width: 100%;">
+
+    <div style=" display: block;margin-top: 25px;" *ngFor="let button of buttons">
+      <a href="javascript:void(0)" class="btn-2" (click)="actionButton(button.type)"
+        [ngStyle]="{'width.px': button.width,'color': button.color,'background.': button.background}">{{button.text}}</a>
+    </div>
+
+  </div>
+
+
+</ion-content>

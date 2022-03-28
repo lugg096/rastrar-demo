@@ -1,0 +1,110 @@
+
+
+
+<ion-content>
+  <div>
+    <ion-icon name="close" class="icon-close" (click)="closeModal()">
+    </ion-icon>
+  </div>
+
+  <div *ngFor="let data of listSelect" style="position: absolute;top: -500%;">
+    <div style="padding: 10px;background: white;text-align: -webkit-center;" [id]="data._id">
+      <div class="ident" style="text-align: left ;">
+  
+        <div class="row" style="position: relative;">
+          <div class="col-5 p-0 m-0" style="text-align: center;">
+            <div style="text-align: left;
+            margin-bottom: 10px;">
+              <img src="../../../assets/images/coopecan-letras-blancas-transparente.png" style="width: 180px;">
+            </div>
+  
+            <ngx-qrcode id="target" [elementType]="elementType" [errorCorrectionLevel]="correctionLevel" [value]="'did:ethr:lacchain:' + data.data.dids[0].address + '#' + data.name"
+              cssClass="bshadow"></ngx-qrcode>
+  
+          </div>
+          <div class="col-6 mx-3" style="letter-spacing: 2px;    font-weight: 300;">
+  
+            <div class="row" style="margin-top: 15px;    color: white;">
+              <div class="col-3 m-0 p-0" style="letter-spacing: 2px;
+            font-size: 16px;">VÁLIDO HASTA</div>
+              <div class="col-4 m-0 p-0" style="font-size: 25px;text-align: right;">{{fechaValid}}</div>
+            </div>
+  
+            <p style="margin: 0;margin-top: 35px;font-size: 14px;">SERIAL</p>
+            <p style="margin: 0;margin-top: 0px;font-size: 19px;color: white;">{{data.serial}}</p>
+  
+            <p style="margin: 0;margin-top: 20px;font-size: 14px;">DNI</p>
+            <p style="margin: 0;margin-top: 0px;font-size: 19px;color: white;">{{data.data.idens[0].number}}</p>
+  
+            <p style="margin: 0;margin-top: 20px;font-size: 14px;">NOMBRE</p>
+            <p style="margin: 0;margin-top: 0px;font-size: 19px;color: white;  padding-right: 100px;">{{data.name}}</p>
+  
+          </div>
+  
+          <div style="position: absolute; top: 20px;right: 0px">
+            <img src="../../../assets/images/AGROCARD.png" alt="" style="width: 100px;">
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div style="padding: 25px;margin-top:30px;">
+    <p style="font-size: 20px;margin-left: 20px;">Generar tarjetas de identidad</p>
+    <div class="row">
+      <div class="col-5">
+        <input class="form-control" [ngModel]="nameFilter" (ngModelChange)="changeInput($event,0,'input')"
+          placeholder="Buscar por nombre">
+      </div>
+
+      <div class="col-2 m-0 p-0 checkbox-filer">
+        <ion-checkbox slot="start" (ionChange)="changeInput($event,1,'checkbox')" color="tertiary" style="    transform: translateY(3px);">
+        </ion-checkbox>
+        <label  style="font-size: 14px;">Ver generadas</label>
+      </div>
+
+      <div class="col-2 m-0 p-0  checkbox-filer">
+        <ion-checkbox slot="start" (ionChange)="selectAll($event)" color="tertiary" style="    transform: translateY(3px);">
+        </ion-checkbox>
+        <label style="font-size: 14px;">Seleccionar todo</label>
+      </div>
+
+
+
+      <div class="col-3" style="text-align: right;">
+        <ion-button (click)="genCards()" class="button-03">
+          <ion-icon name="card-outline"></ion-icon> Generar cards
+        </ion-button>
+      </div>
+
+    </div>
+
+    <div style="padding: 20px 0;overflow-y: scroll;display: block;">
+      <ng-container *ngFor="let itm of list;index as i">
+        <div class="inputGroup">
+          <input [id]="itm.key" name="radio" type="checkbox" [checked]="selectValid(itm)"
+            (change)="confirmCheck(itm,$event)" />
+          <label [attr.for]="itm.key">
+            {{itm.name}} 
+            <ion-badge class="status" [ngClass]="'enabled'" *ngIf="itm.data.gen_card" style="transform: translateY(5px);
+            
+            letter-spacing: 0.7px">
+              Tarjeta generada
+            </ion-badge>
+            <br>
+            <span style="font-style: italic;font-size: 12px;">{{itm.key}}
+            </span>
+            <span style="font-style: italic;font-size: 12px;">{{itm.data.idens[0].number}}
+            </span>
+          </label>
+        </div>
+
+      </ng-container>
+
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,100 @@
+<ion-content>
+
+  <!-- HEADER -->
+  <div>
+    <ion-icon name="close" class="icon-close" (click)="closeModal()">
+    </ion-icon>
+  </div>
+
+  <div style="padding: 20px;">
+
+    <p style="font-size: 22px; margin: 20px;color: rgb(68, 78, 88);">Importar desde archivo Excel</p>
+    <!--   <input type="file"  (change)="onFileChange($event)" multiple="false">
+ -->
+
+    <div class="row">
+      <div class="col-5">
+        <ion-button (click)="fileInput.click()" class="button-02">
+          <ion-icon name="document" style="font-size: 14px;margin-right: 3px;color: #fff"></ion-icon>
+          Seleccionar
+        </ion-button>
+        <span style="color: var(--black-400);font-size: 16px;font-style: italic;margin-left: 5px;">{{name}}</span>
+        <input hidden (change)="onFileChange($event)" #fileInput type="file" id="file">
+      </div>
+
+
+
+      <div class="col-2 m-0 p-0" style="text-align: right;
+      font-size: 14px;
+      align-self: center;
+      color: #5661da;">
+        <ng-container *ngIf="data!=null">
+          <span style="font-weight: 600;
+        font-size: 16px;">{{data_db.length}}</span> registros adecuados para la importación
+        </ng-container>
+
+
+      </div>
+
+      <div class="col-2 m-0 p-0" style="text-align: right;
+      font-size: 14px;
+      align-self: center;
+      color: #da5656;">
+        <ng-container *ngIf="data!=null">
+          <span style="font-weight: 600;
+        font-size: 16px;">{{data_invalid.length}}</span> registros invalidos
+        </ng-container>
+
+      </div>
+
+      <div class="col-3" style="text-align: right;">
+        <ion-button (click)="save()" class="button-02" style="--background: #6a64ff;">
+          <ion-icon name="push-outline" style="font-size: 20px;margin-right: 4px;color: #fff"></ion-icon>
+          Importar información
+        </ion-button>
+
+      </div>
+    </div>
+
+
+
+
+
+
+    <div class="table-responsive" style="margin-top: 20px;">
+      <table class="table" style="width: 100%;" *ngIf="data!=null">
+        <thead style="font-size: 12px;font-style: italic;">
+          <tr>
+            <th>Fila</th>
+            <th *ngFor="let cb of data[1]">{{cb}}</th>
+          </tr>
+        </thead>
+        <tbody style="font-size: 13px;">
+          <tr *ngFor="let row of data; index as i">
+            <ng-container *ngIf="i!=0 && i!=1">
+              <td *ngIf="row.length>0">{{i}}</td>
+              <td *ngFor="let cell of row">
+
+                <ng-container *ngIf="isObject(cell)">
+                  {{cell.value}} <br>
+                  <span style="font-size: 10px;color: tomato;font-weight: 600;">
+                    <ion-icon name="alert-circle-outline" style="font-size: 15px;
+                    transform: translateY(4px);"></ion-icon>
+                    {{cell.error}}
+                  </span>
+                </ng-container>
+
+                <ng-container *ngIf="!isObject(cell)">
+                  {{cell}}
+                </ng-container>
+              </td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+</ion-content>

@@ -1,0 +1,163 @@
+<div class="sidebar">
+    <div class="logo-details" style="    margin-top: 5px;">
+
+       <!--  <ion-icon name="logo-amplify" class="fab fa-stripe-s icon"></ion-icon> -->
+        <img src="../../../assets/images/logo-min.svg" alt="" class="icon icon_min" style="height: 40px;">
+        <img src="../../../assets/images/logo-color.svg" alt="" class="logo_name" style="height: 40px; margin-left: 23px;">
+        <!-- <span class="logo_name">Stamping</span> -->
+    </div>
+
+    <ul class="nav-links">
+
+        <li *ngFor="let p of appPages; let i = index">
+
+            <div class="icon-link" *ngIf="p.modules.length == 0" (click)="navigateRouter(p.url)" 
+            style="cursor: pointer;" [ngClass]="(selectPage ==p.url)?'select-page':'icon-link'">
+                <a href="javascript:void(0)">
+                    <ion-icon [name]="p.icon" class="icon"></ion-icon>
+                    <span class="link_name"> {{ p.name }}</span>
+                </a>
+                <ion-icon name="chevron-down-outline" *ngIf="p.modules.length > 0" class="icon arrow" (click)="showMenu($event)"></ion-icon>
+            </div>
+
+
+            <div class="icon-link" *ngIf="p.modules.length > 0" [ngClass]="(selectPage ==p.url)?'select-page':'icon-link'">
+                <a href="javascript:void(0)">
+                    <ion-icon [name]="p.icon" class="icon"></ion-icon>
+                    <span class="link_name"> {{ p.name }}</span>
+                </a>
+                <ion-icon name="chevron-down-outline" class="icon arrow" (click)="showMenu($event)"></ion-icon>
+            </div>
+
+            <ul class="sub-menu" *ngIf="p.modules.length > 0">
+                <li><a class="link_name" href="#">{{ p.name }}</a></li>
+                <li *ngFor="let sub of p.modules">
+                    <a href="javascript:void(0)" (click)="navigateRouter(sub.url)"  [ngClass]="(router.url ==sub.url)?'select-sub-page':''"
+                        class="nav_title"> <ion-icon [name]="sub.icon" class="icon"></ion-icon> {{sub.name}}</a>
+                </li>
+            </ul>
+        </li>
+
+
+        <!-- 
+        <li>
+
+            <a href="#" class="nav_title">
+                <ion-icon name="person-outline" class="icon"></ion-icon>
+                <span class="link_name">Usuarios</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Category</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <div class="icon-link">
+                <a href="#" class="nav_title">
+                    <i class="fas fa-columns"></i>
+                    <span class="link_name">Category</span>
+                </a>
+                <i class="fas fa-chevron-down arrow" (click)="showMenu($event)"></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="#">Category</a></li>
+                <li><a href="#">Web Desing</a></li>
+                <li><a href="#">Card Desing</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <div class="icon-link">
+                <a href="#" class="nav_title">
+                    <i class="fas fa-archive"></i>
+                    <span class="link_name">Post</span>
+                </a>
+                <i class="fas fa-chevron-down arrow" (click)="showMenu($event)"></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="#">Post</a></li>
+                <li><a href="#">Web Desing</a></li>
+                <li><a href="#">Card Desing</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#" class="nav_title">
+                <i class="far fa-map"></i>
+                <span class="link_name">Analytics</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Analytics</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#" class="nav_title">
+                <i class="fas fa-chart-line"></i>
+                <span class="link_name">Char</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Char</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <div class="icon-link">
+                <a href="#" class="nav_title">
+                    <i class="fas fa-plug"></i>
+                    <span class="link_name">Plugins</span>
+                </a>
+                <i class="fas fa-chevron-down arrow"></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name" href="#">Plugins</a></li>
+                <li><a href="#">Web Desing</a></li>
+                <li><a href="#">Card Desing</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </li> -->
+
+
+        <li class="profile" style="position: absolute;bottom: 0;">
+            <div class="profile-details">
+                <div class="profile-content">
+                    <img src="../../../assets/images/usermt.png" alt="">
+                </div>
+
+                <div class="name-job">
+                    <div class="profile_name">{{nameUser}}</div>
+                    <div class="job">{{roleUser}}</div>
+                </div>
+
+                <ion-icon name="power-outline" class="icon" style="font-size: 22px;"></ion-icon>
+               <!--  <i class="fas fa-sign-out-alt"></i> -->
+            </div>
+        </li>
+    </ul>
+
+    <div class="btn-menu" style=" position: absolute;
+    top: 0px;
+    right: -40px;padding: 10px 20px;" (click)="btnMenu($event)">
+        <div style="
+        background: #fcfbfd;
+    border-radius: 100%;
+    height: 32px;
+    width: 32px;
+    box-shadow: 0 0px 15px rgb(0 0 0 / 10%);
+    display: flex;
+    align-items: center;
+    justify-content: center;">
+            <ion-icon name="chevron-back-outline" class="icon-menu" style="font-size: 17px;"></ion-icon>
+        </div>
+    </div>
+
+</div>
+
+<!-- <section class="home-section">
+    <div class="home-content">
+        <i class="fas fa-bars icon-menu" (click)="btnMenu()"></i>
+        <span class="text">Drop Down</span>
+    </div>
+</section> -->

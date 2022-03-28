@@ -1,0 +1,194 @@
+<ion-content>
+  <!-- HEADER -->
+  <div>
+    <ion-icon name="close" class="icon-close" (click)="closeModal()">
+    </ion-icon>
+
+  </div>
+
+  <div style="padding: 20px 40px;" >
+    <p class="title-form">{{isEdit?'Actualizar':'Agregar'}} campo</p>
+
+    <form [formGroup]="fieldForm">
+
+      <div class="row" style="margin-top: 10px;">
+        <div class="col-6 p-0">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">Nombre</ion-label>
+            <ion-input formControlName="name" placeholder="Nombre" class="input-form"></ion-input>
+          </ion-item>
+          <app-control-messages [control]="fieldForm.controls['name']"></app-control-messages>
+        </div>
+
+        <div class="col-6 p-0">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">Valor por defecto</ion-label>
+            <ion-input formControlName="value" placeholder="Valor por defecto" class="input-form"></ion-input>
+          </ion-item>
+          <app-control-messages [control]="fieldForm.controls['value']"></app-control-messages>
+        </div>
+
+        <div class="col-6 p-0">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">Marcador (Placeholder)</ion-label>
+            <ion-input formControlName="placeholder" placeholder="Marcador" class="input-form"></ion-input>
+          </ion-item>
+          <app-control-messages [control]="fieldForm.controls['placeholder']"></app-control-messages>
+        </div>
+
+
+        <div class="col-6 p-0" formGroupName="type">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">Tipo de campo</ion-label>
+            <ion-select [disabled]="isSystem" formControlName="key" okText="ok" cancelText="Cancelar"
+              (ionChange)="selectChang($event,listFieldType,'type',_env.TABLE_SIS.type_field);viewSelectTable(fieldForm.controls['type'].value.value)"
+              [value]="fieldForm.controls['type'].value.key" placeholder="Tipo de campo" class="input-form">
+              <ion-select-option [value]="opt.key" *ngFor="let opt of listFieldType">{{opt.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <app-control-messages [control]="fieldForm.controls['type']" [field]="'key'">
+          </app-control-messages>
+        </div>
+
+        <div *ngIf="vwSelectTable" class="col-6 p-0" formGroupName="tableSelect">
+          <ion-item style="margin-top: 10px;" lines="inset" (click)="isSystem?null:listTables()">
+            <ion-label position="stacked" class="label-form">Seleccionar tabla</ion-label>
+            <ion-input  [disabled]="isSystem"  formControlName="value" placeholder="Selecionar tabla" class="input-form"></ion-input>
+            <span class="input-icon">
+              <ion-icon name="search"></ion-icon>
+            </span>
+          </ion-item>
+          <app-control-messages [control]="fieldForm.controls['tableSelect']" [field]="'value'"></app-control-messages>
+        </div>
+
+        <div class="col-6 p-0" formGroupName="inputtype">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">Tipo de valor</ion-label>
+            <ion-select  [disabled]="isSystem"  formControlName="key" okText="ok" cancelText="Cancelar" 
+            (ionChange)="selectChang($event,listInputType,'inputtype',_env.TABLE_SIS.type_input)"
+            placeholder="Tipo de campo" class="input-form">
+              <ion-select-option [value]="opt.key" *ngFor="let opt of listInputType">{{opt.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <app-control-messages [control]="fieldForm.controls['inputtype']" [field]="'key'"></app-control-messages>
+        </div>
+
+      </div>
+
+
+<!--       <div class="row" formGroupName="field">
+        <ion-item class="col-12 p-0" style="margin-top: 10px;" lines="inset" (click)="isSystem?null:listField()">
+          <ion-label position="stacked" class="label-form">Campo</ion-label>
+          <ion-input formControlName="name" placeholder="Selecionar campo" class="input-form" [readonly]="isSystem"></ion-input>
+          <span class="input-icon">
+            <ion-icon name="search"></ion-icon>
+          </span>
+        </ion-item>
+        <app-control-messages [control]="fieldForm.controls['field']" [field]="'key'"></app-control-messages>
+      </div> -->
+
+      <!--  <ion-radio-group value="biff" class="col-12 p-0">
+
+        <ion-label class="label-form" style="font-size: 14px !important;">Visibilidad</ion-label>
+
+        <div class="row">
+          <ion-item class="col-4 checkRadio" lines="none">
+            <ion-label>Pública</ion-label>
+            <ion-radio slot="start" value="biff" color="tertiary"></ion-radio>
+          </ion-item>
+
+          <ion-item class="col-4 checkRadio" lines="none">
+            <ion-label>Solo comprador</ion-label>
+            <ion-radio slot="start" value="griff" color="tertiary"></ion-radio>
+          </ion-item>
+
+          <ion-item class="col-4 checkRadio" lines="none">
+            <ion-label>Solo empleado</ion-label>
+            <ion-radio slot="start" value="empledo" color="tertiary"></ion-radio>
+          </ion-item>
+        </div>
+
+
+
+      </ion-radio-group> -->
+
+      <div class="row" style="margin-top: 10px;">
+        <div class="col-6 p-0">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">Visibilidad</ion-label>
+            <ion-select  [disabled]="isSystem"  okText="ok" cancelText="Cancelar"
+            formControlName="visibility_type" placeholder="Visibilidad"
+              class="input-form">
+              <ion-select-option [value]="opt.key" *ngFor="let opt of listVisType">{{opt.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <app-control-messages [control]="fieldForm.controls['visibility_type']">
+          </app-control-messages>
+        </div>
+
+        <div class="col-6 checkbox-filer" style="display: flex;align-items: center; margin-top: 15px;">
+          <ion-checkbox   [disabled]="isSystem" slot="start" [value]="fieldForm.controls['required'].value" formControlName="required"
+           color="tertiary" style="transform: translateY(-5px);">
+          </ion-checkbox>
+          <label class="label-form" style="font-size: 14px !important;">Campo requerido</label>
+        </div>
+      </div>
+
+
+      <p class="subTitle" style="margin-top: 20px;">Estilos de campo</p>
+
+      <!-- STYLE -->
+      <div style="width: 100%;">
+        <p class="label-form" style="font-size: 14px !important;margin: 10px 0 ;">Ancho de campo en pantalla </p>
+        <div style="display: flex;margin-bottom: 5px;margin-top: 10px;">
+          <div class="progress">
+            <div class="progress-value-bg" (click)="widthField(25)"></div>
+            <div class="progress-value-bg" style="left: 25%;" (click)="widthField(50)"></div>
+            <div class="progress-value-bg" style="left: 50%;" (click)="widthField(75)"></div>
+            <div class="progress-value-bg" style="left: 75%;" (click)="widthField(100)"></div>
+      
+
+            <div class="progress-value-bg-t" (click)="widthField(25)"></div>
+            <div class="progress-value-bg-t" style="left: 25%;" (click)="widthField(50)"></div>
+            <div class="progress-value-bg-t" style="left: 50%;" (click)="widthField(75)"></div>
+            <div class="progress-value-bg-t" style="left: 75%;" (click)="widthField(100)"></div>
+      
+            <div class="progress-value" #bar style="z-index: 2;"></div>
+          </div>
+      
+        </div>
+        <div style="width: 100%;">
+          <div class="btn-prog">
+            <a href="javascript:void(0)" (click)="widthField(25)"> 25% </a>
+          </div>
+          <div class="btn-prog">
+            <a href="javascript:void(0)" (click)="widthField(50)"> 50% </a>
+          </div>
+          <div class="btn-prog">
+            <a href="javascript:void(0)" (click)="widthField(75)"> 75% </a>
+          </div>
+          <div class="btn-prog">
+            <a href="javascript:void(0)" (click)="widthField(100)"> 100% </a>
+          </div>
+        </div>
+      
+      </div>
+
+     <!--  <ion-item class="row" style="margin-top: 10px;" lines="inset">
+        <ion-label position="stacked" class="label-form">Propiedades avanzadas</ion-label>
+        <ion-textarea  [disabled]="isSystem"  formControlName="properties" rows="3" class="input-style"
+          placeholder='{"key":"value", "key":"value", ...}'></ion-textarea>
+      </ion-item> -->
+
+    </form>
+
+
+    <div style="display: block;margin-top: 35px;text-align: center;margin-bottom: 35px;">
+      <a href="javascript:void(0)" class="button-a" (click)="validateForm()">  {{isEdit?'Actualizar':'Crear'}}</a>
+    </div>
+
+
+  </div>
+
+</ion-content>
+

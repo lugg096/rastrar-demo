@@ -1,0 +1,138 @@
+<ion-content>
+
+  <div>
+    <ion-icon name="close" class="icon-close" (click)="closeModal()">
+    </ion-icon>
+
+  </div>
+
+  <div style="padding: 20px 40px;">
+    <p class="title-form">{{isEdit?'Editar':'Crear'}} usuario
+      {{key_table==_env.TABLE_SIS.customer?'comprador':(key_table==_env.TABLE_SIS.employee?'empleado':'proveedor')}}
+    </p>
+    <form [formGroup]="userForm" class="row">
+
+      <div class="col-12 p-0">
+        <ion-item style="margin-top: 10px;" lines="inset">
+          <ion-label position="stacked" class="label-form">Nombre completo/Razón social</ion-label>
+          <ion-input formControlName="name" placeholder="Nombre completo" class="input-form"></ion-input>
+        </ion-item>
+        <app-control-messages [control]="userForm.controls['name']"></app-control-messages>
+      </div>
+
+
+      <ng-container formGroupName="idens">
+        <div class="col-6 p-0 pr-1">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">Tipo de documento</ion-label>
+            <ion-select formControlName="type" okText="ok" cancelText="Cancelar"
+            (ionChange)="selectType($event,listTypeDoc,'idens')" [value]="userForm.controls['idens'].value.type" placeholder="Tipo de documento" class="input-form">
+              <ion-select-option [value]="opt.key" *ngFor="let opt of listTypeDoc">{{opt.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <app-control-messages [control]="userForm.controls['idens']" [field]="'type'"></app-control-messages>
+        </div>
+
+        <div class="col-6  p-0 pr-1">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">Documento</ion-label>
+            <ion-input formControlName="number" placeholder="Documento" class="input-form"></ion-input>
+          </ion-item>
+          <app-control-messages [control]="userForm.controls['idens']" [field]="'number'"></app-control-messages>
+        </div>
+      </ng-container>
+
+      <div formGroupName="type" class="col-6 p-0 pr-1" *ngIf="key_table==_env.TABLE_SIS.producer">
+        <ion-item style="margin-top: 10px;" lines="inset">
+          <ion-label position="stacked" class="label-form">Tipo de proveedor</ion-label>
+          <ion-select formControlName="key" [value]="userForm.controls['type'].value.key" okText="ok"
+            (ionChange)="selectChang($event,listTypeProv,'type',_env.TABLE_SIS.g_prod)" cancelText="Cancelar"
+            placeholder="Seleccionar" class="input-form">
+            <ion-select-option [value]="opt.key" *ngFor="let opt of listTypeProv">{{opt.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <app-control-messages [control]="userForm.controls['type']" [field]="'key'"></app-control-messages>
+      </div>
+
+      <div formGroupName="group" class="col-6 p-0 pr-1">
+        <ion-item style="margin-top: 10px;" lines="inset">
+          <ion-label position="stacked" class="label-form">{{nameGroup}}</ion-label>
+          <ion-select formControlName="key" [value]="userForm.controls['group'].value.key" okText="ok"
+            (ionChange)="selectChang($event,listGroup,'group',_env.TABLE_SIS.g_prod)" cancelText="Cancelar"
+            [placeholder]="nameGroup" class="input-form">
+            <ion-select-option [value]="opt.key" *ngFor="let opt of listGroup">{{opt.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <app-control-messages [control]="userForm.controls['group']" [field]="'key'"></app-control-messages>
+      </div>
+
+     
+
+      <ng-container *ngIf="key_table!=_env.TABLE_SIS.producer">
+        <div class="col-6 p-0 pr-1">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">Télefono</ion-label>
+            <ion-input type="number" formControlName="phone" placeholder="Télefono" class="input-form"></ion-input>
+          </ion-item>
+          <app-control-messages [control]="userForm.controls['phone']"></app-control-messages>
+        </div>
+
+        <div class="col-6 p-0 pr-1">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">Correo</ion-label>
+            <ion-input formControlName="email" placeholder="Correo" class="input-form"></ion-input>
+          </ion-item>
+          <app-control-messages [control]="userForm.controls['email']"></app-control-messages>
+        </div>
+
+        <div class="col-6 p-0 pr-1">
+          <ion-item style="margin-top: 10px;" lines="inset">
+            <ion-label position="stacked" class="label-form">Contraseña</ion-label>
+            <ion-input formControlName="password" placeholder="Contraseña" class="input-form"></ion-input>
+          </ion-item>
+          <app-control-messages [control]="userForm.controls['password']"></app-control-messages>
+        </div>
+
+
+      </ng-container>
+
+      <ng-container *ngIf="key_table==_env.TABLE_SIS.employee">
+
+        <div class="col-6 p-0" formGroupName="role">
+          <ion-item style="margin-top: 10px;" lines="inset" (click)="listRol()">
+            <ion-label position="stacked" class="label-form">Selecionar rol</ion-label>
+            <ion-input formControlName="value" placeholder="Selecionar rol" class="input-form"></ion-input>
+            <span class="input-icon">
+              <ion-icon name="search"></ion-icon>
+            </span>
+          </ion-item>
+          <app-control-messages [control]="userForm.controls['role']" [field]="'value'"></app-control-messages>
+        </div>
+
+        <ion-item style="margin-top: 10px;" lines="inset" class="col-12 p-0">
+          <ion-label position="stacked" class="label-form">Propiedades avanzadas</ion-label>
+          <ion-textarea formControlName="properties" rows="3" class="input-style"
+            placeholder='{"key":"value", "key":"value", ...}'></ion-textarea>
+        </ion-item>
+      </ng-container>
+
+
+
+    </form>
+
+
+    <div style="display: block;margin-top: 35px;text-align: center;margin-bottom: 35px;">
+      <a href="javascript:void(0)" class="button-a" (click)="validateForm()">  {{isEdit?'Actualizar':'Crear'}}</a>
+    </div>
+
+    <div style="text-align: center;margin-top: 30px;">
+
+
+   <!--    
+      <ion-button (click)="validateForm()" class="button-02" style="width: 70%;">
+        {{isEdit?'Actualizar':'Crear'}}
+      </ion-button> -->
+    </div>
+  </div>
+
+</ion-content>

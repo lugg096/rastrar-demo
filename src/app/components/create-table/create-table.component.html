@@ -1,0 +1,42 @@
+<ion-content>
+
+  <div>
+    <ion-icon name="close" class="icon-close" (click)="closeModal()">
+    </ion-icon>
+  </div>
+
+  <div style="padding: 20px 40px;">
+
+    <p class="title-form">{{isEdit?'Actualizar':'Crear'}} tabla</p>
+    <form [formGroup]="tableForm">
+
+      <ion-item style="margin-top: 20px;" class="col-6 p-0" lines="inset">
+        <ion-label position="stacked" class="label-form">Nombre de la tabla</ion-label>
+        <ion-input [readonly]="isEdit?true:false" formControlName="key" placeholder="Ingrese el nombre"  class="input-form"></ion-input>
+      </ion-item>
+      <app-control-messages [control]="tableForm.controls['key']"></app-control-messages>
+
+      <ion-item  style="margin-top: 20px;" class="col-12 p-0" lines="inset">
+        <ion-label position="stacked" class="label-form">Descripción</ion-label>
+        <ion-textarea formControlName="name"  rows="3" class="input-style"
+        placeholder="Ingrese la descripción"></ion-textarea>
+      </ion-item>
+      <app-control-messages [control]="tableForm.controls['name']"></app-control-messages>
+
+      <ion-item style="margin-top: 20px;" class="col-12 p-0" lines="inset">
+        <ion-label position="stacked" class="label-form">Propiedades avanzadas</ion-label>
+        <ion-textarea formControlName="properties" rows="6" class="input-style"
+          placeholder='{"key":"value", "key":"value", ...}'></ion-textarea>
+      </ion-item>
+    </form>
+
+
+    <div style="text-align: center;margin-top: 30px;">
+      <ion-button (click)="validateForm()" class="button-02" style="width: 50%;">
+        {{isEdit?'Actualizar':'Crear'}}
+      </ion-button>
+    </div>
+
+  </div>
+
+</ion-content>

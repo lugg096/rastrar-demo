@@ -1,0 +1,166 @@
+<ion-content>
+
+  <div style="background: #f4f4f4b5;height:100%;text-align: center;position: relative;">
+
+    <div style="position: absolute;left: 0;z-index: 20;" (click)="goGestion()">
+      <ion-icon name="arrow-back-outline" style="font-size: 25px; color: rgb(90, 90, 90);padding: 15px;"></ion-icon>
+    </div>
+
+    <div style="position: absolute;right: 0;z-index: 20;" (click)="selectList()">
+      <ion-icon name="add-circle" style="color: #384b76; font-size: 32px;padding: 11px;"></ion-icon>
+    </div>
+
+    <p style="text-align: center;
+    color: rgb(38 38 38 / 84%);
+    font-size: 16px;
+    margin: 0;
+    padding-top: 15px;
+    font-weight: 700;">
+      Generar QR</p>
+
+
+    <div>
+      <p style="text-align: left;
+      margin: 20px;
+      font-size: 14px;
+      color: #999999;
+      font-weight: 600;
+      margin-bottom: 5px;">Seleccione un tipo de producto para generar el código QR o agregue uno predeterminado.</p>
+    </div>
+
+    <!-- LISTADO -->
+    <div class="row" style="padding: 8px;padding-top: 5px;">
+
+      <div class="col-6 m-0 p-0" *ngFor="let item of listScreen">
+        <div style="padding: 15px;background: #fff;margin: 5px;border-radius: 10px;position: relative;">
+
+          <div>
+            <img [src]="_env.url2+item.imagenUrl"
+              style="height: 50px;width: 50px;object-fit: cover;border-radius: 12px;">
+          </div>
+
+          <ion-icon name="ellipsis-vertical" style="
+          position: absolute;
+          top: 13px;
+          right: 10px;
+          font-size: 18px;
+          color: #ce8585de;" (click)="deleteSreen(item)"></ion-icon>
+
+          <p style="
+            color: #d36970d9;
+    font-size: 14px;
+    font-weight: 800;
+    margin-top: 5px;
+    margin-bottom: 0;">{{item.name}}
+          </p>
+          <p style="color: rgb(53, 53, 53);font-size: 11px;font-weight: 500;margin-top: 0;margin-bottom: 5px;">
+            {{item.description}}</p>
+
+          <a href="javascript:void(0)" class="btn btn-2" (click)="goGeneration(item)">
+            Usar</a>
+
+
+        </div>
+      </div>
+
+      <div class="col-6 m-0 p-0" (click)="selectList()" *ngIf="listScreen.length == 0" style="
+        background: #ffffff;
+    border-radius: 5px;
+    text-align: center;
+    height: 135px;
+    position: relative;">
+
+        <ion-icon name="add-circle-outline" style="font-size: 50px;
+        color: #d36970bf;
+        margin: 0;
+        margin-top: 25px;"></ion-icon>
+
+        <div>
+          <p style="color: #d36970;
+          font-size: 12px;
+          margin-bottom: 0;
+          text-align: center;
+          font-weight: 700;">Agregar producto</p>
+        </div>
+
+      </div>
+
+
+      <!--  <div class="col-6 m-0 p-0" (click)="goGeneration()">
+        <div style="padding: 15px;background: #fff;margin: 5px;border-radius: 10px;position: relative;">
+
+          <div>
+            <img src="../../../assets/images/limon.jpg" style="height: 50px;width: 50px;object-fit: cover;">
+          </div>
+
+          <p style="
+            color: #d36970d9;
+    font-size: 14px;
+    font-weight: 800;
+    margin-top: 5px;
+    margin-bottom: 0;">Limon Tahiti
+          </p>
+          <p style="color: rgb(53, 53, 53);font-size: 11px;font-weight: 500;margin-top: 0;margin-bottom: 5px;">
+            Limon</p>
+
+          <a href="javascript:void(0)" class="btn btn-2">
+            Usar</a>
+
+
+        </div>
+      </div>
+
+      <div class="col-6 m-0 p-0">
+        <div style="padding: 15px;background: #fff;margin: 5px;border-radius: 10px;position: relative;">
+
+          <div>
+            <img src="../../../assets/images/cafe.jpg" style="height: 50px;width: 50px;object-fit: cover;">
+          </div>
+
+          <p style="
+            color: #d36970d9;
+    font-size: 14px;
+    font-weight: 800;
+    margin-top: 5px;
+    margin-bottom: 0;">Café Colomb.
+          </p>
+          <p style="color: rgb(53, 53, 53);font-size: 11px;font-weight: 500;margin-top: 0;margin-bottom: 5px;">
+            Café</p>
+
+          <a href="javascript:void(0)" class="btn btn-2" (click)="nextSlidePadre()">
+            Usar</a>
+
+
+        </div>
+      </div>
+
+      <div class="col-6 m-0 p-0">
+        <div style="padding: 15px;background: #fff;margin: 5px;border-radius: 10px;position: relative;">
+
+          <div>
+            <img src="../../../assets/images/quinua.jpg"
+              style="height: 50px;width: 50px;object-fit: cover;border-radius: 12px;">
+          </div>
+
+          <p style="
+            color: #d36970d9;
+    font-size: 14px;
+    font-weight: 800;
+    margin-top: 5px;
+    margin-bottom: 0;">Quinoa Real
+          </p>
+          <p style="color: rgb(53, 53, 53);font-size: 11px;font-weight: 500;margin-top: 0;margin-bottom: 5px;">
+            Quinoa</p>
+
+          <a href="javascript:void(0)" class="btn btn-2" (click)="nextSlidePadre()">
+            Usar</a>
+
+
+        </div>
+      </div> -->
+
+
+    </div>
+
+  </div>
+</ion-content>

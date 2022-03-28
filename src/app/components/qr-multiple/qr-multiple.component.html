@@ -1,0 +1,86 @@
+<ion-content style="--background: #ffffff;position: relative;">
+
+  <div style="position: relative;text-align: center;">
+
+    <ion-icon name="close" (click)="closeModal();" style="font-size: 25px;
+        padding: 15px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: #a7a7a7;cursor: pointer;">
+    </ion-icon>
+
+  </div>
+
+
+
+  <div style="text-align: center;margin-top: 50px;background: #ffffff" #containerImg id="containerImg">
+
+    <img src="../../../assets/images/logo-color.svg" style="height: 38px;">
+
+
+
+    <div style="margin-top: 20px;">
+      <qrcode [qrdata]="dataQR" [width]="250" [errorCorrectionLevel]="'M'" [margin]="1"></qrcode>
+    </div>
+
+    <p style="
+    margin: 0;
+        color: #3c3c3ce8;
+        font-size: 15px;
+        font-weight: 700;
+        padding: 0 20px;margin-top: 8px;margin-bottom: 0;">
+      {{dataAssociateQR.key}} correlativo {{correlativo}}
+    </p>
+    <!--     <p style="margin-top: 0;
+    font-size: 13px;
+    padding: 0 60px;
+    display: block;
+    font-weight: 600;
+    color: #666666;">Ahora solo debe compartirlo y pegarlo al lote fisico.</p> -->
+
+
+    <form [formGroup]="qrForm" class="row" style="place-content: center;margin-bottom: 20px;">
+      <!--TYPE INPUT  -->
+      <div style="margin-top: 10px;" class="item col-6">
+        <p style="    margin: 0;
+      font-size: 13px;
+      color: #838383;
+      margin-bottom: 7px;
+      font-weight: 600;
+      margin-left: 3px;">Ingresar correlativo de producto</p>
+        <ion-item class="item-input" lines="none">
+          <ion-input formControlName="correlativo" type="text" class="input-style" placeholder="Ingresar número"
+            (ionChange)="change($event)">
+          </ion-input>
+        </ion-item>
+      </div>
+    </form>
+
+    <!-- 
+    <div class="nameBanck" style=" font-size: 17px;
+      font-weight: 700;
+      margin-top: 10px;
+      margin-bottom: 35px;
+      color: #525252;">{{title}}
+    </div> -->
+
+
+
+    <div style="text-align: center;">
+      <a [href]="dataQR" target="_blank" class="btn-2" style="padding: 15px 10px;
+      margin-right: 7px;border-radius: 15px;width: 25%;font-size: 11px;">Ver en web</a>
+
+      <a href="javascript:void(0)" class="btn-3" style="padding: 15px 10px;width: 25%;    font-size: 12px;">
+        <!--         <ion-icon name="ownload-outline" style="font-size: 16px;
+          transform: translateY(4px);
+          margin-right: 3px; color: white;
+          margin-top: -8px;"></ion-icon> -->
+        Descargar
+      </a>
+    </div>
+
+
+  </div>
+
+</ion-content>

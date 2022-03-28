@@ -1,0 +1,165 @@
+<app-header [title]="'Información de usuario'"></app-header>
+
+<ion-content>
+  <div style="background: var(--fondo-1);height: 180px;">
+    <div style="position: absolute;top:115px;left:10% ;">
+      <img src="../../../assets/images/usermt.png"
+        style="height: 130px;width: 130px;border-radius: 100%;object-fit: cover;">
+      <div class="btn-main" style="position: absolute;right:2%;bottom: 0; " (click)="copyText()">
+        <ion-icon name="shield-checkmark" style="color: #fff;font-size: 24px;transform: translateY(12px)"> </ion-icon>
+      </div>
+    </div>
+
+    <p
+      style="position: relative; left: 25%;margin-top: 120px; font-size: 32px;color: black;font-weight: 600;display: inline-block;transform: translateY(10px);line-height: 1.3;">
+      {{user.name}}<br> <span style="font-size: 15px;color:var(--black-400);font-weight: 500; ">{{user.role}}</span>
+    </p>
+
+  </div>
+
+
+  <div style="width: 80%;margin: 0 auto;margin-top: 100px;">
+
+ <!--    <p style="margin: 10px 15px;font-size: 18px;color: #686868;font-weight: 600;margin-bottom: 0;">Contratos
+      inteligentes</p>
+    <p style="margin: 10px 15px;font-size: 12px;color: #686868;font-weight: 500;margin-top: 0;">Tu informacion se
+      encuentra segura alojada en la blochain</p>
+    <div class="row">
+
+      <ion-item lines="none" class="col-12 col-lg-6">
+        <ion-label class="ion-text-wrap">
+          <p>Identidades digitales (DID)</p>
+          <p
+            style="font-size: 13px;font-style: italic; margin: 10px 0;line-height: 1;color: black;padding-right: 10px;">
+            {{_env.ct.c_did}}
+          </p>
+
+          <ion-badge class="status" [ngClass]="'pending'" style="transform: translateY(6px) ;font-size: 11px;"
+            *ngIf="owner_did">
+            <ion-icon name="rocket" style="font-size: 11px;transform: translateY(1px);"></ion-icon>
+            Is Owner DID
+          </ion-badge>
+
+          <ion-badge class="status" [ngClass]="'enabled'"
+            style="transform: translateY(6px);margin-left:5px ;font-size: 11px;" *ngIf="m_did">
+            <ion-icon name="shield-checkmark" style="font-size: 11px;transform: translateY(1px);"></ion-icon>
+            Is Master DID
+          </ion-badge>
+
+        </ion-label>
+        <ion-button (click)="owner(_env.ct.c_did,'identidades digitales')" class="button-03"
+          style="height: 35px;width: 115px;">
+          Trasnferir<ion-icon name="key" style="font-size: 18px;margin-left: 3px;color: white;"></ion-icon>
+        </ion-button>
+
+
+      </ion-item>
+
+      <ion-item lines="none" class="col-12 col-lg-6 item-text-wrap">
+        <ion-label class="ion-text-wrap">
+          <p>Credenciales verificables (VC)</p>
+          <p
+            style="font-size: 13px;font-style: italic; margin: 10px 0;line-height: 1;color: black;padding-right: 10px;">
+            {{_env.ct.c_vc}}</p>
+
+          <ion-badge class="status" [ngClass]="'pending'" style="transform: translateY(6px);font-size: 11px;"
+            *ngIf="owner_vc">
+            <ion-icon name="rocket" style="font-size: 11px;transform: translateY(1px);"></ion-icon>
+            Is Owner VC
+          </ion-badge>
+
+          <ion-badge class="status" [ngClass]="'enabled'"
+            style="transform: translateY(6px);margin-left:5px ;font-size: 11px;" *ngIf="m_vc">
+            <ion-icon name="shield-checkmark" style="font-size: 11px;transform: translateY(1px);"></ion-icon>
+            Is Master VC
+          </ion-badge>
+
+        </ion-label>
+        <ion-button (click)="owner(_env.ct.c_vc,'credenciales verificables')" class="button-03"
+          style="height: 35px;width: 115px;">
+          Trasnferir<ion-icon name="key" style="font-size: 18px;margin-left: 3px;color: white;"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </div>
+ -->
+
+
+    <p style="margin: 10px 15px;font-size: 18px;color: #686868;font-weight: 600;margin-bottom: 0;margin-top: 30px;">
+      Datos personales</p>
+    <p style="margin: 10px 15px;font-size: 12px;color: #686868;font-weight: 500;margin-top: 0;">Tu informacion se
+      encuentra segura alojada en la blochain</p>
+    <div class="row">
+
+
+      <!-- button="true"  -->
+      <ion-item lines="none" class="col-12 col-lg-6">
+        <ion-label>
+          <p>Nombre completo</p>
+          {{user.name}}
+        </ion-label>
+      </ion-item>
+
+      <ion-item lines="none" class="col-12 col-lg-6">
+        <ion-label>
+          <p>Cargo</p>
+          {{user.role}}
+        </ion-label>
+      </ion-item>
+
+      <ion-item lines="none" class="col-12 col-lg-6">
+        <ion-label>
+          <p>Email</p>
+          {{user.email}}
+        </ion-label>
+      </ion-item>
+
+      <!--    <ion-item lines="none" class="col-12 col-lg-6">
+          <ion-label>
+            <p>Contraseña</p>
+            *************
+          </ion-label>
+          <ion-button  class="button-01" style="height: 40px;width: 100px;">
+            Cambiar <ion-icon name="key" style="font-size: 18px;margin-left: 3px;color: var(--main-color);">
+            </ion-icon>
+          </ion-button>
+        </ion-item> -->
+
+
+
+
+
+      <ion-item lines="none" class="col-12 col-lg-6">
+        <ion-label>
+          <p>DID</p>
+          {{ (user.DID | slice:0:6)+' ...
+          '+(user.DID | slice:38:42) }}
+        </ion-label>
+        <ion-button (click)="generarQR({value: user.DID,text: 'DID'})" class="button-04"
+          style="height: 35px;width: 100px;">
+          Ver QR <ion-icon name="qr-code-outline" style="font-size: 18px;margin-left: 3px;color: white;">
+          </ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-item lines="none" class="col-12 col-lg-6">
+        <ion-label>
+          <p> {{user.name_ident}}</p>
+          {{user.doc_ident}}
+        </ion-label>
+      </ion-item>
+
+
+
+    </div>
+  </div>
+
+  <!--  <div style="text-align: center;margin-top: 100px;;">
+    <div style="height: 400px;width: 320px; box-shadow: var(--shadow-black-200);border-radius: 10px;display: inline-block" ></div>
+    <div style="height: 200px;width: 600px; margin-left: 30px; border-radius: 10px;display: inline-block;background: #f7f7fc;margin-top: 0;" ></div>
+  </div>
+ -->
+
+  <div>
+
+  </div>
+</ion-content>

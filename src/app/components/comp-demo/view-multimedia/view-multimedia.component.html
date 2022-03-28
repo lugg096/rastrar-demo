@@ -1,0 +1,104 @@
+<div style="padding: 0px 20px;padding-bottom: 50px; overflow-y: scroll;display: block;">
+  <ion-icon name="chevron-back-outline" (click)="closeModal()" style="font-size: 20px;
+  color: #db7078;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 20px;">
+  </ion-icon>
+
+  <p style="color: #d36970e8;
+  text-align: center;
+  font-weight: 700;
+  font-size: 17px;
+  margin-top: 18px;">{{data.name}}</p>
+
+
+  <ion-slides #slidesDatos class="slide-identificacion" style="position: relative;" pager="true" [options]="slideOpts"
+    (ionSlideNextEnd)="verSlide()" (ionSlidePrevEnd)="verSlide()" (ionSlideReachEnd)="endSlide()">
+
+
+    <ion-slide *ngFor="let imgFile of data.value.files">
+     <div style="padding: 10px;">
+      <img style="
+      object-fit: cover;
+      border-radius: 5px;
+      box-shadow: 0 0px 5px rgb(213 213 213 / 53%);" [src]="imgFile.url">
+
+     </div>
+   
+
+    </ion-slide>
+
+
+  </ion-slides>
+
+
+
+<!-- 
+<div style="text-align: center;">
+  <img src="../../../../assets/images/3-cert-prb.jpg" alt="" style="    opacity: 0.95;
+    width: 230px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 1px 18px rgb(179 179 179 / 58%);">
+</div> -->
+
+
+<div style="position: relative;">
+<!--   <p style="color: #5e5e5e;
+  font-weight: 800;
+  margin: 0;
+  margin-top: 20px;
+  font-size: 20px; padding-right: 60px;">{{data.name}} </p>
+ -->
+<p style="    color: #5e5e5e;
+font-weight: 600;
+margin: 0;
+margin-top: 20px;
+font-size: 20px;
+padding-right: 20px;
+line-height: 1;">{{data.name}} </p>
+
+<!--   <div style="    right: 5px;
+    position: absolute;
+    top: -10px;
+    text-align: center;">
+    <ion-icon name="heart" style="transform: translateY(1.5px);
+      background: #d36970e8;
+      color: white;
+      padding: 8px;
+      font-size: 24px;
+      border-radius: 50px;"></ion-icon>
+    <p style="margin: 0;
+      line-height: 0.8;
+      font-size: 12px;
+      font-weight: 800;">120</p>
+  </div> -->
+
+  <p style="font-size: 14px;
+  color: #858585;">Se adjunto {{data.value.files.length}} imagenes</p>
+
+<!--   <p style="color: #525252;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore aspernatur
+    exercitationem dolore... <span style="font-weight: 700;">Leer más</span></p> -->
+
+    <p style="color: #8d8d8d;
+    font-size: 14px;margin-top: 10px;">{{data.value.description}} <!-- <span style="font-weight: 700;">Leer más</span> --></p>
+
+
+<!--   <p style="    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    margin-top: 25px;">Información de certificado</p>
+
+  <p style="    font-weight: 600;
+    font-size: 14px;
+    margin: 0;
+    font-style: italic;
+    margin-top: 5px;">Tipo</p>
+  <p style="color: #525252;">Sanitario</p> -->
+</div>
+
+
+
+</div>

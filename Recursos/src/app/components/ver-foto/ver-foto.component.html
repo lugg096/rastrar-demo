@@ -1,0 +1,22 @@
+<ion-content>
+  <div>
+    <ion-icon name="close" style="position: absolute;right: 4px;top: 4px;font-size: 30px;padding: 20px;z-index: 10;color: var(--main-color);"
+      (click)="closeModal(false);">
+    </ion-icon>
+  </div>
+
+  <ion-slides [options]="sliderOpts" #slider>
+    <ion-slide>
+      <div class="swiper-zoom-container">
+        <img [src]="img">
+      </div>
+    </ion-slide>
+  </ion-slides>
+
+  <ion-fab slot="fixed" horizontal="center" vertical="bottom" style="margin-bottom: 15px;" *ngIf="!onlyView">
+    <ion-fab-button class="fab-button-scan"  (click)="closeModal(true)">
+      <ion-icon name="trash" style="font-size: 22px;"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

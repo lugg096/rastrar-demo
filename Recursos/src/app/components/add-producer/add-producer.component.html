@@ -1,0 +1,112 @@
+<ion-content>
+
+  <div style=" position: absolute;right: 0;z-index: 20;top: 0;" (click)="closeModal()">
+    <ion-icon name="close" style="    font-size: 25px;
+  color: rgb(161 161 161 / 47%);
+  padding: 15px;"></ion-icon>
+  </div>
+
+
+  <div style="padding: 15px;">
+    <p style="
+    color: #d36970e8;
+    font-size: 18px;
+    font-weight: 600;
+    font-style: italic;">Asociar productor</p>
+
+    <form [formGroup]="producerForm">
+      <div style="margin-bottom: 20px;position: relative;">
+        <p style="    margin: 0;
+font-size: 12px;
+color: #95989b;
+margin-bottom: 7px; font-weight: 700;
+margin-left: 3px;">Productor</p>
+        <ion-item class="item-input" lines="none" >
+          <ion-input (ionChange)="searchUser($event)" formControlName="adrx" lines="none" placeholder="Escanear AgroCard o ingresar DNI">
+          </ion-input>
+        </ion-item>
+        <span class="input-icon animate-pulse2" (click)="scan('adrx')">
+          <ion-icon name="qr-code-outline" style="    background: white;"></ion-icon>
+        </span>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <p style="    margin: 0;
+font-size: 12px;
+color: #95989b;
+margin-bottom: 7px;
+font-weight: 700;
+margin-left: 3px;">Nombre de productor</p>
+        <ion-item class="item-input" lines="none">
+          <ion-input [disabled]="true"  formControlName="name" lines="none" placeholder="Ingrese un texto">
+          </ion-input>
+        </ion-item>
+      </div>
+
+      <div class="row">
+        <div style="margin-bottom: 20px;" class="col-6 pr-2">
+          <p style="    margin: 0;
+  font-size: 12px;
+  color: #95989b;
+  margin-bottom: 7px;
+  font-weight: 700;
+  margin-left: 3px;">Cantidad ({{producerForm.controls['q_unid'].value}})</p>
+          <ion-item class="item-input" lines="none">
+            <ion-input formControlName="count" lines="none" placeholder="Ingrese un cantidad">
+            </ion-input>
+          </ion-item>
+        </div>
+
+        <div style="margin-bottom: 20px;" class="col-6 pl-2">
+          <p style="    margin: 0;
+  font-size: 12px;
+  color: #95989b;
+  margin-bottom: 7px;
+  font-weight: 700;
+  margin-left: 3px;">Unidad de medida</p>
+          <ion-item class="item-input" lines="none">
+            <!-- <ion-input formControlName="count" lines="none" placeholder="Ingrese un cantidad">
+            </ion-input> -->
+            <ion-select formControlName="q_unid" value="kg" okText="ok" cancelText="Cancelar" placeholder="Seleccionar">
+              <ion-select-option value="kg">Kilos</ion-select-option>
+              <ion-select-option value="Jb">Jabas</ion-select-option>
+              <ion-select-option value="Lb">Libras</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+
+
+
+    </form>
+
+
+
+  </div>
+
+  <div style="text-align: center;">
+    <a href="javascript:void(0)" class="btn-3" style="padding: 12px 40px;" (click)="confirm()">
+      Asociar
+    </a>
+  </div>
+
+  <div style="
+  font-size: 13px;
+  margin-top: 20px;
+  bottom: 0;
+  text-align: center;
+  font-weight: 600;
+  color: #888484;">
+      ¿Productor sin registrar? <span class="font-grd" (click)="registerProd()"> Regitrar ahora</span>
+    </div>
+
+
+</ion-content>

@@ -1,0 +1,112 @@
+<ion-content style="--background: var(--main-color)">
+  <div style="position: absolute;left: 10px;" *ngIf="!icon">
+    <ion-button fill="clear" (click)="back()" style="margin-top: 20px;">
+      <ion-icon name="arrow-back-outline" style="color: white;"></ion-icon>
+    </ion-button>
+  </div>
+
+  <div style="position: absolute;right: 10px;" *ngIf="icon">
+    <ion-button fill="clear" (click)="back()" style="margin-top: 20px;">
+      <ion-icon name="close" style="color: white;"></ion-icon>
+    </ion-button>
+  </div>
+
+  <div class="text-center" style="padding-top: 35px;">
+    <div class="titulo-pin">{{data.titulo}} </div>
+    <p class="titulo-parrafo-pin">{{data.subTitulo}}</p>
+    <p class="text-parrafo-pin ">{{data.texto}}</p>
+  </div>
+
+  <div class="ion-margin ion-text-center" style="color: white;">
+    <ion-icon [name]="pin.length>0 ? 'ellipse' : 'radio-button-off-outline'"></ion-icon>
+    <ion-icon [name]="pin.length>1 ? 'ellipse' : 'radio-button-off-outline'"></ion-icon>
+    <ion-icon [name]="pin.length>2 ? 'ellipse' : 'radio-button-off-outline'"></ion-icon>
+    <ion-icon [name]="pin.length>3 ? 'ellipse' : 'radio-button-off-outline'"></ion-icon>
+    <ion-icon [name]="pin.length>4 ? 'ellipse' : 'radio-button-off-outline'"></ion-icon>
+    <ion-icon [name]="pin.length>5 ? 'ellipse' : 'radio-button-off-outline'"></ion-icon>
+  </div>
+
+  <div *ngIf="pin.length == 6" class="text-center">
+    <ion-button slot="start" (click)="emitClave()" class="ion-no-border"
+      style="--background: var(--secondary-color);transform: translateY(-13px);">
+      <span style="text-transform: capitalize;margin-left: 5px;">Continuar</span>
+      <ion-icon name="arrow-forward" color="light"></ion-icon>
+    </ion-button>
+  </div>
+
+</ion-content>
+<ion-footer class="pin" style="max-width: 600px;margin: auto;">
+  <div style="min-height: 100%;position: relative;">
+
+    <ion-grid class="ion-text-center ion-no-padding" style="position: absolute; bottom: 0px; width: 100%;">
+      <p class="text-parrafo-pin">
+        <ion-icon name="lock-closed-outline" style="font-size: 15px;transform: translateY(3px);"></ion-icon> Teclado
+        seguro
+      </p>
+      <ion-row>
+        <ion-col>
+          <ion-button mode="md" class="ion-no-border button-pin" (click)="handleInput(digitos[1])" expand="full">
+            {{digitos[1]}}</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button mode="md" class="button-pin" (click)="handleInput(digitos[2])" expand="full">{{digitos[2]}}
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button mode="md" class="button-pin" (click)="handleInput(digitos[3])" expand="full">{{digitos[3]}}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-button mode="md" class="button-pin" (click)="handleInput(digitos[4])" expand="full">{{digitos[4]}}
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button mode="md" class="button-pin" (click)="handleInput(digitos[5])" expand="full">{{digitos[5]}}
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button mode="md" class="button-pin" (click)="handleInput(digitos[6])" expand="full">{{digitos[6]}}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-button mode="md" class="button-pin" (click)="handleInput(digitos[7])" expand="full">{{digitos[7]}}
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button mode="md" class="button-pin" (click)="handleInput(digitos[8])" expand="full">{{digitos[8]}}
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button mode="md" class="button-pin" (click)="handleInput(digitos[9])" expand="full">{{digitos[9]}}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col>
+          <ion-button mode="md" class="button-pin" (click)="handleInput(digitos[0])" expand="full"> </ion-button>
+        </ion-col>
+
+        <ion-col>
+          <ion-button mode="md" class="button-pin" (click)="handleInput(digitos[0])" expand="full">{{digitos[0]}}
+          </ion-button>
+        </ion-col>
+
+        <ion-col>
+          <ion-button mode="md" class="button-pin" (click)="handleInput('delete')" expand="full">
+            <ion-icon name="backspace" style="color: white;font-size: 32px;"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </div>
+
+</ion-footer>

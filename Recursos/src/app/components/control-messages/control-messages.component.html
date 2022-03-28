@@ -1,0 +1,13 @@
+<!-- <p style="font-size: 11px;color: #eb445a;text-align: left;margin-top: 3px;margin-left: 15px;">
+{{errorMessage()}}
+</p>
+ -->
+
+ 
+<p style="font-size: 11px;color: #eb445a;text-align: left;margin-left: 8px;">
+    <ion-icon *ngIf="errorMessage()" name="alert-circle-outline" style="font-size: 19px;transform: translateY(6px);"></ion-icon>  {{errorMessage()}}
+    <ng-container *ngIf="errorStandar.length > 0">
+        <span *ngFor="let item of errorStandar"><ion-icon name="alert-circle-outline" style="font-size: 19px;transform: translateY(6px);"></ion-icon> {{item}} <br> </span>
+    </ng-container>
+</p>
+

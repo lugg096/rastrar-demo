@@ -1,0 +1,394 @@
+<ion-content>
+  <!-- IMAGEN CERT -->
+  <div style="position: absolute; top: -200%;">
+    <div style="width: 900px;text-align: center;" #containerImg id="containerImg">
+      <img [src]="'../../../assets/images/'+imgCert"
+        style="filter: drop-shadow(0 1px 2px rgb(90, 90, 90));">
+      <ng-container *ngIf="certData.certificateType=='C1'">
+        <div style="position: absolute;top: 140px;width: 100%;">
+          <p style="color: #66666c;font-size: 28px;"> {{certData.title}}</p>
+          <p style="color: #66666c;font-size: 20px;    margin-bottom: 5px;margin-top: 20px"> Este certificado es
+            otorgado a</p>
+          <p style="color: #66666c;font-size: 30px;    margin-bottom: 5px; font-weight: 600;"> {{certData.titular_name}}
+          </p>
+          <p style="color: #66666c;font-size: 20px;"> {{'did:ethr:lacchain:'+ (certData.data.adrx_titular | slice:0:6)+'
+            ...
+            '+(certData.data.adrx_titular | slice:38:42) }}</p>
+          <p style="color: #66666c;font-size: 20px;    margin-bottom: 5px;
+          margin-top: 30px;"> Emitido por</p>
+          <p style="color: #66666c;font-size: 25px; font-weight: 600;margin-bottom: 5px;"> {{certData.emisor_name}}</p>
+          <p style="color: #66666c;font-size: 20px;"> {{
+            'did:ethr:lacchain:'+ (certData.emisor_did | slice:0:6)+' ...
+            '+(certData.emisor_did | slice:38:42)
+            }}</p>
+        </div>
+
+
+
+        <div style="position: absolute;
+        bottom:100px;
+        left: 50px;
+        width: 200px;
+        font-size: 20px;
+        color: #66666c;
+       ">
+          Emisión <br> {{(certData.data.f_emision)*1000 | date:'dd/MM/yyyy' }}
+        </div>
+
+        <div style="   position: absolute;
+        bottom:100px;
+        right: 50px;
+        width: 200px;
+        font-size: 20px;
+        color: #66666c;
+       ">
+          Vencimiento <br> {{(certData.data.f_vencimiento)*1000 | date:'dd/MM/yyyy'}}
+        </div>
+
+        <div style="   position: absolute;
+        bottom: 50px;
+        font-size: 8px;
+        color: #66666c;
+        width: 100%;
+        background: transparent;">
+          <qrcode [qrdata]="lacchainId" [width]="150" [errorCorrectionLevel]="'M'" [margin]="1"></qrcode>
+
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="certData.certificateType=='C2'">
+        <div style="position: absolute;top: 140px;width: 100%;">
+          <p style="color: #66666c;font-size: 28px;"> {{certData.title}}</p>
+          <p style="color: #66666c;font-size: 20px;    margin-bottom: 5px;margin-top: 20px"> Este certificado es
+            otorgado a</p>
+          <p style="color: #66666c;font-size: 30px;    margin-bottom: 5px; font-weight: 600;"> {{certData.titular_name}}
+          </p>
+          <p style="color: #66666c;font-size: 20px;"> {{'did:ethr:lacchain:'+ (certData.data.adrx_titular | slice:0:6)+'
+            ...
+            '+(certData.data.adrx_titular | slice:38:42) }}</p>
+       
+        </div>
+
+
+
+        <div style="position: absolute;
+        bottom:100px;
+        left: 50px;
+        width: 200px;
+        font-size: 20px;
+        color: #66666c;
+       ">
+          Emisión <br> {{(certData.data.f_emision)*1000 | date:'dd/MM/yyyy' }}
+        </div>
+
+        <div style="   position: absolute;
+        bottom:100px;
+        right: 50px;
+        width: 200px;
+        font-size: 20px;
+        color: #66666c;
+       ">
+          Vencimiento <br> {{(certData.data.f_vencimiento)*1000 | date:'dd/MM/yyyy'}}
+        </div>
+
+        <div style="   position: absolute;
+        bottom: 50px;
+        font-size: 8px;
+        color: #66666c;
+        width: 100%;
+        background: transparent;">
+          <qrcode [qrdata]="lacchainId" [width]="280" [errorCorrectionLevel]="'M'" [margin]="1"></qrcode>
+
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="certData.certificateType=='C4'">
+        <div style="position: absolute;top: 140px;width: 100%;text-align: right;right: 255px;">
+          <p style="color: #66666c;font-size: 28px;"> {{certData.title}}</p>
+          <p style="color: #66666c;font-size: 20px;    margin-bottom: 5px;margin-top: 20px"> Producto fue entregado por
+          </p>
+          <p style="color: #66666c;font-size: 30px;    margin-bottom: 5px; font-weight: 600;"> {{certData.titular_name}}
+          </p>
+          <p style="color: #66666c;font-size: 20px;"> {{'did:ethr:lacchain:'+ (certData.data.adrx_titular | slice:0:6)+'
+            ...
+            '+(certData.data.adrx_titular | slice:38:42) }}</p>
+
+
+          <p style="color: #66666c;font-size: 20px;    margin-bottom: 5px;margin-top: 20px">Detalle de compra</p>
+
+          <p style="color: #66666c;font-size: 20px;    margin-bottom: 5px;"> <span
+              style="font-size:22px;">{{certData.data.money_paid}}</span>
+            soles por {{certData.data.amount}} Kg</p>
+
+          <p style="color: #66666c;font-size: 20px;    margin-bottom: 5px;
+          margin-top: 30px;">Recibido por</p>
+          <p style="color: #66666c;font-size: 25px; font-weight: 600;margin-bottom: 5px;"> {{certData.emisor_name}}</p>
+          <p style="color: #66666c;font-size: 20px;"> {{
+            'did:ethr:lacchain:'+ (certData.emisor_did | slice:0:6)+' ...
+            '+(certData.emisor_did | slice:38:42)
+            }}</p>
+        </div>
+
+        <div style="position: absolute;
+        bottom:50px;
+        left: 50px;
+        width: 200px;
+        font-size: 20px;
+        color: #66666c;
+       ">
+          Emisión <br> {{(certData.data.f_emision)*1000 | date:'dd/MM/yyyy' }}
+        </div>
+
+        <div style="position: absolute;
+        bottom:50px;
+        right: 250px;
+        width: 200px;
+        font-size: 20px;
+        color: #66666c;
+       ">
+          Vencimiento <br> {{(certData.data.f_vencimiento)*1000 | date:'dd/MM/yyyy'}}
+        </div>
+
+        <div style="position: absolute;
+        bottom: 200px;
+        left: 80px;
+        font-size: 8px;
+        color: #66666c;
+        background: transparent;">
+          <qrcode [qrdata]="lacchainId" [width]="150" [errorCorrectionLevel]="'M'" [margin]="1"></qrcode>
+        </div>
+
+
+      </ng-container>
+
+    </div>
+  </div>
+
+
+  <div style="position: absolute; top: -200%;">
+    <div style="width: 900px;text-align: center;" #containerImg id="containerImg_anonymous">
+      <img [src]="'../../../assets/images/'+imgCert"
+        style="filter: drop-shadow(0 1px 2px rgb(90, 90, 90));">
+
+      <ng-container *ngIf="certData.certificateType=='C1'">
+        <div style="position: absolute;top: 140px;width: 100%;">
+          <p style="color: #66666c;font-size: 28px;"> {{certData.title}}</p>
+          <p style="color: #66666c;font-size: 20px;    margin-bottom: 5px;margin-top: 20px"> Este certificado es
+            otorgado a</p>
+          <p style="color: #66666c;font-size: 30px;    margin-bottom: 5px; font-weight: 600;"> {{
+            (certData.titular_name| slice:0:3)+'***'+ (certData.titular_name|
+            slice:(certData.titular_name.length-3):(certData.titular_name.length)) }}</p>
+          <p style="color: #66666c;font-size: 20px;"> {{'did:ethr:lacchain:'+ (certData.data.adrx_titular | slice:0:6)+'
+            ...
+            '+(certData.data.adrx_titular | slice:38:42) }}</p>
+          <p style="color: #66666c;font-size: 20px;    margin-bottom: 5px;
+          margin-top: 30px;"> Emitido por</p>
+          <p style="color: #66666c;font-size: 25px; font-weight: 600;margin-bottom: 5px;">
+            {{
+              (certData.emisor_name| slice:0:3)+'***'+ (certData.emisor_name|
+              slice:(certData.emisor_name.length-3):(certData.emisor_name.length)) }}
+         </p>
+          <p style="color: #66666c;font-size: 20px;"> {{
+            'did:ethr:lacchain:'+ (certData.emisor_did | slice:0:6)+' ...
+            '+(certData.emisor_did | slice:38:42)
+            }}</p>
+        </div>
+
+
+
+        <div style="position: absolute;
+        bottom:100px;
+        left: 50px;
+        width: 200px;
+        font-size: 20px;
+        color: #66666c;
+       ">
+          Emisión <br> {{(certData.data.f_emision)*1000 | date:'dd/MM/yyyy' }}
+        </div>
+
+        <div style="   position: absolute;
+        bottom:100px;
+        right: 50px;
+        width: 200px;
+        font-size: 20px;
+        color: #66666c;
+       ">
+          Vencimiento <br> {{(certData.data.f_vencimiento)*1000 | date:'dd/MM/yyyy'}}
+        </div>
+
+        <div style="   position: absolute;
+        bottom: 50px;
+        font-size: 8px;
+        color: #66666c;
+        width: 100%;
+        background: transparent;">
+          <qrcode [qrdata]="lacchainId" [width]="150" [errorCorrectionLevel]="'M'" [margin]="1"></qrcode>
+
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="certData.certificateType=='C2'">
+        <div style="position: absolute;top: 140px;width: 100%;">
+          <p style="color: #66666c;font-size: 28px;"> {{certData.title}}</p>
+          <p style="color: #66666c;font-size: 20px;    margin-bottom: 5px;margin-top: 20px"> Este certificado es
+            otorgado a</p>
+          <p style="color: #66666c;font-size: 30px;    margin-bottom: 5px; font-weight: 600;"> {{
+            (certData.titular_name| slice:0:3)+'***'+ (certData.titular_name|
+            slice:(certData.titular_name.length-3):(certData.titular_name.length)) }}</p>
+          <p style="color: #66666c;font-size: 20px;"> {{'did:ethr:lacchain:'+ (certData.data.adrx_titular | slice:0:6)+'
+            ...
+            '+(certData.data.adrx_titular | slice:38:42) }}</p>
+          <p style="color: #66666c;font-size: 20px;    margin-bottom: 5px;
+          margin-top: 30px;"> Emitido por</p>
+          <p style="color: #66666c;font-size: 25px; font-weight: 600;margin-bottom: 5px;">
+            {{
+              (certData.emisor_name| slice:0:3)+'***'+ (certData.emisor_name|
+              slice:(certData.emisor_name.length-3):(certData.emisor_name.length)) }}
+         </p>
+          <p style="color: #66666c;font-size: 20px;"> {{
+            'did:ethr:lacchain:'+ (certData.emisor_did | slice:0:6)+' ...
+            '+(certData.emisor_did | slice:38:42)
+            }}</p>
+        </div>
+
+
+
+        <div style="position: absolute;
+        bottom:100px;
+        left: 50px;
+        width: 200px;
+        font-size: 20px;
+        color: #66666c;
+       ">
+          Emisión <br> {{(certData.data.f_emision)*1000 | date:'dd/MM/yyyy' }}
+        </div>
+
+        <div style="   position: absolute;
+        bottom:100px;
+        right: 50px;
+        width: 200px;
+        font-size: 20px;
+        color: #66666c;
+       ">
+          Vencimiento <br> {{(certData.data.f_vencimiento)*1000 | date:'dd/MM/yyyy'}}
+        </div>
+
+        <div style="   position: absolute;
+        bottom: 50px;
+        font-size: 8px;
+        color: #66666c;
+        width: 100%;
+        background: transparent;">
+          <qrcode [qrdata]="lacchainId" [width]="280" [errorCorrectionLevel]="'M'" [margin]="1"></qrcode>
+
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="certData.certificateType=='C4'">
+        <div style="position: absolute;top: 140px;width: 100%;text-align: right;right: 255px;">
+          <p style="color: #66666c;font-size: 28px;"> {{certData.title}}</p>
+          <p style="color: #66666c;font-size: 20px;    margin-bottom: 5px;margin-top: 20px"> Producto fue entregado por
+          </p>
+          <p style="color: #66666c;font-size: 30px;    margin-bottom: 5px; font-weight: 600;"> {{certData.titular_name}}
+          </p>
+          <p style="color: #66666c;font-size: 20px;"> {{'did:ethr:lacchain:'+ (certData.data.adrx_titular | slice:0:6)+'
+            ...
+            '+(certData.data.adrx_titular | slice:38:42) }}</p>
+
+
+          <p style="color: #66666c;font-size: 20px;    margin-bottom: 5px;margin-top: 20px">Detalle de compra</p>
+
+          <p style="color: #66666c;font-size: 20px;    margin-bottom: 5px;"> <span
+              style="font-size:22px;">{{certData.data.money_paid}}</span>
+            soles por {{certData.data.amount}} Kg</p>
+
+          <p style="color: #66666c;font-size: 20px;    margin-bottom: 5px;
+          margin-top: 30px;">Recibido por</p>
+          <p style="color: #66666c;font-size: 25px; font-weight: 600;margin-bottom: 5px;"> {{certData.emisor_name}}</p>
+          <p style="color: #66666c;font-size: 20px;"> {{
+            'did:ethr:lacchain:'+ (certData.emisor_did | slice:0:6)+' ...
+            '+(certData.emisor_did | slice:38:42)
+            }}</p>
+        </div>
+
+        <div style="position: absolute;
+        bottom:50px;
+        left: 50px;
+        width: 200px;
+        font-size: 20px;
+        color: #66666c;
+       ">
+          Emisión <br> {{(certData.data.f_emision)*1000 | date:'dd/MM/yyyy' }}
+        </div>
+
+        <div style="position: absolute;
+        bottom:50px;
+        right: 250px;
+        width: 200px;
+        font-size: 20px;
+        color: #66666c;
+       ">
+          Vencimiento <br> {{(certData.data.f_vencimiento)*1000 | date:'dd/MM/yyyy'}}
+        </div>
+
+        <div style="position: absolute;
+        bottom: 200px;
+        left: 80px;
+        font-size: 8px;
+        color: #66666c;
+        background: transparent;">
+          <qrcode [qrdata]="lacchainId" [width]="150" [errorCorrectionLevel]="'M'" [margin]="1"></qrcode>
+        </div>
+
+
+      </ng-container>
+
+    </div>
+  </div>
+  
+  <div class="svg hide" id="svg">
+    <ng-lottie [options]="options" (animationCreated)="animationCreated($event)"></ng-lottie>
+  </div>
+
+  <div style="text-align: center;position: absolute;width: 100%;"
+    [ngStyle]="{top:(data.cert.status==env.STATUS_REG.SAVED)?'205px':'142px'}">
+    <p style="font-size: 25px;color: #595959;font-weight: 600;margin-bottom: 0;">{{textTitle}}</p>
+    <p style="margin-top: 5px;color: #5f5f5f;font-size: 15px;margin-left: 20px;margin-right: 20px;">{{subtitle}}</p>
+
+
+    <div *ngIf="data.cert.status==env.STATUS_REG.SAVED" style="text-align: center;">
+      <ion-spinner name="crescent" style="color: var(--secondary-color);height: 50px;width: 50px; "></ion-spinner>
+    </div>
+
+
+    <div *ngIf="data.cert.status!=env.STATUS_REG.SAVED">
+
+      <!--       <div *ngIf="certData.certificateType=='C1'">
+        {{certData.certificateType}}
+        MOSTRARRRRRR C1
+      </div> -->
+      <h3 class="count">{{progress| number: '1.0-0'}}%</h3>
+      <div style="display: flex;margin-bottom: 15px;">
+
+        <div class="progress">
+          <div class="progress-value" #bar></div>
+        </div>
+      </div>
+
+      <!--     <ion-button (click)="type != 'alert'?closeModal():confirm()" class="button-02"
+      style="--border-radius: 5px;font-size: 12px;--background: #2778c4;height: 40px;text-transform:initial;margin-right: 5px;">
+      Pausar
+    </ion-button> -->
+    </div>
+
+
+
+
+
+    <!--  <ion-button (click)="closeModal()" class="button-02"
+      style="--border-radius: 5px;font-size: 12px;--background: rgb(221, 51, 51);height: 40px;text-transform:initial;margin-left: 5px;">
+      Cancelar
+    </ion-button> -->
+
+  </div>
+</ion-content>

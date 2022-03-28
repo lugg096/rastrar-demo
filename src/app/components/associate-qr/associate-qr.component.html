@@ -1,0 +1,145 @@
+<div style="padding: 22px;position: relative;overflow-y: scroll;display: block;">
+  <ion-icon name="chevron-back-outline" (click)="closeModal()" style="font-size: 20px;
+    color: #db7078;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 20px;cursor: pointer;">
+  </ion-icon>
+  <p style="margin: 0;
+    color: #d36970e8;
+    font-size: 18px;
+    font-weight: 600;
+    font-style: italic;
+    transform: translateY(-5px) translateX(20px);">Asociar QR</p>
+
+  <div>
+    <p style="    font-size: 15px;
+    color: #979797;
+    margin-bottom: 10px;">Ingresa los datos requeridos para validar que los datos son correctos y realizar la
+      asociación. </p>
+
+    <form [formGroup]="associateForm" class="row">
+      <div style="margin-top: 20px;" class="item col-6">
+        <p style="    margin: 0;
+          font-size: 12px;
+          color: #95989b;
+          margin-bottom: 7px;
+          font-weight: 700;
+          margin-left: 3px;">Código de lote<span style="color: #d36970e8;">(*)</span> </p>
+        <ion-item class="item-input" lines="none">
+          <ion-input [disabled]="valid_btn" formControlName="key" type="text" class="input-style" placeholder="Ingresar texto">
+          </ion-input>
+        </ion-item>
+        <app-control-messages [control]="associateForm.controls['key']"></app-control-messages>
+      </div>
+
+      <div class="col-6" style="    margin-top: 55px;">
+
+        <ion-icon name="alert-circle-outline" style="    display: inline-block;
+        font-size: 22px;
+        color: #8294b5;"></ion-icon>
+        <div style="font-size: 11px;
+        font-weight: 600;
+        color: #979797;
+        display: inline-block;
+        width: 80%;
+        margin-left: 2%;">
+          El código lo puedes obtener escaneando el QR: PR001_101 <span style="font-weight: 700;color: #8294b5;">
+            <> [código]_[correlativo]
+          </span>
+        </div>
+
+      </div>
+
+      <div style="margin-top: 20px;" class="item col-6">
+        <p style="    margin: 0;
+          font-size: 12px;
+          color: #95989b;
+          margin-bottom: 7px;
+          font-weight: 700;
+          margin-left: 3px;">Correlativo inicial<span style="color: #d36970e8;">(*)</span> </p>
+        <ion-item class="item-input" lines="none">
+          <ion-input [disabled]="valid_btn" formControlName="correlative1" type="number" class="input-style" placeholder="Ingresar número">
+          </ion-input>
+        </ion-item>
+        <app-control-messages [control]="associateForm.controls['correlative1']"></app-control-messages>
+      </div>
+
+      <div style="margin-top: 20px;" class="item col-6">
+        <p style="    margin: 0;
+          font-size: 12px;
+          color: #95989b;
+          margin-bottom: 7px;
+          font-weight: 700;
+          margin-left: 3px;">Correlativo final<span style="color: #d36970e8;">(*)</span> </p>
+        <ion-item class="item-input" lines="none">
+          <ion-input [disabled]="valid_btn" formControlName="correlative2" type="number" class="input-style"
+            placeholder="Ingresar número mayor a correlativo inicial">
+          </ion-input>
+        </ion-item>
+        <app-control-messages [control]="associateForm.controls['correlative2']"></app-control-messages>
+      </div>
+    </form>
+
+    <div style="text-align: right;margin-top: 30px;margin-bottom: 30px;">
+      <a href="javascript:void(0)" *ngIf="valid_btn" (click)="clear()" style="    padding: 15px 10px;
+      margin-right: 10px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+      color: #858585;">
+        <ion-icon name="ban" style="font-size: 16px;
+        transform: translateY(4px);
+        color: #eb656ebf;"></ion-icon> Cancelar
+      </a>
+
+      <a href="javascript:void(0)" class="btn-3" style="padding: 15px 40px;text-align: center;"
+        (click)="valid()">
+        {{valid_btn?'Asociar':'Validar'}}
+      </a>
+
+
+
+    </div>
+
+    <!-- SECTION QR VIEW -->
+    <div style="text-align-last: center;">
+
+      <div *ngFor="let qr of listQR;index as i" style="display: inline-block;margin-right: 10px;">
+
+        <ng-container *ngIf="!qr" style="    font-size: 30px;
+        margin: 0 30px;
+        color: #818181;">
+          ...
+        </ng-container>
+
+        <ng-container *ngIf="qr">
+          <p style="width: 200px;
+          color: #3a3a3ae8;
+          font-size: 12px;
+          font-weight: 600;margin: 0;text-align: center;">
+            ({{i==(listQR.length-1)?count:(i+1)}})
+          </p>
+
+          <div style="margin-top: 10px;">
+            <qrcode [qrdata]="qr" [width]="120" [errorCorrectionLevel]="'M'" [margin]="1"></qrcode>
+          </div>
+
+          <p style="width: 200px;
+      color: #3a3a3ae8;
+      font-size: 11px;
+      font-weight: 600;margin: 0;text-align: center;">
+            {{qr}}
+          </p>
+        </ng-container>
+
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+</div>

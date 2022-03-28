@@ -1,0 +1,101 @@
+<div style="    padding: 20px;padding-bottom: 250px;">
+  <!--   <p style="margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #d36970e8;
+  line-height: 1;
+  margin-top: 10px;">Multimedia</p> -->
+
+
+  <div style="    text-align: center;">
+    <div style="display: inline-block;">
+      <img [src]="dataContact.logoUrl.value" style="height: 55px;
+      width: 55px;
+      object-fit: cover;
+      border-radius: 50px;">
+    </div>
+    <div style="display: inline-block;">
+      <p style="    font-weight: 700;
+      padding-left: 5px;
+      font-size: 16px;
+      margin: 0;
+      line-height: 1;
+      text-align: left;
+      /* padding-top: 20px; */
+      transform: translateY(10px);">{{dataContact.businessName.value}} <br><span style="font-size: 11px;
+    font-weight: 600;
+    color: #999999;"><ion-icon name="checkmark-circle" style="font-size: 13px;
+    margin-top: -5px;
+    transform: translateY(2px);
+    color: #1ea0d2;"></ion-icon> Compañia validada</span> </p>
+    </div>
+  </div>
+
+  <div>
+<!--     <p style="    margin: 0;
+    margin-top: 20px;
+    font-weight: 700;
+    font-size: 15px;
+    color: #4e4e4e;">Sobre nostros</p> -->
+    <p style="font-size: 14px;margin-top: 15px;
+    font-weight: 600;
+    color: #787878;">{{dataContact.businessDesc.value}}</p>
+  </div>
+
+
+  <div class="row" style="    margin-top: 15px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #7a7a7a;">
+    <div class="col-6" style="margin-top: 10px;" *ngIf="dataContact.web.value">
+      <a style="margin: 0;color: #7a7a7a;" [href]="dataContact.web.value"  target="_blank" ><ion-icon name="globe-outline" style="margin-top: -10px;
+        font-size: 20px;
+        transform: translateY(4px);"></ion-icon> Pagina oficial</a>
+    </div>
+  
+    <div class="col-6"  style="margin-top: 10px;" *ngIf="dataContact.facebook.value">
+      <a style="margin: 0;color: #7a7a7a;"  [href]="dataContact.facebook.value"  target="_blank" ><ion-icon name="logo-facebook" style="margin-top: -10px;
+        font-size: 20px;
+        transform: translateY(4px);    color: #5c6cdf;"></ion-icon> Facebook</a>
+    </div>
+  
+    <div class="col-6"  style="margin-top: 10px;" *ngIf="dataContact.instagram.value">
+      <a style="margin: 0;color: #7a7a7a;"  [href]="dataContact.instagram.value"  target="_blank" ><ion-icon name="logo-instagram" style="margin-top: -10px;
+        font-size: 20px;
+        transform: translateY(4px);color:#d15cdf"></ion-icon> Instagram</a>
+    </div>
+  
+    <div class="col-6"  style="margin-top: 10px;" *ngIf="dataContact.linkedin.value">
+      <a style="margin: 0;color: #7a7a7a;"  [href]="dataContact.linkedin.value"  target="_blank" ><ion-icon name="logo-linkedin" style="margin-top: -10px;
+        font-size: 20px;
+        transform: translateY(4px);color: #5ca3df;"></ion-icon> Linkedin</a>
+    </div>
+  
+    <div class="col-6"  style="margin-top: 10px;" *ngIf="dataContact.youtube.value">
+      <a style="margin: 0;color: #7a7a7a;"  [href]="dataContact.youtube.value"  target="_blank" ><ion-icon name="logo-youtube" style="margin-top: -10px;
+        font-size: 20px;
+        transform: translateY(4px);    color: #df5c5c;"></ion-icon> Youtube</a>
+    </div>
+
+
+    <div class="col-6"  style="margin-top: 10px;" *ngIf="dataContact.correo.value">
+      <a style="margin: 0;color: #7a7a7a;"  [href]="dataContact.correo.value"  target="_blank" ><ion-icon name="mail-outline" style="margin-top: -10px;
+        font-size: 20px;
+        transform: translateY(4px);    color: #6faeb5;"></ion-icon> Correo</a>
+    </div>
+  
+  </div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+</div>

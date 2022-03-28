@@ -1,0 +1,25 @@
+<ion-content>
+  <div class="svg hide" id="svg">
+    <ng-lottie [options]="options" (animationCreated)="animationCreated($event)" (complete)="stop()"></ng-lottie>
+  </div>
+  <div style="text-align: center;position: absolute;top: 45%;width: 100%;">
+    <p style="font-size: 25px;color: #595959;font-weight: 600;margin-bottom: 0;">{{textTitle}}</p>
+    <p style="margin-top: 5px;color: #5f5f5f;font-size: 16px;margin-left: 20px;margin-right: 20px;">{{subtitle}}</p>
+
+   
+      <ion-button (click)="type != 'alert'?closeModal():confirm()" class="button-02"
+        style="--border-radius: 5px;font-size: 14px;--background: #2778c4;height: 40px;text-transform:initial;font-weight: 500;">
+        {{buttonConfim}}
+      </ion-button>
+
+      <ion-button *ngIf="type == 'alert'" (click)="closeModal()" class="button-02"
+        style="--border-radius: 5px;font-size: 14px;--background: rgb(221, 51, 51);height: 40px;font-weight: 500;">
+        Cancelar
+      </ion-button>
+   
+
+  </div>
+
+
+
+</ion-content>

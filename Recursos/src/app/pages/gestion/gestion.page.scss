@@ -1,0 +1,194 @@
+.card-content {
+  --background: white;
+  border-radius: 20px;
+  padding: 15px 0;
+  box-shadow: var(--shadow-black-100);
+  margin-top: 10px;
+  transition: all 0.1s ease;
+}
+
+
+
+.icon-nav-arrow {
+  color: #F7F8FB;
+  font-size: 25px;
+  padding: 15px 20px;
+}
+
+.title {
+  text-align: center;
+  color: #F7F8FB;
+  font-size: 15px;
+}
+
+
+/* BOTONES FLOTANTES */
+ion-fab[vertical="bottom"][horizontal="end"] ion-fab-list {
+  right: 0;
+  align-items: flex-end;
+}
+
+ion-fab-button[size="small"] {
+  --size: 35px;
+}
+
+.custom-fab {
+  display: flex;
+  align-items: center;
+}
+
+ion-fab[horizontal="start"] .custom-fab {
+  flex-direction: row-reverse;
+}
+
+.custom-fab ion-button {
+  color: var(--main-color);
+  --background: #fff;
+  --height: 25px;
+  text-transform: none;
+}
+
+
+
+.button-filter {
+  display: inline-block;
+  width: 48%;
+/*   height: 70px; */
+/*   padding: 13px 0 ; */
+/*   border-radius: 6px; */
+ /*  border: 2px solid #d3d3d3; */
+ padding: 12px 0;
+  background: white;
+  color:  #9b9b9b;
+  font-size: 20px;
+  transition: .2s;
+  text-transform: capitalize;
+  font-size: 24px;
+}
+
+
+.select{
+/*   width: 48%; */
+/*   font-size: 25px; */
+/*   border-radius:  8px ; */
+/*   border: none; */
+ /*  background: rgba(92, 108, 236, 1); */
+/*   color:  #F7F8FB; */
+/*   box-shadow: var(--shadow-black-300); */
+/*   transform: scale(1.2) ; */
+  color: var(--main-color);
+  transition: .2s;
+  font-weight: 600;
+ 
+}
+
+
+
+
+
+
+
+.search {
+  --background: #ffffff;
+    --text-color: #414856;
+    --border-radius: 13px;
+    --height: 40px;
+    background: var(--background);
+    width: 100%;
+    height: var(--height);
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px rgb(65 72 86 / 5%);
+    align-items: center;
+    margin-top: 7px;
+    margin-left: 5px;
+  input[type="text"] {
+    position: relative;
+    height: var(--height);
+    font: 400 12px "Varela Round", sans-serif;
+    color: var(--text-color);
+    border: 0;
+    box-sizing: border-box;
+    outline: none;
+    padding: 0 0 0 15px;
+    width: 100%;
+    transition: width 0.6s ease;
+    z-index: 10;
+    cursor: pointer;
+    &:focus {
+      z-index: 0;
+      opacity: 1;
+     /*  width: 100%; */
+     
+    }
+  }
+ 
+}
+
+.upContainer{
+position: absolute;
+width: 100%;
+top: -200px;
+transition: 0.2s linear all;
+}
+
+.nonePosition{
+  position: absolute;
+  width: 100%;
+  top: 0;
+  z-index: 2000;
+  transition: 0.2s linear all;
+}
+
+/* ********************* */
+
+.button-filter {
+  display: inline-block;
+  width: 50%;
+/*   height: 70px; */
+/*   padding: 13px 0 ; */
+/*   border-radius: 6px; */
+ /*  border: 2px solid #d3d3d3; */
+ padding: 2px 0;
+  background: white;
+  color:  #9b9b9b;
+  font-size: 20px;
+  transition: .2s;
+  text-transform: capitalize;
+  font-size: 24px;
+}
+
+
+.select{
+/*   width: 48%; */
+/*   font-size: 25px; */
+/*   border-radius:  8px ; */
+/*   border: none; */
+ /*  background: rgba(92, 108, 236, 1); */
+/*   color:  #F7F8FB; */
+/*   box-shadow: var(--shadow-black-300); */
+/*   transform: scale(1.2) ; */
+  color: #d8525b;
+  transition: .2s;
+  font-weight: 600;
+ 
+}
+
+.btn-2 {
+  text-decoration: none;
+  background: #fff;
+  padding: 8px 15px;
+  border: 1px solid #ce858573;
+  border-radius: 30px;
+  color:  #ce8585de;
+  font-size: 10px;
+  box-shadow: var(--shadow-black-100);
+  font-weight: 600;
+
+}
+
+.btn-2:hover{
+  background: linear-gradient(90deg, #eb656e 10%, #bf3942  100%);;
+  color:  #fff ;
+}

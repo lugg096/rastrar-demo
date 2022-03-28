@@ -1,0 +1,99 @@
+<ion-content>
+
+  <!-- HEADER -->
+  <div>
+    <ion-icon name="close" class="icon-close" (click)="closeModal()">
+    </ion-icon>
+    <ion-item style="--background: transparent;margin-bottom: 0;" lines="none">
+      <ion-title class="title-modal">Credencial</ion-title>
+    </ion-item>
+  </div>
+
+  <div style="padding: 10px;background: white;" #container id="container">
+    <div style="height: 630px;width: 100%;">
+      <img src="../../../assets/images/BLOCKCHAIN.png" class="bg" style="border: 1px solid rgb(223, 223, 223);" alt="">
+
+
+      <div style="
+      position: absolute;
+      top: 208px;
+      right: 195px;
+      width: 400px;">
+        <p style="font-size: 26px;
+        line-height: 1;
+        text-align: right;
+        font-weight: 550;">{{data.data.document.documentType.value}} </p>
+      </div>
+
+      <div style="position: absolute; top: 320px;right: 195px; width: 460px;text-align: right;">
+        <p style="font-size: 32px;line-height: 1;">{{data.data.document.subject.name}} </p>
+        <p style="font-size: 12px;">
+          Cuenta con la credencial de <span style="text-transform: lowercase;">{{data.data.document.documentType.value}}</span> de una alpaca el día: {{data.data.document.date}}, con el código Nro: {{data.key}}. 
+          Se emite el siguiente documento para dar fe de su registro en la cooperativa. Generado por el emisor con el DID: {{data.data.document.credential.from[0]}}
+        </p>
+      </div>
+
+      <div style="position: absolute;
+      top: 548px;
+      left: 335px;
+      color: #565656;">
+        {{data.data.document.iat}}
+      </div>
+
+      <div style="position: absolute; top: 470px;right: 210px; width: 100px;text-align: right;">
+        <ngx-qrcode id="target" [elementType]="elementType" [errorCorrectionLevel]="correctionLevel" [value]="value"
+          cssClass="bshadow"></ngx-qrcode>
+      </div>
+
+    </div>
+  </div>
+  <!--   <ion-icon name="print-outline"></ion-icon> -->
+  <div style="position: absolute;top: 60px;right: 30px;">
+    <ion-button (click)="convertToImage()" class="button-03">
+      <ion-icon name="print" style="font-size: 20px;"></ion-icon>Imprimir certificado
+    </ion-button>
+  </div>
+
+  <!--   <div style="padding: 30px 40px;padding-top: 10px">
+    <p class="font-black-2">Datos de credencial
+    </p>
+    <p class="font-black-3">Tu informacion se
+      encuentra segura alojada en la Blockchain</p>
+    <ion-list style="width: 50%;  display: inline-block">
+
+ 
+      <ion-item lines="none">
+        <ion-label>
+          <p>Entity</p>
+        Productor
+        </ion-label>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label>
+          <p>TypeEntity</p>
+          Person
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-list style="width: 50%;  display: inline-block">
+
+      <ion-item lines="none">
+        <ion-label>
+          <p>Status</p>
+       Activo
+        </ion-label>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label>
+          <p>Timestamp</p>
+          {{1616259741 |date: 'medium'}}
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+  </div> -->
+
+</ion-content>

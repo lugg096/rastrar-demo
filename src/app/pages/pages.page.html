@@ -1,0 +1,38 @@
+
+<!-- <ion-split-pane contentId="main-content" class="scrollable-element ">
+  <ion-menu contentId="main-content" type="overlay" class="menuClass" id="menu">
+     <div style="padding: 5px;background: #c0474d;overflow-y: scroll;display: block;height: 100%;">
+      <div style="width: 100%;text-align: left;padding-top:15px;padding-left: 15px;">
+        <img src="../assets/images/coopecan-letras-blancas-transparente.svg"
+          style="width: 58%;height: auto;margin: auto;">
+      </div>
+      <ion-list id="inbox-list" style="background: #c0474d">
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+          <p *ngIf="p.code=='section'"
+            style="margin: 0;color: rgb(231, 231, 231);margin-top: 20px;margin-bottom:10px;margin-left: 15px;">
+            {{p.title}}</p>
+          <ion-item *ngIf="p.code!='section'" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+            routerLinkActive="selected">
+            <ion-icon [name]="p.icon" style="font-size: 20px;margin-left: 8px;"></ion-icon>
+            <p style="padding-left: 12px;margin-top :9px;margin-bottom: 8px;letter-spacing: 1px;font-size: 10x;">
+              {{ p.title }}
+            </p>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </div>
+  </ion-menu>
+
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+</ion-split-pane> -->
+
+<div id="main-wrapper" >
+ 
+  <!--     <app-header></app-header> -->
+  <app-sidebar #sidebar [appPages]="appPages"></app-sidebar>
+  <div class="page-wrapper" [ngClass]="menuClose?'menuClose':'menuOpen'">
+   <!--    <router-outlet>
+      </router-outlet> -->
+      <ion-router-outlet  style="position: fixed;" [ngClass]="menuClose?'menuClose':'menuOpen'"></ion-router-outlet>
+  </div>
+</div>

@@ -1,0 +1,152 @@
+<app-header [title]="'Módulo de usuarios'"></app-header>
+
+<ion-content class="content-table">
+
+  <!-- Cabecera y botones de acción -->
+  <div class="row content-header">
+    <div class="col-6">
+      <p class="title-header">Listado de
+        {{key_table==_env.TABLE_SIS.customer?'compradores':(key_table==_env.TABLE_SIS.employee?'empleados':'proveedores')}}
+      </p>
+    </div>
+    <!-- Content buttons -->
+    <div class="col-6 content-buttons">
+
+<!--       <a href="javascript:void(0)" class="btn-3" (click)="importExcel()" *ngIf="key_table ==_env.TABLE_SIS.producer" >
+        <ion-icon name="push-outline"></ion-icon> Importar Excel</a> -->
+
+      <a href="javascript:void(0)" class="btn-3" (click)="genCards()" *ngIf="key_table ==_env.TABLE_SIS.producer" >
+        <ion-icon name="card-outline"></ion-icon> Generar cards </a>
+
+      <a href="javascript:void(0)" class="btn-3" (click)="form()" >
+        <ion-icon name="add-circle"></ion-icon> Crear usuario </a>
+    </div>
+  </div>
+
+  <ion-card class="card-table">
+    <ion-segment (ionChange)="segmentChanged($event)" style="max-width: 500px;margin-bottom: 25px;" mode="md"
+      [value]="_env.TABLE_SIS.producer">
+
+      <ion-segment-button [value]="_env.TABLE_SIS.producer">
+        <ion-label style="text-transform: capitalize;">Proveedores</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button [value]="_env.TABLE_SIS.employee">
+        <ion-label style="text-transform: capitalize;">Empleados</ion-label>
+      </ion-segment-button>
+
+      <ion-segment-button [value]="_env.TABLE_SIS.customer">
+        <ion-label style="text-transform: capitalize;">Compradores</ion-label>
+      </ion-segment-button>
+
+    </ion-segment>
+
+    <p class="text-filter">Filtro de registros</p>
+    <div class="row">
+
+      <div class="col-4">
+        <input class="form-control" [ngModel]="nameFilter" (ngModelChange)="changeInput($event,0,'input')"
+          placeholder="Buscar">
+      </div>
+
+      <div class="col-6 checkbox-filer">
+        <ion-checkbox slot="start" (ionChange)="changeInput($event,1,'checkbox')" color="tertiary">
+        </ion-checkbox>
+        <label>Ver desactivados</label>
+      </div>
+    </div>
+
+    <div class="table-responsive table-style">
+      <table class="table">
+        <thead>
+          <tr>
+            <th (click)="orderByTable(item.key)" *ngFor="let item of thead"
+              [ngClass]="orderBy.key==item.key?'select-col-order' :''">{{item.name}} <ion-icon
+                [name]="orderBy.key==item.key?(orderBy.order? 'arrow-down':'arrow-up' ) :'swap-vertical'"
+                class="icon-filter"></ion-icon>
+            </th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="list.length <= 0 && load">
+            <td colspan="6">
+              <div class="alert alert-secondary" role="alert">
+                <span><i class="fa fa-spinner fa-pulse"></i>
+                  Cargando registros...
+                </span>
+              </div>
+
+            </td>
+          </tr>
+
+          <tr *ngFor="let a of pageOfItems">
+
+            <td>{{a.name}}</td>
+            <td>{{a.data.group.value}}</td>
+            <td>{{a.data.idens[0].number}}</td>
+            <td>{{a.data.dids.length!=0? (a.data.dids[0].address | slice:0:6)+' ...
+              '+(a.data.dids[0].address | slice:38:42) :'Pendiente de creación'}}
+            </td>
+
+            <td>
+              <ion-badge class="status" [ngClass]="a.status?'enabled' :'disabled'">
+                {{a.status?'Activo':'Desactivo'}}
+              </ion-badge>
+            </td>
+
+            <td>
+              <div class="dropdown">
+                <div class="dropbtn">
+                  <ion-button class="button-01">
+                    <ion-icon name="settings-outline" class="icon-01">
+                    </ion-icon> <br>
+                  </ion-button>
+                </div>
+
+                <div class="dropdown-content">
+                  <a href="javascript:void(0)" *ngIf="a.data.dids.length!=0" (click)="getDid(a)">
+                    <ion-icon name="shield-checkmark-outline"
+                      style="font-size: 18px;margin-right: 3px;color: var(--main-color);"></ion-icon> Ver DID
+                  </a>
+
+                  <a href="javascript:void(0)" (click)="configMaster(a)" *ngIf="a.table==_env.TABLE_SIS.employee">
+                    <ion-icon name="rocket-outline" style="font-size: 18px;margin-right: 3px;color: var(--main-color);">
+                    </ion-icon> Config. Master
+                  </a>
+
+                  <a href="javascript:void(0)" (click)="form(a)">
+                    <ion-icon name="create-outline" class="icon-01"> </ion-icon>Editar
+                  </a>
+
+                  <a href="javascript:void(0)" *ngIf="a.status" (click)="changeStatus(a,false)">
+                    <ion-icon name="close-circle-outline" class="icon-01"></ion-icon> Deshabilitar
+                  </a>
+
+                  <a href="javascript:void(0)" *ngIf="!a.status" (click)="changeStatus(a,true)">
+                    <ion-icon name="checkmark-circle-outline" class="icon-01"></ion-icon> Habilitar
+                  </a>
+
+                  <a href="javascript:void(0)" (click)="delete(a)" class="option-division">
+                    <ion-icon name="trash-outline" class="icon-01">
+                    </ion-icon> Eliminar
+                  </a>
+
+                </div>
+              </div>
+            </td>
+
+          </tr>
+          <tr *ngIf="list.length <= 0 && !load">
+            <td colspan="5">No se encontraron registros.</td>
+          </tr>
+
+        </tbody>
+
+      </table>
+      <jw-pagination [items]="list" [pageSize]="20" (changePage)="onChangePage($event)">
+      </jw-pagination>
+    </div>
+  </ion-card>
+
+</ion-content>

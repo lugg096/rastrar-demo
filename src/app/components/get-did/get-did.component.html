@@ -1,0 +1,128 @@
+<ion-content>
+
+  <!-- HEADER -->
+  <div>
+    <ion-icon name="close" class="icon-close" (click)="closeModal()">
+    </ion-icon>
+    <ion-item style="--background: transparent;margin-bottom: 0;" lines="none">
+      <ion-title class="title-modal">Credencial</ion-title>
+    </ion-item>
+  </div>
+
+  <div style="padding: 10px;background: white;text-align: -webkit-center;" #container id="container">
+    <div class="ident" style="width: 700px;
+    height: 380px;
+    background-image: linear-gradient(#EB656E, #BF3942);
+    border-radius: 20px;
+    color: rgba(255, 255, 255, 0.829);
+    padding: 15px 20px;
+    background: linear-gradient(
+78deg, #eb656e 0%, #bf3942 100%);">
+    
+      <div class="row" style="position: relative;" >
+        <div class="col-5 p-0 m-0" style="text-align: center;">
+          <div style="text-align: left;
+          margin-bottom: 10px;">
+            <img src="../../../assets/images/logo-white.svg" style="width: 120px;">
+          </div>
+
+          <ngx-qrcode id="target" [elementType]="elementType" [errorCorrectionLevel]="correctionLevel" [value]="value"
+            cssClass="bshadow"></ngx-qrcode>
+
+       <!--   <p style="margin-top: 15px;font-size: 18px;line-height: 1.3;text-align: center;font-weight: 600;text-transform: capitalize;">
+           
+            <span style="font-weight: 500;font-size: 18px;">{{data.name}} </span> <br>
+            <span style="font-weight: 500;font-size: 16px;">{{data.data.idens[0].number}} </span>
+          </p>  -->
+
+        </div>
+        <div class="col-6 mx-3" style="letter-spacing: 2px;    font-weight: 300;    text-align: left;">
+
+         <div class="row" style="margin-top: 15px;    color: white;">
+          <div class="col-3 m-0 p-0" style="letter-spacing: 2px;
+          font-size: 16px;">VÁLIDO HASTA</div>
+          <div class="col-4 m-0 p-0" style="font-size: 25px;text-align: right;">{{fechaValid}}</div>
+         </div>
+
+         <p style="margin: 0;margin-top: 35px;font-size: 14px;">SERIAL</p>
+         <p style="margin: 0;margin-top: 0px;font-size: 19px;color: white;">{{serial}}</p>
+
+         <p style="margin: 0;margin-top: 20px;font-size: 14px;">DNI</p>
+         <p style="margin: 0;margin-top: 0px;font-size: 19px;color: white;">{{data.data.idens[0].number}}</p>
+
+         <p style="margin: 0;margin-top: 20px;font-size: 14px;">NOMBRE</p>
+         <p style="margin: 0;margin-top: 0px;font-size: 19px;color: white;  padding-right: 60px;">{{data.name}}</p>
+
+
+    
+         <!--  <p style="text-align: center;font-weight: 600;font-size: 19px;margin-bottom:5px ;">Identidad digital (DID)</p>
+          <p style="text-align: center;margin: 0;font-size: 15px;"> {{'did:ethr:lacchain:' +data.data.dids[0].address}}</p>
+
+          <div style="text-align: center;margin-top: 20px;">
+            <img src="../../../assets/images/coopecan-letras-blancas-transparente.png" style="width: 150px;">
+          </div>
+       
+          <p style="text-align: center;
+          margin: 0;
+          font-size: 20px;
+          margin-top: 10px;
+          font-weight: 500;">CriptoCard</p> -->
+
+        </div>
+
+        <div style="position: absolute; top: 20px;right: 0px">
+          <img src="../../../assets/images/AGROCARD.png" alt="" style="width: 100px;">
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!--   <ion-icon name="print-outline"></ion-icon> -->
+  <div style="margin-right: 40px;text-align: right;">
+    <ion-button (click)="convertToImage()" class="button-03">
+      <ion-icon name="download-outline" style="font-size: 20px;"></ion-icon>Descargar identificación
+    </ion-button>
+  </div>
+
+<!--   <div style="padding: 30px 40px;padding-top: 10px">
+    <p class="font-black-2">Datos de credencial
+    </p>
+    <p class="font-black-3">Tu informacion se
+      encuentra segura alojada en la Blockchain</p>
+    <ion-list style="width: 50%;  display: inline-block">
+
+      <ion-item lines="none">
+        <ion-label>
+          <p>Entity</p>
+    Productor
+        </ion-label>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label>
+          <p>TypeEntity</p>
+        Person
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-list style="width: 50%;  display: inline-block">
+
+      <ion-item lines="none">
+        <ion-label>
+          <p>Status</p>
+         Activo
+        </ion-label>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label>
+          <p>Timestamp</p>
+          {{1616259741 |date: 'medium'}}
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+  </div> -->
+
+</ion-content>

@@ -1,0 +1,37 @@
+<ion-content>
+
+  <div>
+    <ion-icon name="close" class="icon-close" (click)="closeModal()">
+    </ion-icon>
+  </div>
+
+  <div style="padding: 20px 40px;">
+
+    <p class="title-form">{{isEdit?'Actualizar':'Crear'}} acción</p>
+    <form [formGroup]="acctionForm">
+
+      <ion-item style="margin-top: 20px;" class="col-6 p-0" lines="inset">
+        <ion-label position="stacked" class="label-form">Código de la acción</ion-label>
+        <ion-input [readonly]="isEdit?true:false" formControlName="key" placeholder="Ingrese el nombre"  class="input-form"></ion-input>
+      </ion-item>
+      <app-control-messages [control]="acctionForm.controls['key']"></app-control-messages>
+
+      <ion-item  style="margin-top: 20px;" class="col-12 p-0" lines="inset">
+        <ion-label position="stacked" class="label-form">Nombre de la acción</ion-label>
+        <ion-textarea formControlName="name"  rows="3" class="input-style"
+        placeholder="Ingrese el nombre"></ion-textarea>
+      </ion-item>
+      <app-control-messages [control]="acctionForm.controls['name']"></app-control-messages>
+    </form>
+
+
+    <div style="text-align: center;margin-top: 30px;">
+      <ion-button (click)="validateForm()" class="button-02" style="width: 50%;">
+        {{isEdit?'Actualizar':'Crear'}}
+      </ion-button>
+    </div>
+
+  </div>
+
+
+</ion-content>

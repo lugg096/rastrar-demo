@@ -1,0 +1,128 @@
+<div style="overflow-y: scroll;position: relative;">
+
+  <div style=" position: absolute;right: 0;z-index: 20;top: 0;" (click)="closeModal()">
+    <ion-icon name="checkmark" style="    font-size: 27px;
+  color: rgb(161 161 161 / 47%);
+  padding: 15px;cursor: pointer;"></ion-icon>
+  </div>
+
+  <div style="padding: 15px;">
+    <p style="
+    color: #d36970e8;
+    font-size: 18px;
+    font-weight: 600;
+    font-style: italic;">{{field.caption}}</p>
+
+
+    <!--     <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin: 20px 20px;" *ngIf="!onlyView">
+      <ion-fab-button style="--background:  #fff;--color:var(--main-color);" (click)="takePicture()">
+        <ion-icon name="camera" style="font-size: 22px;"></ion-icon>
+      </ion-fab-button>
+    </ion-fab> -->
+
+
+
+    <form [formGroup]="imgForm">
+      <div style="margin-top: 20px;" class="item">
+        <p style="    margin: 0;
+    font-size: 12px;
+    color: #95989b;
+    margin-bottom: 7px;
+    font-weight: 700;
+    margin-left: 3px;">Breve descripción<span style="color: #d36970e8;" *ngIf="field.required">(*)</span> </p>
+        <ion-item class="item-input" lines="none">
+          <ion-input formControlName="description" type="text" class="input-style" placeholder="Ingrese un texto">
+          </ion-input>
+        </ion-item>
+        <!--   <app-control-messages [control]="sec.form.controls[field.code]"></app-control-messages> -->
+      </div>
+    </form>
+
+    <div style="text-align: left;">
+      <p style="margin: 0;
+      font-size: 13px;margin-top: 20px;
+      color: #838383;">Para asociar imagenes <span style=" color: #838383;
+      font-weight: 700;">seleccione desde su dispositivo</span></p>
+    </div>
+    <div style="    text-align: center;
+    border: 2px dashed #d3d3d3;
+    margin: 10px 0;
+    padding: 20px;margin-bottom: 5px;cursor: pointer;" (click)="fileInputImg.click()">
+
+      <ion-icon name="cloud-upload-outline" style="    font-size: 60px;
+      color: #d7d7d7;"></ion-icon>
+      <p style="font-size: 11px;
+      font-weight: 600;
+      color: #adadad;">JPG, PNG, o JPEG, menor a 10MB</p>
+
+      <div style="font-size: 14px;
+      color: #7c7c7c;
+      text-decoration: underline;
+      font-weight: 600;">
+        Elija archivo
+      </div>
+    </div>
+
+    <div style="padding: 15px 10px;">
+
+      <div style="display: inline-block;width: 50%;padding: 5px;" *ngFor="let p of photoPreview; index as i_img">
+        <div style="position: relative;
+        height: 100px;
+        box-shadow: 0px 0px 3px rgb(0 0 0 / 14%);
+        border-radius: 3px;position: relative;">
+
+          <div style="    position: absolute;
+       right: 0;
+       z-index: 20;
+       top: 0;cursor: pointer;" (click)="deleteImg(i_img)">
+            <ion-icon name="close" style="    font-size: 25px;
+         color: rgb(255 246 246);
+         padding: 10px;"></ion-icon>
+          </div>
+
+<ng-container *ngIf="!p.url" >
+  <img [src]="'data:'+p.type+';base64,'+p.b64" alt="" style=" 
+  height: 100px;
+  width: 100%;
+  object-fit: cover;border-radius: 3px;">
+</ng-container>
+
+<ng-container *ngIf="p.url">
+  <img [src]="p.url" alt="" style=" 
+  height: 100px;
+  width: 100%;
+  object-fit: cover;border-radius: 3px;">
+</ng-container>
+       
+
+        </div>
+      </div>
+    </div>
+
+
+    <input hidden (change)="onFileSelected('imgfile')" #fileInputImg type="file" multiple="multiple" accept="image/*"
+      id="imgfile">
+
+
+    <!--    <div style=" color: #2F3435; padding: 0 20px;">
+      <p style="text-align: center; font-size: 22px;font-weight: 600; margin-bottom: 10px;margin-top: 10%;">Imagenes
+      </p>
+ 
+
+      <div style="text-align: center" *ngIf="photoPreview.length==0">
+        <img src="../../../assets/images/Camera _Two Color.png" style="width: 100%;">
+      </div>
+    </div> -->
+
+    <!--     <ion-grid style="padding-bottom: 15%;">
+      <ion-row style="margin: 4px;">
+        <ion-col size="4" class="content-img" *ngFor="let p of photoPreview; let i=index" (click)="verFoto(p.webPath,i)">
+          <div class="img" [attr.id]="'object-img-'+i">
+            <img [src]="p.webPath">
+          </div>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid> -->
+  </div>
+</div>

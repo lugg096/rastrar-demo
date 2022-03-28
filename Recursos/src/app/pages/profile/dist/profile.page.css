@@ -1,0 +1,38 @@
+.icon-nav-arrow {
+  color: #F7F8FB;
+  font-size: 25px;
+  padding: 15px 20px;
+}
+
+.title {
+  text-align: center;
+  color: #F7F8FB;
+  font-size: 15px;
+}
+
+.btn-main {
+  background-color: #ffffff;
+  border-radius: 100%;
+  font-size: 23px;
+  height: 45px;
+  width: 45px;
+  padding: 0;
+  display: inline-block;
+  border: none;
+  box-shadow: var(--shadow-black-100);
+}
+
+ion-item {
+  --background: transparent;
+  color: #fff;
+}
+ion-item p {
+  margin: 0;
+  font-size: 12px;
+  color: #949494;
+}
+
+ion-label {
+  font-size: 14px !important;
+  color: var(--black-400) !important;
+}

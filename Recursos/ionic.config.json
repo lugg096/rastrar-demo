@@ -1,0 +1,8 @@
+{
+  "name": "Rastrar Pedidos",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

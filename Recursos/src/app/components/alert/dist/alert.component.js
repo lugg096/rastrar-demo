@@ -1,0 +1,56 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+exports.__esModule = true;
+exports.AlertComponent = void 0;
+var core_1 = require("@angular/core");
+var AlertComponent = /** @class */ (function () {
+    function AlertComponent(ngZone, _modal, _comp) {
+        this.ngZone = ngZone;
+        this._modal = _modal;
+        this._comp = _comp;
+        this.buttonConfim = '';
+        this.textTitle = '';
+        this.subtitle = '';
+        this.type = ''; // success | danger | alert
+    }
+    AlertComponent.prototype.ngOnInit = function () { };
+    AlertComponent.prototype.animationCreated = function (animationItem) {
+        var _this = this;
+        this.animationItem = animationItem;
+        setTimeout(function () {
+            _this.pause();
+        }, 1500);
+    };
+    AlertComponent.prototype.stop = function () {
+        var _this = this;
+        this.ngZone.runOutsideAngular(function () { return _this.animationItem.stop(); });
+    };
+    AlertComponent.prototype.play = function () {
+        var _this = this;
+        this.ngZone.runOutsideAngular(function () { return _this.animationItem.play(); });
+    };
+    AlertComponent.prototype.pause = function () {
+        var _this = this;
+        this.ngZone.runOutsideAngular(function () { return _this.animationItem.pause(); });
+    };
+    AlertComponent.prototype.closeModal = function () {
+        this._modal.dismiss();
+    };
+    AlertComponent.prototype.confirm = function () {
+        this._modal.dismiss({ confirm: true });
+    };
+    AlertComponent = __decorate([
+        core_1.Component({
+            selector: 'app-alert',
+            templateUrl: './alert.component.html',
+            styleUrls: ['./alert.component.scss']
+        })
+    ], AlertComponent);
+    return AlertComponent;
+}());
+exports.AlertComponent = AlertComponent;

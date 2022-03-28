@@ -1,0 +1,22 @@
+<ion-content>
+  <!-- HEADER -->
+  <ion-icon name="close" class="icon-close" (click)="closeModal()">
+  </ion-icon>
+
+  <div style="padding: 20px 40px;">
+    <p class="title-form">{{isEdit?'Actualizar':'Crear'}} sección</p>
+
+    <form [formGroup]="sectionForm" class="row">
+
+      <ion-item style="margin-top: 20px;" class="col-12 p-0" lines="inset">
+        <ion-label position="stacked" class="label-form">Nombre</ion-label>
+        <ion-input formControlName="name" placeholder="Nombre" class="input-form"></ion-input>
+      </ion-item>
+      <app-control-messages [control]="sectionForm.controls['name']"></app-control-messages>
+    </form>
+
+    <div style="display: block;margin-top: 35px;text-align: center;margin-bottom: 35px;">
+      <a href="javascript:void(0)" class="button-a" (click)="validateForm()">  {{isEdit?'Actualizar':'Crear'}}</a>
+    </div>
+
+  </div>

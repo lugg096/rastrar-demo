@@ -1,0 +1,134 @@
+<ion-content>
+  <!-- HEADER -->
+  <div>
+    <ion-icon name="close" class="icon-close" (click)="closeModal()">
+    </ion-icon>
+
+  </div>
+
+  <div style="padding: 20px 40px;">
+    <p class="title-form">{{isEdit?'Actualizar':'Crear'}} rol
+    </p>
+
+    <form [formGroup]="rolForm" class="row">
+
+      <ion-item style="margin-top: 20px;" class="col-12 p-0" lines="inset">
+        <ion-label position="stacked" class="label-form">Código</ion-label>
+        <ion-input [readonly]="isEdit?true:false" formControlName="key" placeholder="Código" class="input-form">
+        </ion-input>
+      </ion-item>
+      <app-control-messages [control]="rolForm.controls['key']"></app-control-messages>
+
+      <ion-item style="margin-top: 20px;" class="col-12 p-0" lines="inset">
+        <ion-label position="stacked" class="label-form">Nombre</ion-label>
+        <ion-input formControlName="name" placeholder="Nombre" class="input-form"></ion-input>
+      </ion-item>
+      <app-control-messages [control]="rolForm.controls['name']"></app-control-messages>
+
+   <!--    <ion-item style="margin-top: 20px;" class="col-12 p-0" lines="inset">
+        <ion-label position="stacked" class="label-form">Agregar proceso</ion-label>
+        <ion-select multiple="true" [value]="processSelect" okText="ok" cancelText="Cancelar"
+          (ionChange)="selectProc($event)" class="input-style" placeholder="Agregar proceso" class="input-form">
+          <ion-select-option [value]="p.key" *ngFor="let p of listProcess;index as i">{{p.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="col-12 mt-1">
+        <p class="text-selected" style="font-style: italic;"
+          [ngClass]="rolForm.get(['process']).value.length==0?'':'selected-items'">
+          {{rolForm.get(['process']).value.length==0?'Ningún proceso asignado':'Procesos agregados:'}}</p>
+        <ion-badge color="tertiary" *ngFor="let item of rolForm.get(['process']).value; index as i" style="font-weight: 500;
+          padding: 8px;
+          font-size: 15px;
+          margin-top: 3px;margin-right:5px;">{{item.name}}
+        </ion-badge>
+      </div> -->
+
+
+      <p class="col-12" style="margin-bottom: 0;margin-top: 40px;font-size: 14px;color: rgb(114, 114, 114);">
+        Configuración de acceso</p>
+
+      <div class="col-6 checkbox-filer" style="display: flex;align-items: center; margin-top: 10px;">
+        <ion-checkbox formControlName="acc_web" slot="start" color="tertiary"  (ionChange)="changeInput($event)" style="transform: translateY(-5px);">
+        </ion-checkbox>
+        <label class="label-form" style="font-size: 14px !important;">Web administrador</label>
+      </div>
+      <div class="col-6 checkbox-filer" style="display: flex;align-items: center; margin-top: 5px;">
+        <ion-checkbox formControlName="acc_app" slot="start" color="tertiary" style="transform: translateY(-5px);">
+        </ion-checkbox>
+        <label class="label-form" style="font-size: 14px !important;">Aplicación certificadora</label>
+      </div>
+
+      <ng-container *ngIf="rolForm.controls['acc_web'].value">
+
+        <p class="col-12" style="margin-bottom: 0;margin-top: 30px;font-size: 20px;color: var(--black-400);;">
+          Configurar acceso a la WEB</p>
+        <p class="col-12" style="margin-bottom: 0;margin-top: 0px;font-size: 12px;color: var(--black-400);">Seleccione
+          los modulos a los que podra acceder el usuario una vez que se le asigne este rol</p>
+
+          <div *ngFor="let item of conf_web;index as i0" class="col-12 row">
+            <p class="col-12"
+              style="font-style: italic;margin-bottom: 0;margin-top: 20px;font-size: 14px;color: rgb(87, 87, 87);font-weight: 600;">
+              {{item.name}}</p>
+  
+            <div *ngFor="let md of item.modules;index as i1" class="col-4 checkbox-filer"
+              style="display: flex;align-items: center; margin-top: 10px;">
+              <ion-checkbox slot="start" [checked]="md.value"  (ionChange)="valueConfWeb($event,i0,i1)"  color="tertiary" style="transform: translateY(-5px);">
+              </ion-checkbox>
+              <label class="label-form" style="font-size: 14px !important;">{{md.name}}</label>
+            </div>
+          </div>
+       <!--  <div *ngFor="let item of conf_web;index as i0" class="col-12 row">
+          <p class="col-12"
+            style="font-style: italic;margin-bottom: 0;margin-top: 20px;font-size: 14px;color: rgb(87, 87, 87);font-weight: 600;">
+            {{item.name}}</p>
+
+          <div *ngFor="let md of item.modules;index as i1" class="col-4 checkbox-filer"
+            style="display: flex;align-items: center; margin-top: 10px;">
+            <ion-checkbox slot="start" [checked]="md.value"  (ionChange)="valueConfWeb($event,i0,i1)"  color="tertiary" style="transform: translateY(-5px);">
+            </ion-checkbox>
+            <label class="label-form" style="font-size: 14px !important;">{{md.name}}</label>
+          </div>
+        </div> -->
+      </ng-container>
+
+
+      <ng-container *ngIf="rolForm.controls['acc_app'].value">
+
+        <p class="col-12" style="margin-bottom: 0;margin-top: 30px;font-size: 20px;color: var(--black-400);;">
+          Configurar pantallas de acceso</p>
+        <p class="col-12" style="margin-bottom: 0;margin-top: 0px;font-size: 12px;color: var(--black-400);">Seleccione
+          las pantallas de certificación que podra visualizar el usuario una vez que se le asigne este rol</p>
+
+        <div class="col-12 row">
+          <p class="col-12"
+            style="font-style: italic;margin-bottom: 0;margin-top: 20px;font-size: 14px;color: rgb(87, 87, 87);font-weight: 600;">
+           Listado de pantallas</p>
+
+          <div *ngFor="let md of listScreen;index as i1" class="col-6 checkbox-filer"
+            style="display: flex;align-items: center; margin-top: 10px;">
+            <ion-checkbox slot="start" [checked]="md.value"  (ionChange)="valueConfApp($event,i1)"  color="tertiary" style="transform: translateY(-5px);">
+            </ion-checkbox>
+            <label class="label-form" style="font-size: 14px !important;">{{md.name}}</label>
+          </div>
+        </div>
+      </ng-container>
+
+
+
+    </form>
+
+  <!--   <div style="text-align: center;margin-top: 30px;">
+      <ion-button (click)="validateForm()" class="button-02" style="width: 50%;">
+        {{isEdit?'Actualizar':'Crear'}}
+      </ion-button>
+    </div>
+ -->
+    <div style="display: block;margin-top: 35px;text-align: center;margin-bottom: 35px;">
+      <a href="javascript:void(0)" class="button-a" (click)="validateForm()">  {{isEdit?'Actualizar':'Crear'}}</a>
+    </div>
+
+
+  </div>
+
+</ion-content>
